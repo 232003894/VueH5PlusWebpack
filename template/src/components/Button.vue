@@ -1,8 +1,7 @@
 <template>
   <div class="">
 						
-		<a href="javascript:;" class="btn_login">
-			{{{text}}}
+		<a href="javascript:;" class="btn_login" v-text="text">
 		</a>
 						
 </div>

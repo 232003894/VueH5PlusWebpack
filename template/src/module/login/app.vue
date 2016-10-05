@@ -109,7 +109,7 @@ border-top-right-radius: 10px;*/
     <div class="loginbox p_re">
       <div class="shobx">
         <div class="textcenter topbox">
-          <h3 class="color_main">{{appname}}</h3>
+          <h3 class="color_main" v-text="appname"></h3>
           <p class="color888 font12 martop15">
             您的专业移动工作台！1
           </p>
@@ -119,8 +119,7 @@ border-top-right-radius: 10px;*/
         <div class="logobox textcenter">
           <img class="logo" src='../../assets/logo.png'/>
         </div>
-        <div v-if="loginerror" class="font12 loginerror LRShake">
-          {{loginerror}}
+        <div v-if="loginerror" class="font12 loginerror LRShake" v-text="loginerror">
         </div>
         <ul class="inputbox ">
           <li class="textcenter p_re">
