@@ -4,8 +4,7 @@
     <div>
       <ul class="listbox">
         <li v-for="el in list">
-		  <span>
-			{{el}}
+		  <span v-text="el">
 		  </span>
         </li>
       </ul>
@@ -62,67 +61,66 @@
 </template>
 
 <script>
-  import Lib from 'assets/Lib.js'
-  import moduleHead from 'components/module-head'
-  export default {
-    data() {
-      return {
-        list: [0, 1, 2, 3, 4, 5, 6]
-      }
-    },
-    components: {
-      moduleHead
-    },
-    ready() {
-    },
-    methods: {}
-  }
+    import Lib from 'assets/Lib.js'
+    import moduleHead from 'components/module-head'
+    export default {
+        data() {
+            return {
+                list: [0, 1, 2, 3, 4, 5, 6]
+            }
+        },
+        components: {
+            moduleHead
+        },
+        ready() {},
+        methods: {}
+    }
 </script>
 
 <style scoped>
-  .listbox {
-    overflow: hidden;
-    margin-top: 50px;
-  }
-
-  .listbox li {
-    float: left;
-    width: 25%;
-    text-align: center;
-    height: 50px;
-    line-height: 50px;
-  }
-
-  .listbox li span {
-    border: 1px solid #04BE02;
-    border-radius: 5px;
-    background: #fff;
-    padding: 10px;
-  }
-
-  .icon_lists {
-    margin: 25px 0 0 0;
-    overflow: hidden;
-    background: #fff;
-  }
-
-  .icon_lists li {
-    float: left;
-    width: 33.33333333%;
-    text-align: center;
-  }
-
-  .icon_lists .icon {
-    font-size: 42px;
-    line-height: 100px;
-    margin: 10px 0;
-    color: #04BE02;
-    -webkit-transition: font-size 0.25s ease-out 0s;
-    -moz-transition: font-size 0.25s ease-out 0s;
-    transition: font-size 0.25s ease-out 0s;
-  }
-
-  .icon_lists .icon:hover {
-    font-size: 100px;
-  }
+    .listbox {
+        overflow: hidden;
+        margin-top: 50px;
+    }
+    
+    .listbox li {
+        float: left;
+        width: 25%;
+        text-align: center;
+        height: 50px;
+        line-height: 50px;
+    }
+    
+    .listbox li span {
+        border: 1px solid #04BE02;
+        border-radius: 5px;
+        background: #fff;
+        padding: 10px;
+    }
+    
+    .icon_lists {
+        margin: 25px 0 0 0;
+        overflow: hidden;
+        background: #fff;
+    }
+    
+    .icon_lists li {
+        float: left;
+        width: 33.33333333%;
+        text-align: center;
+    }
+    
+    .icon_lists .icon {
+        font-size: 42px;
+        line-height: 100px;
+        margin: 10px 0;
+        color: #04BE02;
+        -webkit-transition: font-size 0.25s ease-out 0s;
+        -moz-transition: font-size 0.25s ease-out 0s;
+        transition: font-size 0.25s ease-out 0s;
+    }
+    
+    .icon_lists .icon:hover {
+        font-size: 100px;
+    }
 </style>
