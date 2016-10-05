@@ -134,7 +134,7 @@ border-top-right-radius: 10px;*/
         </ul>
         <div class="martop20 textcenter font12 rememberbox" :class="remember_paw ? 'selectedi' : ''">
                 <span @click=" remember_paw ? remember_paw = 0 : remember_paw = 1 " ng-app="">
-                  <i class="iconfont">{{{rememberPassword()}}}</i>
+                  <i class="iconfont" v-html="rememberPassword()"></i>
                   记住密码，免登陆
                 </span>
         </div>
@@ -171,21 +171,9 @@ border-top-right-radius: 10px;*/
         methods: {
             //登陆操作
             loginAction() {
-
-                let url = "http://api.yipifa.com/login";
-                this.$http.post(url, {
-                    u: "123"
-                }, {
-                    headers: {
-                        d: "ddd"
-                    }
-                }).then((response) => {
-                    alert(response.body.message.err_msg);
-                    console.log(response.body.message.err_msg);
-                }, (response) => {
-                    // 响应错误回调
-                    alert(response.status + ":" + JSON.stringify(response.body));
-                });
+                setTimeout(() => {
+                    window.location.href = Lib.Pages["my.welcome"];
+                }, 1000);
             },
             //记住密码
             rememberPassword() {
