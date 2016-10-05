@@ -1,13 +1,4 @@
-module.exports = {
-  "helpers": {
-    "if_or": function (v1, v2, options) {
-      if (v1 || v2) {
-        return options.fn(this);
-      }
-
-      return options.inverse(this);
-    }
-  },
+{
   "prompts": {
     "name": {
       "type": "string",
@@ -23,22 +14,6 @@ module.exports = {
     "author": {
       "type": "string",
       "message": "Author"
-    },
-    "build": {
-      "type": "list",
-      "message": "Vue comes in two build versions, which do you want to use?",
-      "choices": [
-        {
-          "name": "Runtime-only: lighter, but no support for templates defined in .html files (.vue files are fine)",
-          "value": "runtime",
-          "short": "runtime"
-        },
-        {
-          "name": "Standalone: heavier, because it includes the template parser to allow templates in .html files",
-          "value": "standalone",
-          "short": "standalone"
-        }
-      ]
     },
     "lint": {
       "type": "confirm",
@@ -77,10 +52,8 @@ module.exports = {
   },
   "filters": {
     ".eslintrc.js": "lint",
-    ".eslintignore": "lint",
-    "config/test.env.js": "unit || e2e",
     "test/unit/**/*": "unit",
     "test/e2e/**/*": "e2e"
   },
   "completeMessage": "To get started:\n\n  cd {{destDirName}}\n  npm install\n  npm run dev\n\nDocumentation can be found at https://vuejs-templates.github.io/webpack"
-};
+}

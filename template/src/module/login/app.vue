@@ -1,108 +1,107 @@
 <style scoped>
-  .loginerror {
-    color: #FF3B30;
-    padding: 10px 0;
-    text-align: center;
-  }
-
-  .rememberbox {
-    margin-top: 25px;
-    color: #888;
-  }
-
-  .rememberbox i {
-    font-size: 20px;
-    vertical-align: middle;
-    color: #888;
-  }
-
-  .selectedi {
-    color: #666;
-  }
-
-  .selectedi i {
-    color: #04BE02;
-  }
-
-  .login {
-    padding: 55px 0 0 0;
-    /*position: absolute;*/
-    /*width: 100%;*/
-    /*top: 50%;*/
-  }
-
-  .inputmain {
-  }
-
-  h3 {
-    font-size: 18px;
-  }
-
-  .shobx {
-    box-shadow: 0 0 10px #ccc;
-    padding: 20px 10px;
-    position: absolute;
-    width: 70%;
-    top: -40px;
-    background: #fff;
-    /*border-top-left-radius: 10px;
+    .loginerror {
+        color: #FF3B30;
+        padding: 10px 0;
+        text-align: center;
+    }
+    
+    .rememberbox {
+        margin-top: 25px;
+        color: #888;
+    }
+    
+    .rememberbox i {
+        font-size: 20px;
+        vertical-align: middle;
+        color: #888;
+    }
+    
+    .selectedi {
+        color: #666;
+    }
+    
+    .selectedi i {
+        color: #04BE02;
+    }
+    
+    .login {
+        padding: 55px 0 0 0;
+        /*position: absolute;*/
+        /*width: 100%;*/
+        /*top: 50%;*/
+    }
+    
+    .inputmain {}
+    
+    h3 {
+        font-size: 18px;
+    }
+    
+    .shobx {
+        box-shadow: 0 0 10px #ccc;
+        padding: 20px 10px;
+        position: absolute;
+        width: 70%;
+        top: -40px;
+        background: #fff;
+        /*border-top-left-radius: 10px;
 border-top-right-radius: 10px;*/
-    border-radius: 10px;
-    opacity: .8;
-    left: 50%;
-    margin-left: -38%;
-  }
-
-  .btnstyle {
-    border-radius: 100px;
-    margin-top: 30px;
-  }
-
-  .topbox {
-    /*padding: 35px 0 45px 0;*/
-  }
-
-  .logininput {
-    font-size: 16px;
-    height: 40px;
-    border: 1px solid #ddd;
-    width: 100%;
-    text-align: center;
-    border-radius: 100px;
-    /*font-weight: bold;*/
-    color: #888;
-  }
-
-  .inputbox li {
-    margin: 15px 0 0 0;
-  }
-
-  .inputbox .iconfont {
-    position: absolute;
-    font-size: 25px;
-    left: 10px;
-    top: 8px;
-    color: #04BE02;
-  }
-
-  .logo {
-    width: 70px;
-    height: 70px;
-    border-radius: 100px;
-    /*border:2px solid #FFA61B;*/
-  }
-
-  .logobox {
-    padding: 75px 0 25px 0;
-  }
-
-  .loginbox {
-    margin: 0 25px;
-    padding: 15px 40px 30px 40px;
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 8px #ddd;
-  }
+        border-radius: 10px;
+        opacity: .8;
+        left: 50%;
+        margin-left: -38%;
+    }
+    
+    .btnstyle {
+        border-radius: 100px;
+        margin-top: 30px;
+    }
+    
+    .topbox {
+        /*padding: 35px 0 45px 0;*/
+    }
+    
+    .logininput {
+        font-size: 16px;
+        height: 40px;
+        border: 1px solid #ddd;
+        width: 100%;
+        text-align: center;
+        border-radius: 100px;
+        /*font-weight: bold;*/
+        color: #888;
+    }
+    
+    .inputbox li {
+        margin: 15px 0 0 0;
+    }
+    
+    .inputbox .iconfont {
+        position: absolute;
+        font-size: 25px;
+        left: 10px;
+        top: 8px;
+        color: #04BE02;
+    }
+    
+    .logo {
+        width: 70px;
+        height: 70px;
+        border-radius: 100px;
+        /*border:2px solid #FFA61B;*/
+    }
+    
+    .logobox {
+        padding: 75px 0 25px 0;
+    }
+    
+    .loginbox {
+        margin: 0 25px;
+        padding: 15px 40px 30px 40px;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 8px #ddd;
+    }
 </style>
 
 <template>
@@ -118,7 +117,7 @@ border-top-right-radius: 10px;*/
       </div>
       <div class="inputmain">
         <div class="logobox textcenter">
-          <img class="logo" :src="logo"/>
+          <img class="logo" src='../../assets/logo.png'/>
         </div>
         <div v-if="loginerror" class="font12 loginerror LRShake">
           {{loginerror}}
@@ -149,51 +148,49 @@ border-top-right-radius: 10px;*/
 </template>
 
 <script>
-  import Lib from 'assets/Lib.js'
-  import Button from 'components/Button';
-  export default {
-    data() {
-      return {
-        appname: Lib.C.appname,
-        logo: Lib.C.logo,
-        user: {
-          UserName: 'lanchenglv.com',
-          PassWord: 'lanchenglv.com'
+    import Lib from 'assets/Lib.js'
+    import Button from 'components/Button';
+    export default {
+        data() {
+            return {
+                appname: Lib.C.appname,
+                user: {
+                    UserName: 'lanchenglv.com',
+                    PassWord: 'lanchenglv.com'
+                },
+                loginerror: '',
+                //是否记住密码
+                remember_paw: 1,
+                login_height: 500
+            }
         },
-        loginerror: '',
-        //是否记住密码
-        remember_paw: 1,
-        login_height: 500
-      }
-    },
-    components: {
-      Button
-    },
-    ready() {
-    },
-    methods: {
-      //登陆操作
-      loginAction() {
+        components: {
+            Button
+        },
+        ready() {},
+        methods: {
+            //登陆操作
+            loginAction() {
 
-        let url = "http://api.yipifa.com/login";
-        this.$http.post(url, {
-          u: "123"
-        }, {
-          headers: {
-            d: "ddd"
-          }
-        }).then((response) => {
-          alert(response.body.message.err_msg);
-          console.log(response.body.message.err_msg);
-        }, (response) => {
-          // 响应错误回调
-          alert(response.status + ":" + JSON.stringify(response.body));
-        });
-      },
-      //记住密码
-      rememberPassword() {
-        return this.remember_paw ? '&#xe6dd;' : '&#xe601;';
-      }
+                let url = "http://api.yipifa.com/login";
+                this.$http.post(url, {
+                    u: "123"
+                }, {
+                    headers: {
+                        d: "ddd"
+                    }
+                }).then((response) => {
+                    alert(response.body.message.err_msg);
+                    console.log(response.body.message.err_msg);
+                }, (response) => {
+                    // 响应错误回调
+                    alert(response.status + ":" + JSON.stringify(response.body));
+                });
+            },
+            //记住密码
+            rememberPassword() {
+                return this.remember_paw ? '&#xe6dd;' : '&#xe601;';
+            }
+        }
     }
-  }
 </script>

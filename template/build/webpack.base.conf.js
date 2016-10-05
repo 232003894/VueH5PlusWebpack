@@ -26,12 +26,6 @@ module.exports = {
     extensions: ['', '.js', '.vue'],
     fallback: [path.join(__dirname, '../node_modules')],
     alias: {
-      {{#if_eq build "standalone"}}
-      'vue': 'vue/dist/vue',
-      {{/if_eq}}
-      {{#if_eq build "runtime"}}
-      'vue': 'vue/dist/vue.common.js',
-      {{/if_eq}}
       'src': path.resolve(__dirname, '../src'),
       'assets': path.resolve(__dirname, '../src/assets'),
       'components': path.resolve(__dirname, '../src/components')
@@ -74,11 +68,11 @@ module.exports = {
         loader: 'json'
       },
       {
-                test: /\.html$/,
-                loader: 'vue-html'
-            },
-            //图片
-            {
+        test: /\.html$/,
+        loader: 'vue-html'
+      },
+      //图片
+      {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         loader: 'url',
         query: {
@@ -95,19 +89,19 @@ module.exports = {
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
       },
-            //新增的3个
-            // {
-            //     test: /vux.src.*?js$/,
-            //     loader: 'babel'
-            // },
-            {
-                test: /\.css$/,
-                loader: 'style-loader!css-loader'
-            },
-            {
-                test: /\.less$/,
-                loader: 'style!css!less'
-            }
+      //新增的3个
+      // {
+      //     test: /vux.src.*?js$/,
+      //     loader: 'babel'
+      // },
+      {
+        test: /\.css$/,
+        loader: 'style-loader!css-loader'
+      },
+      {
+        test: /\.less$/,
+        loader: 'style!css!less'
+      }
     ]
   },
   {{#lint}}
@@ -116,22 +110,17 @@ module.exports = {
   },
   {{/lint}}
   vue: {
-    loaders: utils.cssLoaders(),
-    postcss: [
-      require('autoprefixer')({
-        browsers: ['last 2 versions']
-      })
-    ]
+    loaders: utils.cssLoaders()
   },
-    plugins: [
-        // 提取公共模块
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'vendors', // 公共模块的名称
-            chunks: chunks, // chunks是需要提取的模块
-            minChunks: chunks.length
-        }),
-        // 配置提取出的样式文件
-        new ExtractTextPlugin(utils.assetsPath('css/[name].[hash:7].css'))
-        //new ExtractTextPlugin('css/[name].[hash:7].css')
-    ]
+  plugins: [
+      // 提取公共模块
+      new webpack.optimize.CommonsChunkPlugin({
+        name: 'vendors', // 公共模块的名称
+        chunks: chunks, // chunks是需要提取的模块
+        minChunks: chunks.length
+      }),
+      // 配置提取出的样式文件
+      new ExtractTextPlugin(utils.assetsPath('css/[name].[hash:7].css'))
+      //new ExtractTextPlugin('css/[name].[hash:7].css')
+  ]
 }
