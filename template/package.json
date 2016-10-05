@@ -6,6 +6,7 @@
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
+    "build5": "set H5=true&&node build/build.js",
     "build": "node build/build.js"{{#unit}},
     "unit": "karma start test/unit/karma.conf.js --single-run"{{/unit}}{{#e2e}},
     "e2e": "node test/e2e/runner.js"{{/e2e}}{{#if_or unit e2e}},
@@ -13,9 +14,17 @@
     "lint": "eslint --ext .js,.vue src{{#unit}} test/unit/specs{{/unit}}{{#e2e}} test/e2e/specs{{/e2e}}"{{/lint}}
   },
   "dependencies": {
-    "vue": "^2.0.1"
+        "vue": "^1.0.26",
+        "vue-resource": "^1.0.3",
+        "babel-runtime": "^6.0.0",
+        "glob": "^7.0.5",
+        "style-loader": "^0.13.1",
+        "less": "^2.7.1",
+        "less-loader": "^2.2.3"
   },
   "devDependencies": {
+    "vue-router": "^0.7.5",
+    "fastclick": "^1.0.6",
     "autoprefixer": "^6.4.0",
     "babel-core": "^6.0.0",
     {{#lint}}
@@ -79,6 +88,8 @@
     "ora": "^0.3.0",
     "shelljs": "^0.7.4",
     "url-loader": "^0.5.7",
+    "vue-hot-reload-api": "^1.2.0",
+    "vue-html-loader": "^1.0.0",
     "vue-loader": "^9.4.0",
     "vue-style-loader": "^1.0.0",
     "webpack": "^1.13.2",

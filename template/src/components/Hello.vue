@@ -1,22 +1,35 @@
 <template>
-  <div class="hello">
-    <h1>\{{ msg }}</h1>
+  <div>
+  	tpl
   </div>
 </template>
 
 <script>
-export default {
-  data{{#unless_eq lintConfig "airbnb"}} {{/unless_eq}}() {
+
+import Lib from 'assets/Lib.js'
+
+module.exports = {
+	components:{
+		
+	},
+  data: function () {
     return {
-      msg: 'Hello Vue!'{{#if_eq lintConfig "airbnb"}},{{/if_eq}}
-    }{{#if_eq lintConfig "airbnb"}};{{/if_eq}}
-  }{{#if_eq lintConfig "airbnb"}},{{/if_eq}}
-}{{#if_eq lintConfig "airbnb"}};{{/if_eq}}
+      msg: 'Hello moto! what`s up,yaoyao'
+    }
+  },
+  ready(){
+  	
+  },
+  methods:{
+  	
+  },
+  props:{
+  	
+  }
+}
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
+
 <style scoped>
-h1 {
-  color: #42b983;
-}
+
 </style>
