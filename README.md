@@ -1,13 +1,12 @@
----
-title: vue-cli + webpack 多页面模板
-date: 2016-10-6
-tags: 
--	vuejs(1.026)
--	多页面
--	webpack
+# vue-cli + webpack 多页面模板
+日期: 2016-10-6
+
+关键字: 
+- vuejs(1.026)
+- 多页面
+- webpack
 
 ---
-
 ## 使用方法
 ``` bash
 # 全局安装vue-cli 如果已经安装过,可以省略
