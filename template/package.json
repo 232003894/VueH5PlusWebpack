@@ -20,16 +20,15 @@
   "dependencies": {
         "vue": "^1.0.26",
         "vue-resource": "^1.0.3",
-        "babel-runtime": "^6.0.0",
-        "glob": "^7.0.5",
-        "style-loader": "^0.13.1",
-        "less": "^2.7.1",
-        "less-loader": "^2.2.3"
+        "fastclick": "^1.0.6",
+        "babel-runtime": "^6.0.0"
   },
   "devDependencies": {
-    "vue-router": "^0.7.5",
-    "fastclick": "^1.0.6",
     "babel-core": "^6.0.0",
+    "glob": "^7.0.5",
+    "style-loader": "^0.13.1",
+    "less": "^2.7.1",
+    "less-loader": "^2.2.3",
     {{#lint}}
     "babel-eslint": "^6.1.2",
     {{/lint}}
