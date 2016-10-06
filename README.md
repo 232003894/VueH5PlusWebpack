@@ -7,22 +7,6 @@ tags:
 -	webpack
 
 ---
-## vue+webpack多页面
-
-基于[bluefox1688 github][2]，非常感谢bluefox1688童鞋，今天要讲的内容是基于bluefox1688童鞋的多页面实例上再优化的。
-
-## 优化了点啥
-
-### github地址
-1、github：https://github.com/232003894/VueWebpackMultiplePage
-
-### 优化的内容
-我们先来讲讲，具体我们优化了什么内容。
-
- 1. 增加了npm run dev后打开chome调试。
- 2. 调整了module目录的层级
- 3. 全局统一使用的模块Lib.js库中导入了pages.js(全部页面列表)
- 4. 添加了build5的脚本,主要是pages.js中页面路径不同,用于hbuild H5+ 使用的路径
 
 ## 使用方法
 ``` bash
@@ -48,6 +32,23 @@ npm run build
 npm run build5
 
 ```
+## vue+webpack多页面
+
+基于[bluefox1688 github][2]，非常感谢bluefox1688童鞋，今天要讲的内容是基于bluefox1688童鞋的多页面实例上再优化的。
+
+## 优化了点啥
+
+### github地址
+1、github：https://github.com/232003894/VueWebpackMultiplePage
+
+### 优化的内容
+我们先来讲讲，具体我们优化了什么内容。
+
+ 1. 增加了npm run dev后打开chome调试。
+ 2. 调整了module目录的层级
+ 3. 全局统一使用的模块Lib.js库中导入了pages.js(全部页面列表)
+ 4. 添加了build5的脚本,主要是pages.js中页面路径不同,用于hbuild H5+ 使用的路径
+
 本地默认访问端口为8080，dev默认入口页面为'module/login.html'，需要更改的童鞋请到项目根目录文件`config/index.js`修改。
 
 ### 目录结构
