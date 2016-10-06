@@ -245,4 +245,4 @@ export default {
 每个项目需求都不一样，配置也会有许不同。
 
   [1]: https://github.com/yaoyao1987/vue-cli-multipage
-  [2]: https://github.com/cnu4/Webpack-Vue-MultiplePage
+  [2]: https://github.com/bluefox1688/vue-cli-multi-page
