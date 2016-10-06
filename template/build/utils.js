@@ -24,7 +24,7 @@ exports.getCustomeJS = function(globPath) {
 
   var jsStr = "var pages =" + JSON.stringify(entries);
   jsStr += ";\r\n export default pages;";
-  fs.writeFileSync('./src/assets/pages.js', jsStr);
+  fs.writeFileSync('./src/assets/js/pages.js', jsStr);
 
   //return entries;
 }

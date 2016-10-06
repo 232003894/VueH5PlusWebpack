@@ -65,7 +65,7 @@
         config,
         common,
         pages
-    } from 'assets/Lib.js';
+    } from 'assets/js/Lib.js';
     import moduleHead from 'components/module-head'
     export default {
         data() {

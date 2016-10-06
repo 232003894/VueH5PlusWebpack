@@ -12,7 +12,7 @@
         config,
         common,
         pages
-    } from 'assets/Lib.js';
+    } from 'assets/js/Lib.js';
 
     module.exports = {
         components: {

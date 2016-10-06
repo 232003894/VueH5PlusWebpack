@@ -117,7 +117,7 @@
       </div>
       <div class="inputmain">
         <div class="logobox textcenter">
-          <img class="logo" src='../../assets/logo.png'/>
+          <img class="logo" src='../../assets/img/logo.png'/>
         </div>
         <div v-if="loginerror" class="font12 loginerror LRShake" v-text="loginerror">
         </div>
@@ -151,7 +151,7 @@
         config,
         common,
         pages
-    } from 'assets/Lib.js';
+    } from 'assets/js/Lib.js';
     import Button from 'components/Button';
     export default {
         data() {
