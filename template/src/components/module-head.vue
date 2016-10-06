@@ -5,7 +5,11 @@
 </template>
 
 <script>
-    import Lib from 'assets/Lib.js'
+    import {
+        config,
+        common,
+        pages
+    } from 'assets/Lib.js';
 
     module.exports = {
         props: {

@@ -1,11 +1,6 @@
 import 'assets/css.css';
-import C from 'assets/conf';
-import M from 'assets/common';
-import Pages from 'assets/pages'
+import config from 'assets/conf';
+import common from 'assets/common';
+import pages from 'assets/pages'
 
-var Rxports = {
-    M,
-    C,
-    Pages
-};
-module.exports = Rxports
+export { config, common, pages };

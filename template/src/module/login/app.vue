@@ -44,8 +44,8 @@
         width: 70%;
         top: -40px;
         background: #fff;
-        /*border-top-left-radius: 10px;
-border-top-right-radius: 10px;*/
+        /*border-top-left-radius: 10px;*/
+        /*border-top-right-radius: 10px;*/
         border-radius: 10px;
         opacity: .8;
         left: 50%;
@@ -111,7 +111,7 @@ border-top-right-radius: 10px;*/
         <div class="textcenter topbox">
           <h3 class="color_main" v-text="appname"></h3>
           <p class="color888 font12 martop15">
-            您的专业移动工作台！1
+            您的专业移动工作台！
           </p>
         </div>
       </div>
@@ -147,12 +147,16 @@ border-top-right-radius: 10px;*/
 </template>
 
 <script>
-    import Lib from 'assets/Lib.js'
+    import {
+        config,
+        common,
+        pages
+    } from 'assets/Lib.js';
     import Button from 'components/Button';
     export default {
         data() {
             return {
-                appname: Lib.C.appname,
+                appname: config.appname,
                 user: {
                     UserName: 'lanchenglv.com',
                     PassWord: 'lanchenglv.com'
@@ -171,7 +175,7 @@ border-top-right-radius: 10px;*/
             //登陆操作
             loginAction() {
                 setTimeout(() => {
-                    window.location.href = Lib.Pages["my.welcome"];
+                    window.location.href = pages["my.welcome"];
                 }, 1000);
             },
             //记住密码

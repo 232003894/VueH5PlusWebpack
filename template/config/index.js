@@ -19,6 +19,7 @@ module.exports = {
     dev: {
         env: require('./dev.env'),
         port: 8080,
+        main: 'module/login.html',
         assetsSubDirectory: 'static',
         assetsPublicPath: '/',
         proxyTable: {},

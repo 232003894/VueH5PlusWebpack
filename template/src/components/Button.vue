@@ -8,43 +8,46 @@
 </template>
 
 <script>
+    import {
+        config,
+        common,
+        pages
+    } from 'assets/Lib.js';
 
-import Lib from 'assets/Lib.js'
+    module.exports = {
+        components: {
 
-module.exports = {
-	components:{
-		
-	},
-  data: function () {
-    return {
-      msg: 'Hello moto! what`s up,yaoyao'
+        },
+        data: function() {
+            return {
+                msg: 'Hello moto! what`s up,yaoyao'
+            }
+        },
+        ready() {
+
+        },
+        methods: {
+
+        },
+        props: {
+            "text": {
+                type: String,
+                default: "点我点我"
+            }
+        }
     }
-  },
-  ready(){
-  	
-  },
-  methods:{
-  	
-  },
-  props:{
-  	"text":{
-		type:String,
-		default:"点我点我"
-	}
-  }
-}
 </script>
 
 
 <style scoped>
-.btn_login{
-background:#04BE02;
-color:#fff;
-display:block;
-height:45px;
-text-align:center;
-line-height:45px;
-border-radius:10px;
-margin-top:25px
-}
+    .btn_login {
+        background: #04BE02;
+        color: #fff;
+        display: block;
+        height: 45px;
+        text-align: center;
+        line-height: 45px;
+        border-radius: 10px;
+        margin-top: 25px
+    }
 </style>
