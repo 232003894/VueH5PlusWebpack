@@ -1,2 +1,2 @@
-var pages ={"login":"login.html","my.welcome":"my.welcome.html"};
+var pages ={"main":"main.html","my.setting":"my.setting.html"};
  export default pages;

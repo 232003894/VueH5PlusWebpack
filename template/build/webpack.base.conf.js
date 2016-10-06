@@ -28,8 +28,8 @@ module.exports = {
     alias: {
       'src': path.resolve(__dirname, '../src'),
       'assets': path.resolve(__dirname, '../src/assets'),
-      'components': path.resolve(__dirname, '../src/components')
-      //'vux-components': 'vux/src/components'
+      'components': path.resolve(__dirname, '../src/components'),
+      'vux-components': 'vux/src/components'
     }
   },
   resolveLoader: {
@@ -89,11 +89,10 @@ module.exports = {
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
       },
-      //新增的3个
-      // {
-      //     test: /vux.src.*?js$/,
-      //     loader: 'babel'
-      // },
+      {
+          test: /vux.src.*?js$/,
+          loader: 'babel'
+      },
       {
         test: /\.css$/,
         loader: 'style-loader!css-loader'

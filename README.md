@@ -1,10 +1,11 @@
-# vue-cli + webpack 多页面模板
+# vue-cli + webpack + vux 多页面模板
 日期: 2016-10-6
 
 关键字: 
-- vuejs(1.026)
 - 多页面
+- vuejs(1.0.26)
 - webpack
+- vux(0.1.3)
 
 ## 使用方法
 ``` bash

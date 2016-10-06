@@ -1,10 +1,8 @@
 <template>
-  <div class="">
-						
-		<a href="javascript:;" class="btn_login" v-text="text">
-		</a>
-						
-</div>
+    <div class="">						
+        <a href="javascript:;" class="btn_login" v-text="text">
+        </a>						
+    </div>
 </template>
 
 <script>
@@ -13,7 +11,6 @@
         common,
         pages
     } from 'assets/js/Lib.js';
-
     module.exports = {
         components: {
 
