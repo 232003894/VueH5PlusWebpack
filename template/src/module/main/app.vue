@@ -58,7 +58,8 @@
     import {
         config,
         common,
-        pages
+        pages,
+        Vue
     } from 'assets/js/Lib.js';
 
     import Button from 'components/Button';
@@ -70,6 +71,7 @@
             Divider,
             Button
         },
+        ready() {},
 
         data() {
             return {
@@ -81,7 +83,7 @@
             //登陆操作
             loginAction() {
                 setTimeout(() => {
-                    window.location.href = pages["my.setting"];
+                    window.location.href = this.settingUri;
                 }, 1000);
             }
         }

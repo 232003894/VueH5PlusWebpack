@@ -5,7 +5,8 @@ tpl
     import {
         config,
         common,
-        pages
+        pages,
+        Vue
     } from 'assets/js/Lib.js';
 
     export default {

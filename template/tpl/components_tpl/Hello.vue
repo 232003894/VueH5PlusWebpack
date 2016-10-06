@@ -7,7 +7,8 @@
     import {
         config,
         common,
-        pages
+        pages,
+        Vue
     } from 'assets/js/Lib.js';
     module.exports = {
         components: {

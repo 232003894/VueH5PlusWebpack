@@ -37,9 +37,7 @@
     } from 'vux-components';
 
     import {
-        config,
-        common,
-        pages
+        config, common, pages, Vue 
     } from 'assets/js/Lib.js';
 
     export default {
