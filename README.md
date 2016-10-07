@@ -56,7 +56,7 @@ webpack
   |---build
   |---config
   |---dist 打包生成的目录
-    |---pages 页面 (页面的命名为 [一级模块名.二级级模块名...].页面名.html])
+    |---html 页面 (页面的命名为 [一级模块名.二级级模块名...].页面名.html])
       |---main.html  (页面名.html)
       |---my.setting.html  (模块名.页面名.html)
     |---static 资源
