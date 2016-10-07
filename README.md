@@ -76,7 +76,7 @@ webpack
       |---Button.vue  按钮组件
       |---module-head.vue  head组件
     |---module各个页面模块
-      |---main    登陆模块(单页面,一个文件夹就是一个html)
+      |---main    首页(单页面,一个文件夹就是一个html)
         |---main.html
         |---main.js
         |---app.vue
