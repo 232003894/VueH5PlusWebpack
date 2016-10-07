@@ -57,7 +57,7 @@ webpack
   |---config
   |---dist 打包生成的目录
     |---pages 页面 (页面的命名为 [一级模块名.二级级模块名...].页面名.html])
-      |---login.html  (页面名.html)
+      |---main.html  (页面名.html)
       |---my.welcome.html  (模块名.页面名.html)
     |---static 资源
       |---css 
@@ -76,9 +76,9 @@ webpack
       |---Button.vue  按钮组件
       |---module-head.vue  head组件
     |---module各个页面模块
-      |---login    登陆模块(单页面,一个文件夹就是一个html)
-        |---login.html
-        |---login.js
+      |---main    登陆模块(单页面,一个文件夹就是一个html)
+        |---main.html
+        |---main.js
         |---app.vue
       |---my    用户模块(一个业务模块,每个业务下可能有多个页面)
         |---welcome       欢迎页模(单页面,一个文件夹就是一个html)
