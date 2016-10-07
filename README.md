@@ -24,11 +24,8 @@ npm install
 # 调试环境 serve with hot reload at http://localhost:8080/module/login.html
 npm run dev
 
-# 生产环境 build for web production with minification 
+# 生产环境 with minification 
 npm run build
-
-# 生产环境 build for H5+ production with minification 
-npm run build5
 
 ```
 ## vue+webpack多页面
