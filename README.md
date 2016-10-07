@@ -58,7 +58,7 @@ webpack
   |---dist 打包生成的目录
     |---pages 页面 (页面的命名为 [一级模块名.二级级模块名...].页面名.html])
       |---main.html  (页面名.html)
-      |---my.welcome.html  (模块名.页面名.html)
+      |---my.setting.html  (模块名.页面名.html)
     |---static 资源
       |---css 
       |---fonts 
@@ -81,9 +81,9 @@ webpack
         |---main.js
         |---app.vue
       |---my    用户模块(一个业务模块,每个业务下可能有多个页面)
-        |---welcome       欢迎页模(单页面,一个文件夹就是一个html)
-          |---welcome.html
-          |---welcome.js
+        |---setting       设置页面(单页面,一个文件夹就是一个html)
+          |---setting.html
+          |---setting.js
           |---app.vue
   |---static 其他需要打包的静态资源,本目录下的资源会完整的复制到 dist/static中去
 
