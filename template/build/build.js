@@ -43,8 +43,9 @@ webpack(webpackConfig, function(err, stats) {
         chunkModules: false
     }) + '\n');
 
-    if (process.env.H5 === 'true') {
+    if (process.env.H5 !== 'true') {
         var uri = config.build.index;
+        console.log("打开默认页:" + uri);
         //Chrome 在 OS X 中 'google chrome', 在 Linux 中 'google-chrome' 在 Windows 中'chrome'.
         opn(uri, { wait: false, app: ['chrome', '--remote-debugging-port=9222', '--disable-web-security', '--user-data-dir=D:\\tmp\\CMyChromeDevUserData'] });
     }
