@@ -4,13 +4,13 @@ var utils = require('./utils')
 var projectRoot = path.resolve(__dirname, '../')
 
 var webpack = require('webpack')
-var entries = utils.getEntry('./src/module/**/*.js'); // 获得入口js文件
+var entries = utils.getEntry('./src/pages/**/*.js'); // 获得入口js文件
 var chunks = Object.keys(entries);
 
 // 将样式提取到单独的css文件中，而不是打包到js文件或使用style标签插入在head标签中
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-utils.getCustomeJS('./src/module/**/*.html');
+utils.getCustomeJS('./src/pages/**/*.html');
 
 module.exports = {
   entry: entries,

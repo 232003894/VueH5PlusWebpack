@@ -75,7 +75,7 @@ webpack
     |---components 组件
       |---Button.vue  按钮组件
       |---module-head.vue  head组件
-    |---module各个页面模块
+    |---pages 各个页面模块
       |---main    首页(单页面,一个文件夹就是一个html)
         |---main.html
         |---main.js
@@ -93,14 +93,14 @@ webpack
 例如
 
 ``` stylus
-  |---login    登陆模块(单页面,一个文件夹就是一个html)
-    |---login.html
-    |---login.js
+  |---main    首页(单页面,一个文件夹就是一个html)
+    |---main.html
+    |---main.js
     |---app.vue
   |---my    用户模块(一个业务模块,每个业务下可能有多个页面)
-    |---welcome       欢迎页模(单页面,一个文件夹就是一个html)
-      |---welcome.html
-      |---welcome.js
+    |---setting       设置页面(单页面,一个文件夹就是一个html)
+      |---setting.html
+      |---setting.js
       |---app.vue
 ```
 就是我们访问时的地址：
