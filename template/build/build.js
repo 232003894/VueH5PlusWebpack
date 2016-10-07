@@ -11,17 +11,17 @@ var opn = require('opn')
 
 
 
-var outStr = '构建web production 打包文件...';
+var outStr = '构建web production 文件...';
 if (process.env.H5 === 'true') {
     console.log(
-        '  Tip:\n' +
-        '  构建H5+ production ,可以拷贝到Hbuilder中使用\n'
+        '  Tip:' +
+        '  Fro H5+ ,可以拷贝到Hbuilder中使用\n'
     )
-    outStr = '构建H5+ production 打包文件...';
+    outStr = '构建H5+ production 文件...';
 } else {
     console.log(
-        '  Tip:\n' +
-        '  构建web production ,可以用文件路径打开访问.\n'
+        '  Tip:' +
+        '  For web ,可以用文件路径打开访问.\n'
     )
 }
 var spinner = ora(outStr)
