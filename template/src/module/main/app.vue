@@ -60,7 +60,7 @@
         common,
         pages,
         Vue
-    } from 'assets/js/Lib.js';
+    } from 'assets/Lib.js';
 
     import Button from 'components/Button';
 

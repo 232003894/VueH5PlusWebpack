@@ -43,12 +43,12 @@ npm run build5
 ### 优化的内容
 我们先来讲讲，具体我们优化了什么内容。
 
- 1. 增加了npm run dev后打开chome调试。
+ 1. 增加了npm run dev 或 npm run build 后会用chome打开默认页。
  2. 调整了module目录的层级
  3. 全局统一使用的模块Lib.js库中导入了pages.js(全部页面列表)
- 4. 添加了build5的脚本,主要是pages.js中页面路径不同,用于hbuild H5+ 使用的路径
+ 4. 添加了build5的脚本,主要是pages.js中页面路径不同,用于hbuild H5+使用的路径,完成后不会打开页面
 
-本地默认访问端口为8080，dev默认入口页面为'module/login.html'，需要更改的童鞋请到项目根目录文件`config/index.js`修改。
+本地默认访问端口为8080，dev和build 默认入口页面为'pages/login.html'，需要更改的童鞋请到项目根目录文件`config/index.js`修改。
 
 ### 目录结构
 ``` stylus
@@ -56,7 +56,7 @@ webpack
   |---build
   |---config
   |---dist 打包生成的目录
-    |---module 页面 (页面的命名为 [一级模块名.二级级模块名...].页面名.html])
+    |---pages 页面 (页面的命名为 [一级模块名.二级级模块名...].页面名.html])
       |---login.html  (页面名.html)
       |---my.welcome.html  (模块名.页面名.html)
     |---static 资源
@@ -70,6 +70,8 @@ webpack
       |---img/  图片文件夹
       |---font/  字体图标文件夹
       |---js/  js图标文件夹
+      |---Lib.js  公用库
+      |---base.css  公用样式
     |---components 组件
       |---Button.vue  按钮组件
       |---module-head.vue  head组件
@@ -188,13 +190,14 @@ export default pages;
 import {
     config,
     common,
-    pages
-} from 'assets/js/Lib.js';
+    pages,
+    Vue
+} from 'assets/Lib.js';
 ```
 这就是全局统一公共模块，我们先看看`Lib.js`里的代码
 
 ``` javascript
-import 'assets/css/css.css';
+import 'assets/base.css';
 import config from 'assets/js/conf';
 import common from 'assets/js/common';
 import pages from 'assets/js/pages'
@@ -206,11 +209,12 @@ export { config, common, pages };
 import {
     config,
     common,
-    pages
-} from 'assets/js/Lib.js';
+    pages,
+    Vue
+} from 'assets/Lib.js';
 config.appname;  //# 临风
 ```
-只需要在`*.vue`里导入`import {config,common,pages} from 'assets/js/Lib.js''`，
+只需要在`*.vue`里导入`import {config,common,pages,Vue} from 'assets/Lib.js''`，
 就可以到处使用全局模块了。
 
 另外，如果想要干净的页面模块模板，可以到根目录的`tpl`里复制`module_tpl`整个文件夹，然后粘贴到`src/module`目录下马上就可以进行开发了，开发之前记得在`cmd`里`npm run dev`跑一遍，新增页面都要重新`dev`一遍。

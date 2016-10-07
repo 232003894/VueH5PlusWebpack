@@ -7,7 +7,7 @@ tpl
         common,
         pages,
         Vue
-    } from 'assets/js/Lib.js';
+    } from 'assets/Lib.js';
 
     export default {
         data() {

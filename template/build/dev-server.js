@@ -75,5 +75,5 @@ module.exports = app.listen(port, function(err) {
     var uri = 'http://localhost:' + port + '/' + main;
     console.log('Listening at ' + uri + '\n');
     //Chrome 在 OS X 中 'google chrome', 在 Linux 中 'google-chrome' 在 Windows 中'chrome'.
-    opn(uri, { app: ['chrome', '--remote-debugging-port=9222', '--disable-web-security', '--user-data-dir=D:\\tmp\\CMyChromeDevUserData'] });
+    opn(uri, { wait: false, app: ['chrome', '--remote-debugging-port=9222', '--disable-web-security', '--user-data-dir=D:\\tmp\\CMyChromeDevUserData'] });
 })

@@ -7,6 +7,7 @@ var config = require('../config')
 var ora = require('ora')
 var webpack = require('webpack')
 var webpackConfig = require('./webpack.prod.conf')
+var opn = require('opn')
 
 
 
@@ -31,14 +32,20 @@ rm('-rf', config.build.assetsRoot)
 mkdir('-p', assetsPath)
 cp('-R', 'static/', assetsPath)
 
-webpack(webpackConfig, function (err, stats) {
-  spinner.stop()
-  if (err) throw err
-  process.stdout.write(stats.toString({
-    colors: true,
-    modules: false,
-    children: false,
-    chunks: false,
-    chunkModules: false
-  }) + '\n')
+webpack(webpackConfig, function(err, stats) {
+    spinner.stop()
+    if (err) throw err
+    process.stdout.write(stats.toString({
+        colors: true,
+        modules: false,
+        children: false,
+        chunks: false,
+        chunkModules: false
+    }) + '\n');
+
+    if (process.env.H5 === 'true') {
+        var uri = config.build.index;
+        //Chrome 在 OS X 中 'google chrome', 在 Linux 中 'google-chrome' 在 Windows 中'chrome'.
+        opn(uri, { wait: false, app: ['chrome', '--remote-debugging-port=9222', '--disable-web-security', '--user-data-dir=D:\\tmp\\CMyChromeDevUserData'] });
+    }
 })

@@ -4,7 +4,7 @@ var path = require('path')
 module.exports = {
     build: {
         env: require('./prod.env'),
-        index: path.resolve(__dirname, '../dist/index.html'),
+        index: path.resolve(__dirname, '../dist/pages/main.html'),
         assetsRoot: path.resolve(__dirname, '../dist'),
         assetsSubDirectory: 'static',
         assetsPublicPath: '../',
@@ -19,7 +19,7 @@ module.exports = {
     dev: {
         env: require('./dev.env'),
         port: 8080,
-        main: 'module/main.html',
+        main: 'pages/main.html',
         assetsSubDirectory: 'static',
         assetsPublicPath: '/',
         proxyTable: {},

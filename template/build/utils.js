@@ -15,7 +15,7 @@ exports.getCustomeJS = function(globPath) {
     pathname = tmp.splice(star, length).join('.');
     var strHe = "";
     if (process.env.H5 === 'true') {
-      strHe = '_www/module/';
+      strHe = '_www/pages/';
     }
     var last = tmp[tmp.length - 1].split('.');
     entry = strHe + pathname + '.' + last[last.length - 1];
@@ -39,7 +39,7 @@ exports.getEntry = function(globPath) {
     var star = tmp.indexOf("module") + 1;
 
     var length = tmp.lastIndexOf(basename) - star + 1;
-    pathname = "module/" + tmp.splice(star, length).join('.');
+    pathname = "pages/" + tmp.splice(star, length).join('.');
 
     // tmp = entry.split('/').splice(-3);
     // pathname = tmp.splice(0, 1) + '/' + basename; // 正确输出js和html的路径

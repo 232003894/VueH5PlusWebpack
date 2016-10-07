@@ -1,4 +1,4 @@
-import 'assets/css/css.css';
+import 'assets/base.css';
 import 'vux/dist/vux.css';
 import config from 'assets/js/conf';
 import common from 'assets/js/common';
