@@ -64,7 +64,7 @@ export default {
     data() {
         return {
             msg: "我的钱包(简单头部)",
-            settingUri: pages["my.setting"]
+            settingUri: pages["my.setting"].web
         }
     },
     asyncData: function(resolve, reject) {

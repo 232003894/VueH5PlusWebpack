@@ -46,7 +46,6 @@ npm run build5
  1. 增加了npm run dev 或 npm run build 后会用chome打开默认页。
  2. 调整了module目录的层级
  3. 全局统一使用的模块Lib.js库中导入了pages.js(全部页面列表)
- 4. 添加了build5的脚本,主要是pages.js中页面路径不同,用于hbuild H5+使用的路径,完成后不会打开页面
 
 本地默认访问端口为8080，dev和build 默认入口页面为'pages/login.html'，需要更改的童鞋请到项目根目录文件`config/index.js`修改。
 
@@ -139,13 +138,11 @@ exports.getCustomeJS = function(globPath) {
     var star = tmp.indexOf("module") + 1;
     var length = tmp.lastIndexOf(basename) - star + 1;
     pathname = tmp.splice(star, length).join('.');
-    var strHe = "";
-    if (process.env.H5 === 'true') {
-      strHe = '_www/module/';
-    }
     var last = tmp[tmp.length - 1].split('.');
-    entry = strHe + pathname + '.' + last[last.length - 1];
-    entries[pathname] = entry;
+    entries[pathname] = {
+      web  : pathname + '.' + last[last.length - 1],
+      h5 : "_www/html/" + pathname + '.' + last[last.length - 1]
+    };
   });
 
   var jsStr = "var pages =" + JSON.stringify(entries);
@@ -155,29 +152,11 @@ exports.getCustomeJS = function(globPath) {
 
 ```
 
-【assets/js/pages.js】所有页面for web。
+【assets/js/pages.js】所有页面
 
 ``` javascript
-var pages ={"login":"login.html","my.welcome":"my.welcome.html"};
+var pages ={"main":{"web":"main.html","h5":"_www/html/main.html"},"my.setting":{"web":"my.setting.html","h5":"_www/html/my.setting.html"}};
 export default pages;
-```
-
-【assets/js/pages.js】所有页面for H5+。
-
-``` javascript
-var pages ={"login":"_www/module/login.html","my.welcome":"_www/module/my.welcome.html"};
-export default pages;
-```
-
-【package.json】中 新增 build5 脚本
-
-``` javascript
-"scripts": {
-  "dev": "node build/dev-server.js",
-  "build": "node build/build.js",
-  "build5": "set H5=true&&node build/build.js"
-  ......
-}
 ```
 
 ### 全局统一公共模块
@@ -197,11 +176,24 @@ import {
 这就是全局统一公共模块，我们先看看`Lib.js`里的代码
 
 ``` javascript
-import 'assets/base.css';
+import Style from 'assets/css.vue' // eslint-disable-line
+
 import config from 'assets/js/conf';
 import common from 'assets/js/common';
-import pages from 'assets/js/pages'
-export { config, common, pages };
+import pages from 'assets/js/pages';
+
+import Vue from 'vue';
+var VueTouch = require('vue-touch');
+var vueResource = require('vue-resource');
+var VueAsyncData = require('vue-async-data');
+var VueValidator = require('vue-validator')
+Vue.use(VueTouch);
+Vue.use(vueResource);
+Vue.use(VueAsyncData);
+Vue.use(VueValidator);
+
+export { config, common, pages, Vue };
+
 ```
 例如我们现在想调用APP的名称，在`.vue`里可以这么写
 

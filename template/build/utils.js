@@ -13,13 +13,11 @@ exports.getCustomeJS = function(globPath) {
     var star = tmp.indexOf("pages") + 1;
     var length = tmp.lastIndexOf(basename) - star + 1;
     pathname = tmp.splice(star, length).join('.');
-    var strHe = "";
-    if (process.env.H5 === 'true') {
-      strHe = '_www/html/';
-    }
     var last = tmp[tmp.length - 1].split('.');
-    entry = strHe + pathname + '.' + last[last.length - 1];
-    entries[pathname] = entry;
+    entries[pathname] = {
+      web  : pathname + '.' + last[last.length - 1],
+      h5 : "_www/html/" + pathname + '.' + last[last.length - 1]
+    };
   });
 
   var jsStr = "var pages =" + JSON.stringify(entries);
