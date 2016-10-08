@@ -13,10 +13,10 @@ var opn = require('opn')
 
 var outStr = '构建发布文件...';
 console.log(
-    '  Tip:' +
-    '  可以用文件路径打开访问\n'
-)
-//或拷贝到Hbuilder中使用
+        '  Tip:' +
+        '  可以用文件路径打开访问\n'
+    )
+    //或拷贝到Hbuilder中使用
 var spinner = ora(outStr)
 spinner.start()
 
