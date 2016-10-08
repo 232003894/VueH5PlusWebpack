@@ -36,8 +36,7 @@ import Switch from 'vux-components/Switch';
 import {
     config,
     common,
-    pages,
-    Vue
+    pages
 } from 'assets/Lib.js';
 export default {
     ready() {},

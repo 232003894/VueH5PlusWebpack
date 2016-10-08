@@ -48,8 +48,7 @@ import Card from 'vux-components/card';
 import {
     config,
     common,
-    pages,
-    Vue
+    pages
 }
 from 'assets/Lib.js';
 import Button from 'components/Button';
