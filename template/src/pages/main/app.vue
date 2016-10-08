@@ -71,7 +71,6 @@ export default {
         this.$http.get('http://demo.dcloud.net.cn/test/xhr/json.php')
             .then(function(response) {
                 var data = JSON.parse(response.data);
-                debugger;
                 setTimeout(() => {
                     resolve({
                         msg: data.string
