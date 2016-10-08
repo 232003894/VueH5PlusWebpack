@@ -11,7 +11,7 @@ var opn = require('opn')
 
 
 
-var outStr = '构建production 文件...';
+var outStr = '构建发布文件...';
 console.log(
     '  Tip:' +
     '  可以用文件路径打开访问\n'
