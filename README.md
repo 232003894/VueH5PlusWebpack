@@ -165,8 +165,7 @@ export default pages;
 import {
     config,
     common,
-    pages,
-    Vue
+    pages
 } from 'assets/Lib.js';
 ```
 这就是全局统一公共模块，我们先看看`Lib.js`里的代码
@@ -178,17 +177,7 @@ import config from 'assets/js/conf';
 import common from 'assets/js/common';
 import pages from 'assets/js/pages';
 
-import Vue from 'vue';
-var VueTouch = require('vue-touch');
-var vueResource = require('vue-resource');
-var VueAsyncData = require('vue-async-data');
-var VueValidator = require('vue-validator')
-Vue.use(VueTouch);
-Vue.use(vueResource);
-Vue.use(VueAsyncData);
-Vue.use(VueValidator);
-
-export { config, common, pages, Vue };
+export { config, common, pages };
 
 ```
 例如我们现在想调用APP的名称，在`.vue`里可以这么写
@@ -197,12 +186,11 @@ export { config, common, pages, Vue };
 import {
     config,
     common,
-    pages,
-    Vue
+    pages
 } from 'assets/Lib.js';
 config.appname;  //# 临风
 ```
-只需要在`*.vue`里导入`import {config,common,pages,Vue} from 'assets/Lib.js''`，
+只需要在`*.vue`里导入`import {config,common,pages} from 'assets/Lib.js''`，
 就可以到处使用全局模块了。
 
 另外，如果想要干净的页面模块模板，可以到根目录的`tpl`里复制`page_tpl`整个文件夹，然后粘贴到`src/pages`目录下马上就可以进行开发了，开发之前记得在`cmd`里`npm run dev`跑一遍，新增页面都要重新`dev`一遍。
@@ -231,7 +219,7 @@ export default {
 }
 ```
 
-如果想要干净的组件模板，可以到根目录的`tpl`里找到`components_tpl`的`Hello.vue`文件，复制粘贴到`components`目录下马上就可以进行开发了。
+如果想要干净的组件模板，可以到根目录的`tpl`里找到`component_tpl`的`Hello.vue`文件，复制粘贴到`components`目录下马上就可以进行开发了。
 
 ## 结束言
 每个项目需求都不一样，配置也会有许不同。
