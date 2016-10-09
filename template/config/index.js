@@ -15,8 +15,8 @@ module.exports = {
         // npm install --save-dev compression-webpack-plugin
         productionGzip: false,
         productionGzipExtensions: ['js', 'css'],
-        //需要复制到的路径
-        copyPath: "D:\\chenw\\Documents\\HBuilderProject\\vuetest"
+        //需要复制到的路径,不填则不拷贝
+        copyPath: ""
     },
     dev: {
         env: require('./dev.env'),
