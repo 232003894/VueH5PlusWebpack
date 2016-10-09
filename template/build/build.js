@@ -36,6 +36,15 @@ webpack(webpackConfig, function(err, stats) {
         chunkModules: false
     }) + '\n');
 
+    //删除指定路径下html和static目录,并将生成的文件复制到指定路径
+    var copyPath = config.build.copyPath || "";
+    if (copyPath !== "") {
+        rm('-rf', copyPath + "\\html");
+        rm('-rf', copyPath + "\\static");
+        cp('-R', path.join(config.build.assetsRoot, "html"), copyPath);
+        cp('-R', path.join(config.build.assetsRoot, "static"), copyPath);
+    }
+
     var uri = config.build.index;
     console.log("打开默认页:" + uri);
     //具体参数可以可以在config/index.js- chrome中配置
