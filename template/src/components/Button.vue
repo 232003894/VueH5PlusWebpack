@@ -1,24 +1,24 @@
 <template>
-<div class="">
+  <div class="">
     <a href="javascript:;" class="btn_login" v-text="text">
     </a>
-</div>
+  </div>
 </template>
 
 <script>
-import {
+  import {
     config,
     common,
     pages
-} from 'assets/Lib.js';
-module.exports = {
+  } from 'assets/Lib.js'
+  module.exports = {
     components: {
 
     },
     data: function() {
-        return {
-            msg: 'Hello moto! what`s up,yaoyao'
-        }
+      return {
+        msg: 'Hello moto! what`s up,yaoyao'
+      }
     },
     ready() {
 
@@ -27,17 +27,17 @@ module.exports = {
 
     },
     props: {
-        "text": {
-            type: String,
-            default: "点我点我"
-        }
+      'text': {
+        type: String,
+        default: '点我点我'
+      }
     }
-}
+  }
 </script>
 
 
 <style scoped>
-.btn_login {
+  .btn_login {
     background: #04BE02;
     color: #fff;
     display: block;
@@ -46,5 +46,5 @@ module.exports = {
     line-height: 45px;
     border-radius: 10px;
     margin-top: 25px
-}
+  }
 </style>

@@ -1,2 +1,2 @@
-var Rxports = {};
-module.exports = Rxports;
+var Rxports = {}
+module.exports = Rxports

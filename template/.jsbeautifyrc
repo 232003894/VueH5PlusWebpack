@@ -1,27 +1,29 @@
 {
     "onSave": true,
-    "javascript": {
-        "indent_size": 4,
+    "indent_size": 2,
+    "indent_char": " ",
+    "js": {
+        "indent_size": 2,
         "indent_char": " ",
         "eol": "auto",
         "preserve_newlines": true,
         "break_chained_methods": false,
         "max_preserve_newlines": 0,
-        "space_in_paren": false,
-        "space_in_empty_paren": false,
+        "space_in_paren": true,
+        "space_in_empty_paren": true,
         "jslint_happy": false,
-        "space_after_anon_function": false,
+        "space_after_anon_function": true,
         "keep_array_indentation": false,
         "space_before_conditional": true,
         "unescape_strings": false,
         "wrap_line_length": 0,
         "e4x": false,
-        "end_with_newline": false,
+        "end_with_newline": true,
         "comma_first": false,
         "brace_style": "collapse"
     },
     "css": {
-        "indent_size": 4,
+        "indent_size": 2,
         "indentCharacter": " ",
         "indent_char": " ",
         "selector_separator_newline": true,
@@ -31,11 +33,18 @@
     },
     "html": {
         "indent_inner_html": false,
-        "indent_size": 4,
+        "indent_size": 2,
         "indent_char": " ",
         "indent_character": " ",
-        "unformatted": ["a", "sub", "sup", "b", "i", "u"],
+        "unformatted": [
+            "a",
+            "sub",
+            "sup",
+            "b",
+            "i",
+            "u"
+        ],
         "indent_scripts": "normal", // "separate", "keep","normal"
-        "indent_handlebars": false // e.g. {{#foo}}, {{/foo}}
+        "indent_handlebars": false // e.g.
     }
 }
