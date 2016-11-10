@@ -1,27 +1,27 @@
 <template>
-<div>
+  <div>
     tpl--
-</div>
+  </div>
 </template>
 <script>
-import {
+  import {
     config,
     common,
     pages
-} from 'assets/Lib.js';
-module.exports = {
+  } from 'assets/Lib.js'
+  module.exports = {
     components: {
 
     },
     data: function() {
-        return {
-            msg: 'Hello，这是组件的模板'
-        }
+      return {
+        msg: 'Hello，这是组件的模板'
+      }
     },
     ready() {},
     methods: {},
     props: {}
-}
+  }
 </script>
 <style scoped>
 

@@ -1,21 +1,21 @@
 <template>
- tpl
+  tpl
 </template>
 <script>
-import {
+  import {
     config,
     common,
     pages
-} from 'assets/Lib.js';
+  } from 'assets/Lib.js'
 
-export default {
+  export default {
     data() {
-        return {}
+      return {}
     },
     components: {},
     ready() {},
     methods: {}
-}
+  }
 </script>
 <style scoped>
 
