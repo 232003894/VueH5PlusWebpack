@@ -36,7 +36,7 @@
       <img slot="header" src="http://placeholder.qiniudn.com/640x300" style="width:100%;display:block;">
       <div slot="content" class="card-padding">
         <p style="color:#999;font-size:12px;">2016-07-31 07:42:45</p>
-        <p style="font-size:14px;line-height:1.2;padding-top:10px;">C语言终于超越了Java，登顶榜首．Python超过C++成为第三名，C#被R顶出前五．最近几年R一路飙升，主要是由于乘上了大数据分析的浪潮．</p>
+        <p style="font-size:14px;line-height:1.2;padding-top:10px;"> C语言终于超越了Java，登顶榜首．Python超过C++成为第三名，C#被R顶出前五．最近几年R一路飙升，主要是由于乘上了大数据分析的浪潮．</p>
       </div>
     </card>
   </div>
