@@ -26,7 +26,7 @@
     </group>
     <tip>关闭后，有朋友更新照片时，界面下面的"发现"切换按钮上不再出现红点提示。</tip>
 
-    <img class="logo" src="../../../assets/img/logo.png">
+    <img class="logo" src="../../../img/logo.png">
   </div>
 </template>
 
