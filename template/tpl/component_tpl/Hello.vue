@@ -4,11 +4,7 @@
   </div>
 </template>
 <script>
-  import {
-    config,
-    common,
-    pages
-  } from 'assets/Lib.js'
+  require('libs')
   module.exports = {
     components: {
 

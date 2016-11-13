@@ -6,11 +6,6 @@
 </template>
 
 <script>
-  import {
-    config,
-    common,
-    pages
-  } from 'assets/Lib.js'
   module.exports = {
     components: {
 

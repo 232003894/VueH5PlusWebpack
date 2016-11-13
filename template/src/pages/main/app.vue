@@ -25,7 +25,7 @@
     <divider>简单头部,简单底部带链接</divider>
     <card :header="{title:'商品详情(简单头部)'}" :footer="{title:'设置(简单底部带链接)',link:settingUri}">
       <p slot="content" class="card-padding">
-        这里是内容
+        这里是内容12
         <Button v-touch:tap="loginAction" text="设&nbsp;&nbsp;置"></Button>
       </p>
     </card>
@@ -46,11 +46,10 @@
   import Divider from 'vux-components/Divider'
   import Card from 'vux-components/card'
   import {
-    config,
-    common,
     pages
   }
-  from 'assets/Lib.js'
+  from 'libs'
+
   import Button from 'components/Button'
   export default {
     components: {

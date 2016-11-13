@@ -2,12 +2,7 @@
   tpl
 </template>
 <script>
-  import {
-    config,
-    common,
-    pages
-  } from 'assets/Lib.js'
-
+  require('libs')
   export default {
     data() {
       return {}

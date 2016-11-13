@@ -25,6 +25,8 @@
       <switch title="朋友圈照片更新" :value="true" @on-change="change"></switch>
     </group>
     <tip>关闭后，有朋友更新照片时，界面下面的"发现"切换按钮上不再出现红点提示。</tip>
+
+    <img class="logo" src="../../../assets/img/logo.png">
   </div>
 </template>
 
@@ -33,11 +35,7 @@
   import Tip from 'vux-components/tip'
   import Cell from 'vux-components/cell'
   import Switch from 'vux-components/Switch'
-  import {
-    config,
-    common,
-    pages
-  } from 'assets/Lib.js'
+  require('libs')
   export default {
     ready() {},
     components: {

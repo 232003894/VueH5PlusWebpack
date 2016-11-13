@@ -1,52 +1,66 @@
 // https://github.com/shelljs/shelljs
 require('shelljs/global')
-env.NODE_ENV = 'production'
 
 var path = require('path')
-var config = require('../config')
 var ora = require('ora')
 var webpack = require('webpack')
-var webpackConfig = require('./webpack.prod.conf')
 var opn = require('opn')
+var fs = require('fs');
+var rimraf = require('rimraf')
 
+var preConfig = require('./pre.config')
+var webpackConfig = require('../config/webpack.procduct.config')
+var dirVars = require('../config/base/dir-vars.config.js')
 
-
-var outStr = '构建发布文件...';
-console.log(
-        '  Tip:' +
-        '  可以用文件路径打开访问\n'
-    )
-    //或拷贝到Hbuilder中使用
+var outStr = '构建发布文件...'
 var spinner = ora(outStr)
-spinner.start()
 
-var assetsPath = path.join(config.build.assetsRoot, config.build.assetsSubDirectory)
-rm('-rf', config.build.assetsRoot)
-mkdir('-p', assetsPath)
-cp('-R', 'static/', assetsPath)
+rimraf(dirVars.buildDir, fs, function cb() {
+  console.log('build目录已清空')
+  spinner.start()
+})
+cp('-R', 'static/', dirVars.buildDir)
 
-webpack(webpackConfig, function(err, stats) {
-    spinner.stop()
-    if (err) throw err
-    process.stdout.write(stats.toString({
-        colors: true,
-        modules: false,
-        children: false,
-        chunks: false,
-        chunkModules: false
-    }) + '\n');
 
-    //删除指定路径下html和static目录,并将生成的文件复制到指定路径
-    var copyPath = config.build.copyPath || "";
-    if (copyPath !== "") {
-        rm('-rf', copyPath + "\\html");
-        rm('-rf', copyPath + "\\static");
-        cp('-R', path.join(config.build.assetsRoot, "html"), copyPath);
-        cp('-R', path.join(config.build.assetsRoot, "static"), copyPath);
-    }
+//或拷贝到Hbuilder中使用
+console.log(
+  '  Tip:' +
+  '  可以用文件路径打开访问\n'
+)
 
-    var uri = config.build.index;
-    console.log("打开默认页:" + uri);
-    //具体参数可以可以在config/index.js- chrome中配置
-    opn(uri, { wait: false, app: [config.chrome.name, '--remote-debugging-port=' + config.chrome.debuggingPort, '--disable-web-security', '--user-data-dir=' + config.chrome.userDataPath] });
+webpack(webpackConfig, function (err, stats) {
+  spinner.stop()
+  if (err) throw err
+  process.stdout.write(stats.toString({
+    colors: true,
+    modules: false,
+    children: false,
+    chunks: false,
+    hash: false,
+    version: false,
+    timings: false,
+    chunkModules: false
+  }) + '\n')
+
+  // 删除指定路径下html和static目录, 并将生成的文件复制到指定路径
+  var copyPath = preConfig.copyPath || ''
+  if (copyPath !== '') {
+    rm('-rf', copyPath + '\\html')
+    rm('-rf', copyPath + '\\static');
+    cp('-R', path.resolve(dirVars.buildDir, '\html'), copyPath)
+    cp('-R', path.resolve(dirVars.buildDir, '\static'), copyPath)
+  }
+
+  var uri = preConfig.index || ''
+  if (uri !== '') {
+    console.log("Chrome打开:" + uri);
+    uri = path.resolve(dirVars.buildDir, 'html/' + uri)
+
+    //具体参数可以可以在 pre.build.config.js- chrome中配置
+    opn(uri, {
+      wait: false,
+      app: [preConfig.chrome.name, '--remote-debugging-port=' + preConfig.chrome.debuggingPort, '--disable-web-security', '--user-data-dir=' + preConfig.chrome.userDataPath]
+    });
+  }
+
 })
