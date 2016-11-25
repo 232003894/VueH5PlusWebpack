@@ -5,20 +5,20 @@
 ## Build Setup
 
 ``` bash
-# install dependencies
+# 安装
 npm install
 
-# serve with hot reload at localhost:8080
+# 调试环境 serve with hot reload at http://localhost:8080/html/main.html
 npm run dev
 
-# build for web production with minification
+# web生产环境 with minification
 npm run web
 
-# build for h5+ hbuilder  production with minification
+# h5+(hbuilder H5+ 开发用的)生产环境 with minification
 npm run h5
 
 {{#lint}}
-# run lint
+# 代码检查
 npm run lint
 {{/lint}}
 ```
