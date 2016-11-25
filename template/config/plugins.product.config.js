@@ -40,7 +40,7 @@ pluginsConfig.push(new webpack.optimize.OccurenceOrderPlugin())
 
 pageArr.forEach((page) => {
   if (path.extname(page).toLowerCase() === '.html') {
-    var _page = page.replace('\/' + path.basename(page), '').replace('\/', '.')
+    var _page = page.replace('\/' + path.basename(page), '').replace('\/', '_')
 
     var conf = {
       filename: 'html/' + _page + '.html',

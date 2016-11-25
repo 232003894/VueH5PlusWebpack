@@ -2,7 +2,6 @@
   tpl
 </template>
 <script>
-  require('libs')
   export default {
     data() {
       return {}

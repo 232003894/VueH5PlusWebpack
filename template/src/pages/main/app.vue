@@ -25,7 +25,7 @@
     <divider>简单头部,简单底部带链接</divider>
     <card :header="{title:'商品详情(简单头部)'}" :footer="{title:'设置(简单底部带链接)',link:settingUri}">
       <p slot="content" class="card-padding">
-        这里是内容12
+        这里是内容
         <Button v-touch:tap="loginAction" text="设&nbsp;&nbsp;置"></Button>
       </p>
     </card>
@@ -36,7 +36,8 @@
       <img slot="header" src="http://placeholder.qiniudn.com/640x300" style="width:100%;display:block;">
       <div slot="content" class="card-padding">
         <p style="color:#999;font-size:12px;">2016-07-31 07:42:45</p>
-        <p style="font-size:14px;line-height:1.2;padding-top:10px;"> C语言终于超越了Java，登顶榜首．Python超过C++成为第三名，C#被R顶出前五．最近几年R一路飙升，主要是由于乘上了大数据分析的浪潮．</p>
+        <p style="font-size:14px;line-height:1.2;padding-top:10px;">
+          C语言终于超越了Java，登顶榜首．Python超过C++成为第三名，C#被R顶出前五．最近几年R一路飙升，主要是由于乘上了大数据分析的浪潮．</p>
       </div>
     </card>
   </div>
@@ -48,8 +49,7 @@
   import {
     pages
   }
-  from 'libs'
-
+  from '../../libs/libs.module'
   import Button from 'components/Button'
   export default {
     components: {
@@ -62,7 +62,7 @@
     data() {
       return {
         msg: '我的钱包(简单头部)',
-        settingUri: pages['my.setting'].web
+        settingUri: pages.my_setting.web
       }
     },
     asyncData: function(resolve, reject) {

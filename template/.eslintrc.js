@@ -13,15 +13,23 @@ module.exports = {
   {{/if_eq}}
   // required to lint *.vue files
   plugins: [
-    'html'
+    'html' 
   ],
   // add your custom rules here
-  'rules': {
+  'rules': { 
     {{#if_eq lintConfig "standard"}}
-     "no-unused-vars": [ "error", {
+     "no-unused-vars": [ "warn", {
       "vars": "local",
       "args": "none"
     } ],
+    "padded-blocks": ["warn", {
+      //禁止块内填充
+      "blocks": "never",
+      //要求类内填充
+      "classes": "always",
+      //禁止在 switch 语句中填充
+      "switches": "never"
+    }],
     "space-before-function-paren": [ 0, "never" ],
     // allow paren-less arrow functions
     'arrow-parens': 0,

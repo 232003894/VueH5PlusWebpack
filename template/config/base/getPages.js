@@ -12,7 +12,7 @@ pageArr.forEach((entry) => {
     tmp = entry.split('/')
     var star = tmp.indexOf("pages") + 1
     var length = tmp.lastIndexOf(basename) - star + 1
-    pathname = tmp.splice(star, length).join('.')
+    pathname = tmp.splice(star, length).join('_')
     var last = tmp[tmp.length - 1].split('.')
     entries[pathname] = {
       web: pathname + '.' + last[last.length - 1],

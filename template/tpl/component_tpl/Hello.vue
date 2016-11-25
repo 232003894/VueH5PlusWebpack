@@ -4,7 +4,6 @@
   </div>
 </template>
 <script>
-  require('libs')
   module.exports = {
     components: {
 

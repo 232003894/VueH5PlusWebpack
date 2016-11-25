@@ -35,7 +35,10 @@
   import Tip from 'vux-components/tip'
   import Cell from 'vux-components/cell'
   import Switch from 'vux-components/Switch'
-  require('libs')
+  import {
+    pages
+  }
+  from '../../../libs/libs.module'
   export default {
     ready() {},
     components: {
