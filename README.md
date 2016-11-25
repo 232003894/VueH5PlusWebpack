@@ -36,7 +36,7 @@ npm run lint
 ```
 ## vue+webpack多页面
 
-> webpack方面的教程可以去看 [多页为王：webpack多页应用架构专题系列][2]，非常适合入门学习，本项目也是基于[Array-Huang github][1]改造的
+> 本项目是基于[Array-Huang github][1]改造的，webpack方面的教程可以去看 [多页为王：webpack多页应用架构专题系列][2]，非常适合入门学习
 
 ### 本项目github地址
 > github：[https://github.com/232003894/VueWebpackMultiplePage][3]
@@ -175,7 +175,7 @@ http://localhost:8080/html/main.html
 
 ### 构建代码说明
 
-### 组件的使用(与bluefox1688童鞋完全一样,直接搬来的)
+### 组件的使用
 组件（Component）是 vue.js 最强大的功能之一，当你发现使用组件可以减少造轮子里，你会深深的爱上它。
 我们的组件都是放在`components`目录下的，调用组件的方法也很简单。
 
