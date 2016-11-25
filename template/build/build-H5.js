@@ -9,7 +9,7 @@ var fs = require('fs');
 var rimraf = require('rimraf')
 
 var preConfig = require('./pre.config')
-var webpackConfig = require('../config/webpack.procduct.config')
+var webpackConfig = require('../config/webpack.procduct-H5.config')
 var dirVars = require('../config/base/dir-vars.config.js')
 
 var outStr = '构建发布文件...'
@@ -42,15 +42,16 @@ webpack(webpackConfig, function (err, stats) {
     chunkModules: false
   }) + '\n')
 
-  var uri = preConfig.index || ''
-  if (uri !== '') {
-    console.log("Chrome打开:" + uri);
-    uri = path.resolve(dirVars.buildDir, 'html/' + uri)
-
-    //具体参数可以可以在 pre.build.config.js- chrome中配置
-    opn(uri, {
-      wait: false,
-      app: [preConfig.chrome.name, '--remote-debugging-port=' + preConfig.chrome.debuggingPort, '--disable-web-security', '--user-data-dir=' + preConfig.chrome.userDataPath]
+  // 删除指定路径下html和static目录, 并将生成的文件复制到指定路径
+  var copyPath = preConfig.copyPath || ''
+  if (copyPath !== '') {
+    rm('-rf', copyPath + '\\html')
+    rm('-rf', copyPath + '\\static');
+    cp('-R', path.resolve(dirVars.buildDir, '\html'), copyPath)
+    cp('-R', path.resolve(dirVars.buildDir, '\static'), copyPath)
+    console.log("清理并复制文件到指定路径：" + copyPath);
+    opn(copyPath, {
+      wait: false
     });
   }
 

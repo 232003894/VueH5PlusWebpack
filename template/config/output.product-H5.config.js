@@ -1,6 +1,7 @@
 var dirVars = require('./base/dir-vars.config.js')
+
 var getPages = require('./base/getPages.js')
-getPages.build('web')
+getPages.build('h5')
 module.exports = {
   path: dirVars.buildDir,
   publicPath: '../',

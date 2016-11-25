@@ -62,7 +62,7 @@
     data() {
       return {
         msg: '我的钱包(简单头部)',
-        settingUri: pages.my_setting.web
+        settingUri: pages.my_setting
       }
     },
     asyncData: function(resolve, reject) {
