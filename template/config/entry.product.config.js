@@ -5,7 +5,7 @@ var configEntry = {};
 
 pageArr.forEach( ( page ) => {
   if ( path.extname( page ).toLowerCase( ) === '.js' ) {
-    var _page = page.replace( '\/' + path.basename( page ), '' ).replace( '\/', '.' )
+    var _page = page.replace( '\/' + path.basename( page ), '' ).replace( '\/', '_' )
     configEntry[ _page ] = path.resolve( dirVars.pagesDir, page )
   }
 } )
