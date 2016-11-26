@@ -14,6 +14,11 @@ pluginsConfig.push(new webpack.DefinePlugin({
   IS_PRODUCTION: false,
 }))
 
+var Dashboard = require('webpack-dashboard');
+var DashboardPlugin = require('webpack-dashboard/plugin');
+var dashboard = new Dashboard();
+pluginsConfig.push(new DashboardPlugin(dashboard.setData))
+
 // 配置提取出的样式文件
 pluginsConfig.push(new ExtractTextPlugin('static/css/[name].[hash:3].css'))
 

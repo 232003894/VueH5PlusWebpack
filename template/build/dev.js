@@ -1,6 +1,8 @@
 var path = require('path')
 var express = require('express')
 require('shelljs/global')
+process.env.NODE_ENV = 'development'
+
 var webpack = require('webpack')
 var opn = require('opn')
 var proxyMiddleware = require('http-proxy-middleware')
@@ -34,7 +36,8 @@ var devMiddleware = require('webpack-dev-middleware')(compiler, {
     version: false,
     timings: false,
     chunkModules: false
-  }
+  },
+  quiet:true
 })
 
 var hotMiddleware = require('webpack-hot-middleware')(compiler)
