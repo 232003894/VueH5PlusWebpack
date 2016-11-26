@@ -1,4 +1,4 @@
-# vue-cli + webpack + vux 多页面模板
+# vue-cli + webpack + vux + H5+ 多页面/单页模板
 日期: 2016-10-6
 
 关键字:
@@ -6,6 +6,7 @@
 - vuejs(1.0.26)
 - webpack
 - vux(0.1.3)
+- H5+
 
 ## 使用方法
 ``` bash
@@ -13,7 +14,7 @@
 npm install -g vue-cli
 
 # 使用本模板初始化项目
-vue init 232003894/VueWebpackMultiplePage my-project
+vue init 232003894/VueH5PlusWebpack my-project
 
 # 进入目录
 cd my-project
@@ -37,9 +38,10 @@ npm run lint
 ## vue+webpack多页面
 
 > 本项目是基于[Array-Huang github][1]改造的，webpack方面的教程可以去看 [多页为王：webpack多页应用架构专题系列][2]，非常适合入门学习
+下一步做 H5+ 
 
 ### 本项目github地址
-> github：[https://github.com/232003894/VueWebpackMultiplePage][3]
+> github：[https://github.com/232003894/VueH5PlusWebpack][3]
 
 ### 优化的内容
  1. 改为基于vue方案(spa和多页面都适合)
@@ -207,4 +209,4 @@ export default {
 
   [1]: https://github.com/Array-Huang/webpack-seed
   [2]: http://array_huang.coding.me/webpack-book/chapter2/webpack-dev-production-environment.html
-  [3]: https://github.com/232003894/VueWebpackMultiplePage
+  [3]: https://github.com/232003894/VueH5PlusWebpack
