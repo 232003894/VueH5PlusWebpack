@@ -9,7 +9,7 @@
       "type": "string",
       "required": false,
       "message": "Project description",
-      "default": "A Vue.js vux H5Plus project"
+      "default": "A Vue.js vux h5+ project"
     },
     "author": {
       "type": "string",
