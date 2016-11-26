@@ -38,6 +38,7 @@ npm run lint
 ## vue+webpack多页面
 
 > 本项目是基于[Array-Huang github][1]改造的，webpack方面的教程可以去看 [多页为王：webpack多页应用架构专题系列][2]，非常适合入门学习
+
 下一步做 H5+ 
 
 ### 本项目github地址
