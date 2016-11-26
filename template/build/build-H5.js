@@ -3,7 +3,6 @@ require('shelljs/global')
 process.env.NODE_ENV = 'production'
 
 var path = require('path')
-var ora = require('ora')
 var webpack = require('webpack')
 var opn = require('opn')
 var fs = require('fs');
@@ -13,12 +12,9 @@ var preConfig = require('./pre.config')
 var webpackConfig = require('../config/webpack.procduct-H5.config')
 var dirVars = require('../config/base/dir-vars.config.js')
 
-var outStr = '构建发布文件...'
-var spinner = ora()
 
 rimraf(dirVars.buildDir, fs, function cb() {
-  console.log('dist已清空')
-  spinner.start()
+  // console.log('dist已清空')
 })
 cp('-R', 'static/', dirVars.buildDir)
 
@@ -30,7 +26,6 @@ cp('-R', 'static/', dirVars.buildDir)
 // )
 
 webpack(webpackConfig, function (err, stats) {
-  spinner.stop()
   if (err) throw err
   // process.stdout.write(stats.toString({
   //   colors: true,

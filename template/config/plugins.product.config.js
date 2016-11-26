@@ -15,7 +15,7 @@ pluginsConfig.push(new webpack.DefinePlugin({
 }))
 var Dashboard = require('webpack-dashboard');
 var DashboardPlugin = require('webpack-dashboard/plugin');
-var dashboard = new Dashboard();
+var dashboard = new Dashboard({minimal:true});
 pluginsConfig.push(new DashboardPlugin(dashboard.setData))
 
 // 配置提取出的样式文件

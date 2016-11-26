@@ -77,7 +77,7 @@ app.use('/static', express.static('./static'))
 
 
 rimraf(dirVars.buildDir, fs, function cb() {
-  console.log('build目录已清空')
+  // console.log('build目录已清空')
 })
 
 module.exports = app.listen(port, function (err) {
@@ -87,7 +87,7 @@ module.exports = app.listen(port, function (err) {
   }
 
   var uri = 'http://localhost:' + port + '/html/' + main;
-  console.log('打开:' + uri + '\n');
+  // console.log('打开:' + uri + '\n');
   //具体参数可以可以在config/index.js- chrome中配置
   opn(uri, {
     wait: false,
