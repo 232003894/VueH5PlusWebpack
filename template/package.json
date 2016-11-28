@@ -6,8 +6,7 @@
   "private": true,
   "scripts": {
     "dev": "node build/dev.js",
-    "web": "node build/build.js",
-    "h5": "node build/build-H5.js"{{#lint}},
+    "build": "node build/build.js"{{#lint}},
     "lint": "eslint --ext .js,.vue src{{#unit}} test/unit/specs{{/unit}}{{#e2e}} test/e2e/specs{{/e2e}}"{{/lint}}
   },
   "dependencies": {

@@ -18,7 +18,8 @@ module.exports = {
   // add your custom rules here
   'rules': { 
     {{#if_eq lintConfig "standard"}}
-     "no-unused-vars": [ "warn", {
+    "comma-spacing": 0,
+     "no-unused-vars": [ "off", {
       "vars": "local",
       "args": "none"
     } ],

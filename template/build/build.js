@@ -25,16 +25,29 @@ cp('-R', 'static/', dirVars.buildDir)
 
 webpack(webpackConfig, function (err, stats) {
   if (err) throw err
-  // process.stdout.write(stats.toString({
-  //   colors: true,
-  //   modules: false,
-  //   children: false,
-  //   chunks: false,
-  //   hash: false,
-  //   version: false,
-  //   timings: false,
-  //   chunkModules: false
-  // }) + '\n')
+    // process.stdout.write(stats.toString({
+    //   colors: true,
+    //   modules: false,
+    //   children: false,
+    //   chunks: false,
+    //   hash: false,
+    //   version: false,
+    //   timings: false,
+    //   chunkModules: false
+    // }) + '\n')
+
+  // 删除指定路径下html和static目录, 并将生成的文件复制到指定路径
+  var copyPath = preConfig.copyPath || ''
+  if (copyPath !== '') {
+    rm('-rf', copyPath + '\\html')
+    rm('-rf', copyPath + '\\static');
+    cp('-R', path.resolve(dirVars.buildDir, '\html'), copyPath)
+    cp('-R', path.resolve(dirVars.buildDir, '\static'), copyPath)
+      // console.log("清理并复制文件到指定路径：" + copyPath);
+    opn(copyPath, {
+      wait: false
+    });
+  }
 
   var uri = preConfig.index || ''
   if (uri !== '') {

@@ -28,15 +28,7 @@ var compiler = webpack(webpackConfig)
 
 var devMiddleware = require('webpack-dev-middleware')(compiler, {
   publicPath: '/',
-  stats: {
-    colors: true,
-    modules: false,
-    chunks: false,
-    hash: false,
-    version: false,
-    timings: false,
-    chunkModules: false
-  },
+  stats: false,
   quiet:true
 })
 
@@ -82,7 +74,7 @@ rimraf(dirVars.buildDir, fs, function cb() {
 
 module.exports = app.listen(port, function (err) {
   if (err) {
-    console.log(err)
+    // console.log(err)
     return
   }
 

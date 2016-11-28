@@ -9,11 +9,11 @@
         </div>
         <div class="vux-1px-r">
           <span>15</span>
-          <br/> 京东券
+          <br/> 东券
         </div>
         <div class="vux-1px-r">
           <span>0</span>
-          <br/> 京东卡/E卡
+          <br/> 东卡/E卡
         </div>
         <div>
           <span>88</span>
@@ -47,9 +47,18 @@
   import Divider from 'vux-components/Divider'
   import Card from 'vux-components/card'
   import {
-    pages
+    pages,
+    api,
+    ready,
+    apiready
   }
   from '../../libs/libs.module'
+  ready(() => {
+    console.log('ready')
+  })
+  apiready(() => {
+    window.alert('plusReady')
+  })
   import Button from 'components/Button'
   export default {
     components: {
@@ -80,6 +89,7 @@
     methods: {
       // 登陆操作
       loginAction() {
+        window.alert(JSON.stringify(api.os))
         window.location.href = this.settingUri
       }
     }
