@@ -9,7 +9,7 @@ exports.build = function (type) {
   pageArr.forEach((entry) => {
     var ext = '.html'
     var basename = 'template' + ext
-    // if (path.extname(entry).toLowerCase() === ext) {
+      // if (path.extname(entry).toLowerCase() === ext) {
     if (path.basename(entry) === basename) {
       tmp = entry.split('/')
       var star = tmp.indexOf("pages") + 1
@@ -20,6 +20,6 @@ exports.build = function (type) {
   })
   var jsStr = "var pages = " + JSON.stringify(entries, null, 2).replace(/"/g, '\'')
   jsStr += "\r\nexport default pages\r\n"
-  fs.writeFileSync(path.resolve(dirVars.libsDir, 'module/pages.js'), jsStr)
+  fs.writeFileSync(path.resolve(dirVars.logicDir, 'app/pages.js'), jsStr)
 }
 exports.build('')
