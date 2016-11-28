@@ -35,7 +35,8 @@ module.exports = {
       loader: 'url',
       query: {
         limit: 10000,
-        name: 'static/img/[hash].[ext]'
+        // [hash].[ext]
+        name: 'static/img/[name].[ext]?[hash]'
       }
     },
     //字体
@@ -44,7 +45,8 @@ module.exports = {
       loader: 'url',
       query: {
         limit: 10000,
-        name: 'static/fonts/[hash].[ext]'
+        // [hash].[ext]
+        name: 'static/fonts/[name].[ext]?[hash]'
       }
     }, {
       test: /vux.src.*?js$/,

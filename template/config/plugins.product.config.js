@@ -19,8 +19,8 @@ var dashboard = new Dashboard({minimal:true});
 pluginsConfig.push(new DashboardPlugin(dashboard.setData))
 
 // 配置提取出的样式文件
-pluginsConfig.push(new ExtractTextPlugin('static/css/[name].[contenthash:3].css'))
-
+pluginsConfig.push(new ExtractTextPlugin('static/css/[name].css'))
+// pluginsConfig.push(new ExtractTextPlugin('static/css/[name].[contenthash:3].css'))
 
 // 配合CLI的--bail，一出error就终止webpack的编译进程
 //pluginsConfig.push( new webpack.NoErrorsPlugin( ) )
