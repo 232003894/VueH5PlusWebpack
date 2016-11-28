@@ -7,7 +7,7 @@ if (process.platform == 'win32') { //windows
   userDataPath = 'D:\\tmp\\CMyChromeDevUserData'
 } else if (process.platform == 'darwin') { //windows
   chromename = 'google chrome'
-  // copyPath = '/Users/kaifa/HBuilderProjects/'
+  // copyPath = '/Users/kaifa/HBuilderProjects/test'
   userDataPath = '/Users/kaifa/Documents/tmp'
 } else { //'freebsd', 'linux', 'sunos'
   chromename = 'google-chrome'

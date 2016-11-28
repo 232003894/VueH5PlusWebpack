@@ -15,12 +15,12 @@ exports.build = function (type) {
       var length = tmp.lastIndexOf(basename) - star + 1
       pathname = tmp.splice(star, length).join('_')
       var last = tmp[tmp.length - 1].split('.')
-
-      if (type === 'web') {
-        entries[pathname] = pathname + '.' + last[last.length - 1]
-      } else if (type === 'h5') {
-        entries[pathname] = "_www/html/" + pathname + '.' + last[last.length - 1]
-      }
+      entries[pathname] = pathname + '.' + last[last.length - 1]
+        // if (type === 'web') {
+        //   entries[pathname] = pathname + '.' + last[last.length - 1]
+        // } else if (type === 'h5') {
+        //   entries[pathname] = "_www/html/" + pathname + '.' + last[last.length - 1]
+        // }
     }
   })
   var jsStr = "var pages = " + JSON.stringify(entries, null, 2).replace(/"/g, '\'')
