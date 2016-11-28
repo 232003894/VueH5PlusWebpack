@@ -15,6 +15,9 @@ module.exports = {
   plugins: [
     'html' 
   ],
+  "globals": {
+    "alert": true
+  },
   // add your custom rules here
   'rules': { 
     {{#if_eq lintConfig "standard"}}

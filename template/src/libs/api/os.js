@@ -44,7 +44,6 @@ let os = {};
     os.stream = true
       // document.body.classList.add( $.className( 'plus-stream' ) )
   }
-
 })(navigator.userAgent)
 
 export default os

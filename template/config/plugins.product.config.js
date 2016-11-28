@@ -45,7 +45,6 @@ pluginsConfig.push(new webpack.optimize.OccurenceOrderPlugin())
 pageArr.forEach((page) => {
   if (path.extname(page).toLowerCase() === '.html') {
     var _page = page.replace('\/' + path.basename(page), '').replace('\/', '_')
-
     var conf = {
       filename: 'html/' + _page + '.html',
       template: path.resolve(dirVars.pagesDir, `./${page}`), // 模板路径

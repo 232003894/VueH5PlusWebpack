@@ -56,7 +56,7 @@
     console.log('ready')
   })
   api.ready(() => {
-    window.alert('plusReady')
+    console.log('plusReady')
   })
   import Button from 'components/Button'
   export default {
@@ -88,7 +88,6 @@
     methods: {
       // 登陆操作
       loginAction() {
-        window.alert(JSON.stringify(api.os))
         window.location.href = this.settingUri
       }
     }
