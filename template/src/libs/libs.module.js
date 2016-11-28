@@ -6,11 +6,11 @@ import {
   apiready
 } from './api/ready'
 let api = {
-  os: os
+  os: os,
+  ready: apiready
 }
 export {
   pages,
   api,
-  ready,
-  apiready
+  ready
 }

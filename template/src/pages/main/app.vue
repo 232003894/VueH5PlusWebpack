@@ -49,14 +49,13 @@
   import {
     pages,
     api,
-    ready,
-    apiready
+    ready
   }
   from '../../libs/libs.module'
   ready(() => {
     console.log('ready')
   })
-  apiready(() => {
+  api.ready(() => {
     window.alert('plusReady')
   })
   import Button from 'components/Button'
