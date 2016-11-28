@@ -22,7 +22,7 @@ let apiready = (callback) => {
  * @param {function} callback
  * @returns
  */
-let ready = (callback) => {
+let domready = (callback) => {
   let readyRE = /complete|loaded|interactive/
   if (readyRE.test(document.readyState)) {
     callback()
@@ -35,6 +35,6 @@ let ready = (callback) => {
 }
 
 export {
-  ready,
+  domready,
   apiready
 }

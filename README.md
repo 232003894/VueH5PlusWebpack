@@ -58,7 +58,6 @@ Webpack
 │  .jsbeautifyrc
 │
 ├─build
-│      build-H5.js
 │      build.js
 │      dev-client.js
 │      dev.js
@@ -69,15 +68,13 @@ Webpack
 │  │  entry.product.config.js   # 生产环境的webpack入口配置
 │  │  module.config.js  # webpacks的module配置
 │  │  output.dev.config.js  # 开发环境的webpacks输出配置
-│  │  output.product-H5.config.js   #  H5+生产环境的webpacks输出配置
-│  │  output.product.config.js  # web生产环境的webpacks输出配置
+│  │  output.product.config.js  # 生产环境的webpacks输出配置
 │  │  plugins.dev.config.js   # 环境配置中不一致的部分，开发环境配置文件
 │  │  plugins.product.config.js   # 环境配置中不一致的部分，生产环境配置文件
 │  │  resolve.config.js   # webpacks的resolve配置
 │  │  resolveLoader.config.js   # webpacks的resolveLoader配置
 │  │  webpack.dev.config.js   # 开发环境的webpack配置文件（无实质内容，仅为组织整理）
-│  │  webpack.procduct-H5.config.js   # H5+生产环境的webpack配置文件（无实质内容，仅为组织整理）
-│  │  webpack.procduct.config.js  # web生产环境的webpack配置文件（无实质内容，仅为组织整理）
+│  │  webpack.procduct.config.js  # 生产环境的webpack配置文件（无实质内容，仅为组织整理）
 │  │
 │  ├─base   # 主要是存放一些变量和页面
 │  │      dir-vars.config.js  # 存放一些变量
@@ -117,23 +114,28 @@ Webpack
 │  ├─img	# 公用图片
 │  │      logo.png
 │  │
-│  ├─libs	# 业务逻辑无关的库
-│  │  │  libs.module.js
-│  │  └─module
-│  │          pages.js
+│  ├─libs	
+│  │  │  index.js # 业务逻辑无关的库
+│  │  └─api
+│  │          os.js	# 环境
+│  │          ready.js	# ready
+│  │          ...
 │  │
-│  ├─logic	# 业务逻辑
+│  ├─logic	
+│  │  │  index.js # 业务逻辑
+│  │  └─app
+│  │          pages.js	# 所有页面集合
 │  │
 │  └─pages	# 各个页面独有的部分
 │      ├─main
 │      │      app.vue
-│      │      main.html
-│      │      main.js
+│      │      template.html
+│      │      entry.js
 │      └─my
 │          └─setting
 │                  app.vue
-│                  setting.html
-│                  setting.js
+│                  template.html
+│                  entry.js
 │                  
 ├─static	# 其他需要打包的静态资源,本目录下的资源会完整的复制到 dist/static中去
 │      
@@ -143,8 +145,8 @@ Webpack
     │      
     └─page_tpl # 页面模板
             app.vue
-            tpl.html
-            tpl.js
+            template.html
+            entry.js
 
   ```
 从目录结构上，各种组件、页面模块、资源等都按类新建了文件夹，方便我们储存文件。
@@ -153,12 +155,12 @@ Webpack
 
 ``` bash
   |---main   # 首页(单页面,一个文件夹就是一个html)
-    |---main.html
+    |---template.html
     |---main.js
     |---app.vue
   |---my   # 用户模块(一个业务模块,每个业务下可能有多个页面)
     |---setting      # 设置页面(单页面,一个文件夹就是一个html)
-      |---setting.html
+      |---template.html
       |---setting.js
       |---app.vue
 ```

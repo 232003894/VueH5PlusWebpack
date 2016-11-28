@@ -28,8 +28,11 @@ pluginsConfig.push(new webpack.NoErrorsPlugin())
 
 
 pageArr.forEach((page) => {
-  if (path.extname(page).toLowerCase() === '.html') {
-    var _page = page.replace('\/' + path.basename(page), '').replace('\/', '_')
+  var ext = '.html'
+  var basename = 'template' + ext
+    // if (path.extname(page).toLowerCase() === ext) {
+  if (path.basename(page) === basename) {
+    var _page = page.replace('\/' + basename, '').replace('\/', '_')
     var conf = {
       filename: 'html/' + _page + '.html',
       template: path.resolve(dirVars.pagesDir, `./${page}`), // 模板路径

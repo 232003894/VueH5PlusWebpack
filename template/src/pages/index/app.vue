@@ -5,7 +5,7 @@
       <div slot="content" class="card-demo-flex card-demo-content01">
         <div class="vux-1px-l vux-1px-r">
           <span>1130</span>
-          <br/> 京豆
+          <br/> 豆豆
         </div>
         <div class="vux-1px-r">
           <span>15</span>
@@ -46,17 +46,13 @@
   import Tip from 'vux-components/tip'
   import Divider from 'vux-components/Divider'
   import Card from 'vux-components/card'
-  import {
-    pages,
-    api,
-    ready
-  }
-  from '../../libs/libs.module'
-  ready(() => {
+  import api from '../../libs'
+  import app from '../../logic'
+  api.domready(() => {
     console.log('ready')
   })
-  api.ready(() => {
-    console.log('plusReady')
+  api.apiready(() => {
+    alert('plusReady')
   })
   import Button from 'components/Button'
   export default {
@@ -70,7 +66,7 @@
     data() {
       return {
         msg: '我的钱包(简单头部)',
-        settingUri: pages.my_setting
+        settingUri: app.pages.my_setting
       }
     },
     asyncData: function(resolve, reject) {
@@ -88,6 +84,7 @@
     methods: {
       // 登陆操作
       loginAction() {
+        alert(JSON.stringify(api.os))
         window.location.href = this.settingUri
       }
     }

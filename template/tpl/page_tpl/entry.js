@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import VueTouch from 'vue-touch'
-import VueResource from 'vue-resource'
-import VueAsyncData from 'vue-async-data'
-import VueValidator from 'vue-validator'
 Vue.use(VueTouch)
-Vue.use(vueResource)
+import VueResource from 'vue-resource'
+Vue.use(VueResource)
+import VueAsyncData from 'vue-async-data'
 Vue.use(VueAsyncData)
+import VueValidator from 'vue-validator'
 Vue.use(VueValidator)
 
 require('configVue')

@@ -7,23 +7,19 @@ exports.build = function (type) {
   var entries = {},
     basename, tmp, pathname
   pageArr.forEach((entry) => {
-    if (path.extname(entry).toLowerCase() === '.html') {
-
-      basename = path.basename(entry, path.extname(entry));
+    var ext = '.html'
+    var basename = 'template' + ext
+    // if (path.extname(entry).toLowerCase() === ext) {
+    if (path.basename(entry) === basename) {
       tmp = entry.split('/')
       var star = tmp.indexOf("pages") + 1
-      var length = tmp.lastIndexOf(basename) - star + 1
+      var length = tmp.length - star - 1
       pathname = tmp.splice(star, length).join('_')
-      var last = tmp[tmp.length - 1].split('.')
-      entries[pathname] = pathname + '.' + last[last.length - 1]
-        // if (type === 'web') {
-        //   entries[pathname] = pathname + '.' + last[last.length - 1]
-        // } else if (type === 'h5') {
-        //   entries[pathname] = "_www/html/" + pathname + '.' + last[last.length - 1]
-        // }
+      entries[pathname] = pathname + ext
     }
   })
   var jsStr = "var pages = " + JSON.stringify(entries, null, 2).replace(/"/g, '\'')
   jsStr += "\r\nexport default pages\r\n"
   fs.writeFileSync(path.resolve(dirVars.libsDir, 'module/pages.js'), jsStr)
 }
+exports.build('')

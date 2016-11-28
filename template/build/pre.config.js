@@ -17,7 +17,7 @@ if (process.platform == 'win32') { //windows
 
 module.exports = {
   copyPath: copyPath,
-  index: 'main.html',
+  index: 'index.html',
   port: 8080,
   proxyTable: {},
   chrome: {

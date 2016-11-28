@@ -15,12 +15,14 @@ pluginsConfig.push(new webpack.DefinePlugin({
 }))
 var Dashboard = require('webpack-dashboard');
 var DashboardPlugin = require('webpack-dashboard/plugin');
-var dashboard = new Dashboard({minimal:true});
+var dashboard = new Dashboard({
+  minimal: true
+});
 pluginsConfig.push(new DashboardPlugin(dashboard.setData))
 
 // 配置提取出的样式文件
 pluginsConfig.push(new ExtractTextPlugin('static/css/[name].css'))
-// pluginsConfig.push(new ExtractTextPlugin('static/css/[name].[contenthash:3].css'))
+  // pluginsConfig.push(new ExtractTextPlugin('static/css/[name].[contenthash:3].css'))
 
 // 配合CLI的--bail，一出error就终止webpack的编译进程
 //pluginsConfig.push( new webpack.NoErrorsPlugin( ) )
@@ -43,10 +45,13 @@ pluginsConfig.push(new webpack.optimize.OccurenceOrderPlugin())
 
 
 pageArr.forEach((page) => {
-  if (path.extname(page).toLowerCase() === '.html') {
-    var _page = page.replace('\/' + path.basename(page), '').replace('\/', '_')
+  var ext = '.html'
+  var basename = 'template' + ext
+    // if (path.extname(page).toLowerCase() === ext) {
+  if (path.basename(page) === basename) {
+    var _page = page.replace('\/' + basename, '').replace('\/', '_')
     var conf = {
-      filename: 'html/' + _page + '.html',
+      filename: 'html/' + _page + ext,
       template: path.resolve(dirVars.pagesDir, `./${page}`), // 模板路径
       // template: path.resolve( `./src/pages/${page}` ), // 模板路径
       inject: true, // js插入位置
