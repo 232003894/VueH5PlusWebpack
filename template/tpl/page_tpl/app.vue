@@ -2,8 +2,8 @@
   tpl
 </template>
 <script>
-  import api from '../../libs'
-  import app from '../../logic'
+  import * as $api from '../../libs'
+  import * as $app from '../../logic'
   export default {
     data() {
       return {}

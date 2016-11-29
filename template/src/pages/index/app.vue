@@ -26,7 +26,7 @@
     <card :header="{title:'商品详情(简单头部)'}" :footer="{title:'设置(简单底部带链接)',link:settingUri}">
       <p slot="content" class="card-padding">
         这里是内容
-        <Button v-touch:tap="loginAction" text="设&nbsp;&nbsp;置"></Button>
+        <Button v-touch:tap="settingAction" text="设&nbsp;&nbsp;置"></Button>
       </p>
     </card>
     <br>
@@ -46,15 +46,11 @@
   import Tip from 'vux-components/tip'
   import Divider from 'vux-components/Divider'
   import Card from 'vux-components/card'
-  import api from '../../libs'
-  import app from '../../logic'
-  api.domready(() => {
-    console.log('ready')
-  })
-  api.apiready(() => {
-    alert('plusReady')
-  })
   import Button from 'components/Button'
+
+  import * as $api from '../../libs'
+  import * as $app from '../../logic'
+
   export default {
     components: {
       Tip,
@@ -66,7 +62,7 @@
     data() {
       return {
         msg: '我的钱包(简单头部)',
-        settingUri: app.pages.my_setting
+        settingUri: $app.pages.my_setting
       }
     },
     asyncData: function(resolve, reject) {
@@ -82,13 +78,19 @@
       })
     },
     methods: {
-      // 登陆操作
-      loginAction() {
-        alert(JSON.stringify(api.os))
+      // 设置
+      settingAction() {
         window.location.href = this.settingUri
       }
     }
   }
+
+  $api.domready(() => {
+    console.log('ready')
+  })
+  $api.apiready(() => {
+    alert('plusReady')
+  })
 </script>
 
 <style scoped lang="less">

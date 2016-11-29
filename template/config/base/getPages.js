@@ -18,8 +18,8 @@ exports.build = function (type) {
       entries[pathname] = pathname + ext
     }
   })
-  var jsStr = "var pages = " + JSON.stringify(entries, null, 2).replace(/"/g, '\'')
-  jsStr += "\r\nexport default pages\r\n"
+  var jsStr = "export const pages = " + JSON.stringify(entries, null, 2).replace(/"/g, '\'')
+  jsStr += "\r\n"
   fs.writeFileSync(path.resolve(dirVars.logicDir, 'app/pages.js'), jsStr)
 }
 exports.build('')

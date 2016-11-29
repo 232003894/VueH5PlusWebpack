@@ -16,16 +16,17 @@ module.exports = {
     'html' 
   ],
   "globals": {
+    "plus": true,
     "alert": true
   },
   // add your custom rules here
   'rules': { 
     {{#if_eq lintConfig "standard"}}
     "comma-spacing": 0,
-     "no-unused-vars": [ "off", {
+     "no-unused-vars": ["off", {
       "vars": "local",
       "args": "none"
-    } ],
+    }],
     "padded-blocks": ["warn", {
       //禁止块内填充
       "blocks": "never",
@@ -34,7 +35,7 @@ module.exports = {
       //禁止在 switch 语句中填充
       "switches": "never"
     }],
-    "space-before-function-paren": [ 0, "never" ],
+    "space-before-function-paren": [0, "never" ],
     // allow paren-less arrow functions
     'arrow-parens': 0,
     // allow async-await

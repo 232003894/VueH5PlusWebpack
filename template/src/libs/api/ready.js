@@ -34,6 +34,15 @@ let domready = (callback) => {
   return this
 }
 
+apiready(() => {
+  // H5+ 中的窗体设置
+  var webview = plus.webview.currentWebview()
+  webview.setStyle({
+    // 去掉页面滚动条
+    scrollIndicator: 'none'
+  })
+})
+
 export {
   domready,
   apiready

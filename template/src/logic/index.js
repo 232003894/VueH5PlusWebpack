@@ -1,5 +1,4 @@
-import pages from './app/pages'
-let app = {
-  pages: pages
+export {
+  pages
 }
-export default app
+from './app/pages'

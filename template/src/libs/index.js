@@ -1,25 +1,42 @@
 import Style from 'assets/css.vue' // eslint-disable-line
 
-import os from './api/os'
-/**
- * ready
- */
-import {
-  /**
-   * 网页的加载完成
-   */
-  domready,
-  /**
-   * 设备的加载完成
-   */
-  apiready
-} from './api/ready'
-/**
- * 环境与框架的api
- */
-let api = {
-  os: os,
-  domready: domready,
-  apiready: apiready
+// 工具
+export {
+  getType,
+  isFunction,
+  isWindow,
+  isObject,
+  isPlainObject,
+  mix
 }
-export default api
+from './api/utils'
+
+// 系统
+export {
+  os
+}
+from './api/os'
+
+// action
+export {
+  doAction,
+  addAction
+}
+from './api/action'
+
+// 后退
+export {
+  addBack,
+  back,
+  beforeback
+}
+from './api/back'
+
+// 页面加载
+export {
+  // 网页的加载完成
+  domready,
+  // 设备的加载完成
+  apiready
+}
+from './api/ready'
