@@ -1,16 +1,18 @@
 var dirVars = require('./base/dir-vars.config.js')
 module.exports = {
-  preLoaders: [{
+  {{#lint}}
+  preLoaders: [ {
     test: /\.vue$/,
     loader: 'eslint',
     include: dirVars.srcRootDir,
-    exclude: [/node_modules/]
+    exclude: [ /node_modules/ ]
   }, {
     test: /\.js$/,
     loader: 'eslint',
     include: dirVars.srcRootDir,
-    exclude: [/node_modules/]
-  }],
+    exclude: [ /node_modules/ ]
+  } ],
+  {{/lint}}
   loaders: [{
       test: /\.vue$/,
       loader: 'vue'
