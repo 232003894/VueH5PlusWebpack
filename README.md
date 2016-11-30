@@ -14,7 +14,7 @@
 npm install -g vue-cli
 
 # 使用本模板初始化项目
-vue init 232003894/VueH5PlusWebpack my-project
+vue init 232003894/VueH5PlusWebpack vue.h5.project
 
 # 进入目录
 cd my-project
