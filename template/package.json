@@ -59,6 +59,7 @@
     "http-proxy-middleware": "^0.12.0",
     "json-loader": "^0.5.4",
     "opn": "^4.0.2",
+    "ora": "^0.2.0",
     "shelljs": "^0.6.0",
     "rimraf": "^2.5.4",
     "url-loader": "^0.5.7",

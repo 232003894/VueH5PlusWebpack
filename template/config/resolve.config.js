@@ -18,8 +18,9 @@ module.exports = {
     /* config */
     /* configModule */
     'configVue': path.resolve(dirVars.configDir, 'vue.config'),
-    'configModule': path.resolve(dirVars.configDir, 'common.config')
-    // 'libs': path.resolve(dirVars.libsDir, 'libs.module')
+    'configModule': path.resolve(dirVars.configDir, 'common.config'),
+    'api': path.resolve(dirVars.libsDir, 'api'),
+    'app': path.resolve(dirVars.logicDir, 'app')
 
     /* logic */
     // cm: path.resolve( dirVars.logicDir, 'common.module' ),

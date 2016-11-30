@@ -7,10 +7,22 @@ var webpack = require('webpack')
 var opn = require('opn')
 var fs = require('fs');
 var rimraf = require('rimraf')
+var ora = require('ora')
 
 var preConfig = require('./pre.config')
 var webpackConfig = require('../config/webpack.procduct.config')
 var dirVars = require('../config/base/dir-vars.config.js')
+
+
+var outStr = '构建发布文件...'
+var spinner = ora(outStr)
+
+rimraf(dirVars.buildDir, fs, function cb() {
+  if (process.platform == 'win32') { //windows
+    console.log('dist已清空')
+    spinner.start()
+  }
+})
 
 rimraf(dirVars.buildDir, fs, function cb() {
   // console.log('dist已清空')
@@ -25,16 +37,20 @@ cp('-R', 'static/', dirVars.buildDir)
 
 webpack(webpackConfig, function (err, stats) {
   if (err) throw err
-    // process.stdout.write(stats.toString({
-    //   colors: true,
-    //   modules: false,
-    //   children: false,
-    //   chunks: false,
-    //   hash: false,
-    //   version: false,
-    //   timings: false,
-    //   chunkModules: false
-    // }) + '\n')
+
+  if (process.platform == 'win32') { //windows
+    spinner.stop()
+    process.stdout.write(stats.toString({
+      colors: true,
+      modules: false,
+      children: false,
+      chunks: false,
+      hash: false,
+      version: false,
+      timings: false,
+      chunkModules: false
+    }) + '\n')
+  }
 
   // 删除指定路径下html和static目录, 并将生成的文件复制到指定路径
   var copyPath = preConfig.copyPath || ''

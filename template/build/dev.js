@@ -29,8 +29,24 @@ var compiler = webpack(webpackConfig)
 var devMiddleware = require('webpack-dev-middleware')(compiler, {
   publicPath: '/',
   stats: false,
-  quiet:true
+  quiet: true
 })
+if (process.platform == 'win32') { //windows
+  devMiddleware = require('webpack-dev-middleware')(compiler, {
+    publicPath: '/',
+    stats: {
+      colors: true,
+      modules: false,
+      chunks: false,
+      hash: false,
+      version: false,
+      timings: false,
+      chunkModules: false
+    }
+  })
+} else {
+
+}
 
 var hotMiddleware = require('webpack-hot-middleware')(compiler)
   // force page reload when html-webpack-plugin template changes
@@ -69,17 +85,24 @@ app.use('/static', express.static('./static'))
 
 
 rimraf(dirVars.buildDir, fs, function cb() {
-  // console.log('build目录已清空')
+  if (process.platform == 'win32') { //windows
+    console.log('dist已清空')
+  }
 })
 
 module.exports = app.listen(port, function (err) {
   if (err) {
-    // console.log(err)
+    if (process.platform == 'win32') { //windows
+      console.log(err)
+    }
     return
   }
 
   var uri = 'http://localhost:' + port + '/html/' + main;
-  // console.log('打开:' + uri + '\n');
+
+  if (process.platform == 'win32') { //windows
+    console.log('打开:' + uri + '\n');
+  }
   //具体参数可以可以在config/index.js- chrome中配置
   opn(uri, {
     wait: false,

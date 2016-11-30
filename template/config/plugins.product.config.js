@@ -13,12 +13,15 @@ var entries = require('./entry.product.config')
 pluginsConfig.push(new webpack.DefinePlugin({
   IS_PRODUCTION: true,
 }))
-var Dashboard = require('webpack-dashboard');
-var DashboardPlugin = require('webpack-dashboard/plugin');
-var dashboard = new Dashboard({
-  minimal: true
-});
-pluginsConfig.push(new DashboardPlugin(dashboard.setData))
+if (process.platform != 'win32') {
+  var Dashboard = require('webpack-dashboard')
+  var DashboardPlugin = require('webpack-dashboard/plugin')
+  var dashboard = new Dashboard({
+    minimal: true
+  });
+  pluginsConfig.push(new DashboardPlugin(dashboard.setData))
+}
+
 
 // 配置提取出的样式文件
 pluginsConfig.push(new ExtractTextPlugin('static/css/[name].css'))

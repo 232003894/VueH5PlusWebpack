@@ -7,7 +7,7 @@ types.forEach((name, i) => {
 })
 
 if (!Array.isArray) {
-  Array.isArray = function(a) {
+  Array.isArray = function (a) {
     return Object.prototype.toString.call(a) === '[object Array]'
   }
 }
@@ -72,7 +72,20 @@ export function isObject(obj) {
 export function isPlainObject(obj) {
   return isObject(obj) && !isWindow(obj) && Object.getPrototypeOf(obj) === Object.prototype
 }
-
+// /**
+//  * isArrayLike
+//  * @export
+//  * @param {any} obj
+//  * @returns {boolean}
+//  */
+// export function isArrayLike(obj) {
+//   var length = !!obj && 'length' in obj && obj.length
+//   var type = getType(obj)
+//   if (type === 'function' || isWindow(obj)) {
+//     return false
+//   }
+//   return type === 'array' || length === 0 || typeof length === 'number' && length > 0 && (length - 1) in obj
+// }
 /**
  * 用于合并多个对象或深克隆,类似于jQuery.extend；
  * 数组也可以合并,这里数组可以理解为以索引为属性的对象；
@@ -85,21 +98,25 @@ export function isPlainObject(obj) {
  * @returns {Object} 返回 target
  */
 export function mix() {
-  var options, name, src, copy, copyIsArray, clone,
-    target = arguments[0] || {},
-    i = 1,
-    length = arguments.length,
-    deep = false
-
-  // 如果第一个参数为布尔,判定是否深拷贝
-  if (typeof target === "boolean") {
+  var options
+  var name
+  var src
+  var copy
+  var copyIsArray
+  var clone
+  var target = arguments[0] || {}
+  var i = 1
+  var length = arguments.length
+  var deep = false
+    // 如果第一个参数为布尔,判定是否深拷贝
+  if (typeof target === 'boolean') {
     deep = target
     target = arguments[1] || {}
     i++
   }
 
   // 确保接受方为一个复杂的数据类型
-  if (typeof target !== "object" && !isFunction(target)) {
+  if (typeof target !== 'object' && !isFunction(target)) {
     target = {}
   }
 
@@ -126,15 +143,12 @@ export function mix() {
           continue
         }
         if (deep && copy && (isPlainObject(copy) || (copyIsArray = Array.isArray(copy)))) {
-
           if (copyIsArray) {
             copyIsArray = false
             clone = src && Array.isArray(src) ? src : []
-
           } else {
             clone = src && isPlainObject(src) ? src : {}
           }
-
           target[name] = mix(deep, clone, copy)
         } else if (copy !== void 0) {
           target[name] = copy

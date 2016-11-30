@@ -7,6 +7,7 @@ export {
   isWindow,
   isObject,
   isPlainObject,
+  // isArrayLike,
   mix
 }
 from './api/utils'

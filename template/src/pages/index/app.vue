@@ -43,13 +43,16 @@
   </div>
 </template>
 <script>
+  /** vux components*/
   import Tip from 'vux-components/tip'
   import Divider from 'vux-components/Divider'
   import Card from 'vux-components/card'
+  /** project components*/
   import Button from 'components/Button'
-
-  import * as $api from '../../libs'
-  import * as $app from '../../logic'
+  /** $api*/
+  import * as $api from 'api'
+  /** $app*/
+  import * as $app from 'app'
 
   export default {
     components: {

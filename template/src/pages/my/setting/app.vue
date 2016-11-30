@@ -1,7 +1,5 @@
 <template>
-  <div class="vux-demo-header-box">
-    <x-header :left-options="{showBack: true,preventGoBack: true,backText:'后退'}" @on-click-back="back">设置</x-header>
-  </div>
+  <com-header :left-options="{backText:'后退'}" @on-click-back="back">设置</com-header>
   <div class="sc">
     <group>
       <cell title="接收新消息通知" value="已启用"></cell>
@@ -34,14 +32,18 @@
 </template>
 
 <script>
+  /** vux components*/
   import Group from 'vux-components/group'
   import Tip from 'vux-components/tip'
   import Cell from 'vux-components/cell'
   import Switch from 'vux-components/Switch'
   import XHeader from 'vux-components/x-header'
-
-  import * as $api from '../../../libs'
-  import * as $app from '../../../logic'
+  /** project components*/
+  import comHeader from 'components/comHeader'
+  /** $api*/
+  import * as $api from 'api'
+  /** $app*/
+  import * as $app from 'app'
 
   export default {
     ready() {},
@@ -50,7 +52,8 @@
       Tip,
       Switch,
       Cell,
-      XHeader
+      XHeader,
+      comHeader
     },
     data() {
       return {}
@@ -80,16 +83,6 @@
   })
 </script>
 
-<style>
-  .vux-demo-header-box {
-    z-index: 100;
-    position: fixed;
-    width: 100%;
-    left: 0;
-    top: 0;
-  }
-  
-  body {
-    padding-top: 46px;
-  }
+<style lang="less">
+
 </style>
