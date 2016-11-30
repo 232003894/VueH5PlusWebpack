@@ -17,16 +17,15 @@ var dirVars = require('../config/base/dir-vars.config.js')
 var outStr = '构建发布文件...'
 var spinner = ora(outStr)
 
-rimraf(dirVars.buildDir, fs, function cb() {
-  if (process.platform == 'win32') { //windows
+rimraf(dirVars.buildDir, fs, function () {
+  // windows
+  if (process.platform == 'win32') {
     console.log('dist已清空')
     spinner.start()
   }
 })
 
-rimraf(dirVars.buildDir, fs, function cb() {
-  // console.log('dist已清空')
-})
+// 拷贝根目录下static目录下的文件到生成目录中
 cp('-R', 'static/', dirVars.buildDir)
 
 //或拷贝到Hbuilder中使用
@@ -52,17 +51,17 @@ webpack(webpackConfig, function (err, stats) {
     }) + '\n')
   }
 
-  // 删除指定路径下html和static目录, 并将生成的文件复制到指定路径
+  // 删除指定目录, 并将生成的文件复制到指定目录
   var copyPath = preConfig.copyPath || ''
   if (copyPath !== '') {
-    rm('-rf', copyPath + '\\html')
-    rm('-rf', copyPath + '\\static');
-    cp('-R', path.resolve(dirVars.buildDir, '\html'), copyPath)
-    cp('-R', path.resolve(dirVars.buildDir, '\static'), copyPath)
-      // console.log("清理并复制文件到指定路径：" + copyPath);
-    opn(copyPath, {
-      wait: false
-    });
+    // rm('-rf', copyPath + '\\dist')
+    rimraf(copyPath + '\\dist', fs, function () {
+      cp('-R', path.resolve(dirVars.buildDir, ''), copyPath)
+      console.log("清理并复制文件到指定路径：" + copyPath);
+      opn(copyPath, {
+        wait: false
+      });
+    })
   }
 
   var uri = preConfig.index || ''

@@ -56,6 +56,7 @@
 <style lang="less">
   body {
     padding-top: 46px;
+    background: url(../img/logo.png) no-repeat 100% 100%;
   }
   
   .vux-header-fixed {

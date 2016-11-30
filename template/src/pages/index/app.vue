@@ -29,7 +29,13 @@
         <Button v-touch:tap="settingAction" text="设&nbsp;&nbsp;置"></Button>
       </p>
     </card>
-    <br>
+    <divider>简单头部</divider>
+    <card :header="{title:'图标'}">
+      <p slot="content" class="card-padding">
+        <i class="iconfont icon-close iconfont--spin"></i>
+        <i class="iconfont iconfont--spin">&#xe613;</i>
+      </p>
+    </card>
     <divider>使用头部slot和内容slot</divider>
     <card>
       <tip slot="header" style="padding:10px;">2个头部:tip,image</tip>

@@ -1,19 +1,17 @@
-var dirVars = require( './base/dir-vars.config.js' )
+var dirVars = require('./base/dir-vars.config.js')
 module.exports = {
-  {{#lint}}
-  preLoaders: [ {
+  preLoaders: [{
     test: /\.vue$/,
     loader: 'eslint',
     include: dirVars.srcRootDir,
-    exclude: [ /node_modules/ ]
+    exclude: [/node_modules/]
   }, {
     test: /\.js$/,
     loader: 'eslint',
     include: dirVars.srcRootDir,
-    exclude: [ /node_modules/ ]
-  } ],
-  {{/lint}}
-  loaders: [ {
+    exclude: [/node_modules/]
+  }],
+  loaders: [{
       test: /\.vue$/,
       loader: 'vue'
     }, {
@@ -36,7 +34,7 @@ module.exports = {
       query: {
         limit: 10000,
         // [hash].[ext]
-        name: 'static/img/[name].[ext]?[hash]'
+        name: 'img/[name].[ext]?[hash]'
       }
     },
     //字体
@@ -46,7 +44,7 @@ module.exports = {
       query: {
         limit: 10000,
         // [hash].[ext]
-        name: 'static/fonts/[name].[ext]?[hash]'
+        name: 'fonts/[name].[ext]?[hash]'
       }
     }, {
       test: /vux.src.*?js$/,

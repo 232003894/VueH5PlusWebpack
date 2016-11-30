@@ -21,7 +21,7 @@ if (process.platform != 'win32') {
 }
 
 // 配置提取出的样式文件
-pluginsConfig.push(new ExtractTextPlugin('static/css/[name].[hash:3].css'))
+// pluginsConfig.push(new ExtractTextPlugin('css/[name].[hash:3].css'))
 
 pluginsConfig.push(new webpack.optimize.OccurenceOrderPlugin())
 pluginsConfig.push(new webpack.HotModuleReplacementPlugin())

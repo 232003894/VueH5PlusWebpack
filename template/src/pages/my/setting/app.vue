@@ -1,5 +1,5 @@
 <template>
-  <com-header :left-options="{backText:'后退'}" @on-click-back="back">设置</com-header>
+  <fixed-header :left-options="{backText:'后退'}" @on-click-back="back">设置</fixed-header>
   <div class="sc">
     <group>
       <cell title="接收新消息通知" value="已启用"></cell>
@@ -39,7 +39,7 @@
   import Switch from 'vux-components/Switch'
   import XHeader from 'vux-components/x-header'
   /** project components*/
-  import comHeader from 'components/comHeader'
+  import fixedHeader from 'components/fixedHeader'
   /** $api*/
   import * as $api from 'api'
   /** $app*/
@@ -53,7 +53,7 @@
       Switch,
       Cell,
       XHeader,
-      comHeader
+      fixedHeader
     },
     data() {
       return {}

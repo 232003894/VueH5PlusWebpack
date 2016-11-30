@@ -14,7 +14,7 @@ var configPlugins = [
     minChunks: _chunks.length
   })
   // 配置提取出的样式文件
-  // new ExtractTextPlugin( 'static/css/[name].[hash:7].css' )
+  // new ExtractTextPlugin( 'css/[name].[hash:7].css' )
 ]
 
 
