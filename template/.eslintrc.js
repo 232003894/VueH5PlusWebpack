@@ -17,7 +17,8 @@ module.exports = {
   ],
   "globals": {
     "plus": true,
-    "alert": true
+    "alert": true,
+    "CustomEvent": true
   },
   // add your custom rules here
   'rules': { 

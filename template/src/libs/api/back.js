@@ -2,7 +2,7 @@ import * as utils from './utils'
 import * as act from './action'
 
 /**
- * register back
+ * 增加back执行流程
  * @export
  * @param {type} back
  * @returns {$.gestures}
@@ -17,7 +17,7 @@ export function addBack(back) {
 addBack({
   name: 'browser',
   index: 100,
-  handle: function() {
+  handle: function () {
     if (window.history.length > 1) {
       console.log('默认的后退 history.back')
       window.history.back()

@@ -72,6 +72,7 @@ export function isObject(obj) {
 export function isPlainObject(obj) {
   return isObject(obj) && !isWindow(obj) && Object.getPrototypeOf(obj) === Object.prototype
 }
+
 // /**
 //  * isArrayLike
 //  * @export
@@ -86,6 +87,7 @@ export function isPlainObject(obj) {
 //   }
 //   return type === 'array' || length === 0 || typeof length === 'number' && length > 0 && (length - 1) in obj
 // }
+
 /**
  * 用于合并多个对象或深克隆,类似于jQuery.extend；
  * 数组也可以合并,这里数组可以理解为以索引为属性的对象；
@@ -158,3 +160,20 @@ export function mix() {
   }
   return target
 }
+
+/**
+ * trigger event
+ * @export
+ * @param {Object} element
+ * @param {string} eventType
+ * @param {JSON} eventData
+ * @returns
+ */
+export function trigger(element, eventType, eventData) {
+  element.dispatchEvent(new CustomEvent(eventType, {
+    detail: eventData,
+    bubbles: true,
+    cancelable: true
+  }))
+  return this
+};

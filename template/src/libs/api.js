@@ -8,7 +8,8 @@ export {
   isObject,
   isPlainObject,
   // isArrayLike,
-  mix
+  mix,
+  trigger
 }
 from './api/utils'
 
@@ -24,6 +25,25 @@ export {
   addAction
 }
 from './api/action'
+
+// init
+export {
+  global,
+  options,
+  initGlobal,
+  init,
+  showOptions,
+  waitingOptions,
+  windowOptions,
+  currentWebview,
+  isHomePage,
+  fire,
+  fireTree,
+  fireAll,
+  preload,
+  openWindow
+}
+from './api/init'
 
 // 后退
 export {
@@ -41,3 +61,8 @@ export {
   apiready
 }
 from './api/ready'
+
+export {
+  pages
+}
+from './api/pages'

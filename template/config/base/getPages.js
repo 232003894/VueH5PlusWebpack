@@ -20,6 +20,8 @@ exports.build = function (type) {
   })
   var jsStr = "export const pages = " + JSON.stringify(entries, null, 2).replace(/"/g, '\'')
   jsStr += "\r\n"
-  fs.writeFileSync(path.resolve(dirVars.logicDir, 'app/pages.js'), jsStr)
+  fs.writeFileSync(path.resolve(dirVars.libsDir, 'api/pages.js'), jsStr)
+    // fs.writeFileSync(path.resolve(dirVars.logicDir, 'app/pages.js'), jsStr)
 }
-exports.build('')
+
+// exports.build('')

@@ -1,4 +1,4 @@
 export {
-  pages
+  test
 }
-from './app/pages'
+from './app/test'
