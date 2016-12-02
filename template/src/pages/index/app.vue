@@ -89,7 +89,7 @@
     methods: {
       // 设置
       settingAction() {
-        window.location.href = this.settingUri
+        $api.openWindow(this.settingUri)
       }
     }
   }
