@@ -28,6 +28,7 @@ module.exports = {
       "vars": "local",
       "args": "none"
     }],
+    "no-eval": "off",
     "padded-blocks": ["warn", {
       //禁止块内填充
       "blocks": "never",
