@@ -8,14 +8,17 @@ Vue.use(VueAsyncData)
 import VueValidator from 'vue-validator'
 Vue.use(VueValidator)
 
-require('configVue')
-
+import 'configVue'
 import App from './app'
+/** project components*/
+import Msg from 'components/msg'
 
 /* eslint-disable no-new */
 new Vue({
   el: 'body',
+  ready() {},
   components: {
-    App
+    App,
+    Msg
   }
 })

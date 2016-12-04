@@ -1,5 +1,5 @@
 <template>
-  <fixed-header :left-options="{backText:'后退'}" @on-click-back="back">设置</fixed-header>
+  <fixed-header :left-options="{backText:'后退'}">设置</fixed-header>
   <div class="sc">
     <group>
       <cell title="接收新消息通知" value="已启用"></cell>
@@ -68,15 +68,16 @@
     }
   }
 
-  $api.beforeback(() => {
-    console.log('后退前的处理')
-    return true
+  $api.init({
+    beforeback() {
+      alert('后退前的处理')
+      return true
+    }
   })
   $api.addBack({
     name: 'test',
     index: 1,
     handle: function() {
-      console.log('附加的后退处理')
       alert('附加的后退处理')
       return true
     }

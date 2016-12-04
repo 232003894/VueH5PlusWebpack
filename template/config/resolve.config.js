@@ -8,6 +8,7 @@ module.exports = {
   alias: {
     /* vux 组件引用路径  */
     'vux-components': 'vux/src/components',
+    'vux-plugins': 'vux/src/plugins',
 
     /* 项目代码根路径 */
     'src': dirVars.srcRootDir,

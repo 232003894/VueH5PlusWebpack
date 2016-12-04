@@ -19,6 +19,15 @@ export {
 }
 from './api/os'
 
+// 页面加载
+export {
+  // 网页的加载完成
+  domready,
+  // 设备的加载完成
+  apiready
+}
+from './api/ready'
+
 // action
 export {
   doAction,
@@ -49,20 +58,16 @@ from './api/init'
 export {
   addBack,
   back,
-  beforeback
+  menu
 }
 from './api/back'
-
-// 页面加载
-export {
-  // 网页的加载完成
-  domready,
-  // 设备的加载完成
-  apiready
-}
-from './api/ready'
 
 export {
   pages
 }
 from './api/pages'
+
+export {
+  toast
+}
+from './api/msg'

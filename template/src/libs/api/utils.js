@@ -1,3 +1,50 @@
+/**
+ * fixed Array.isArray
+ */
+if (!Array.isArray) {
+  Array.isArray = function (a) {
+    return Object.prototype.toString.call(a) === '[object Array]'
+  }
+}
+
+/**
+ * fixed CustomEvent
+ */
+if (typeof window.CustomEvent === 'undefined') {
+  /* eslint-disable no-inner-declarations */
+  function CustomEvent(event, params) {
+    params = params || {
+      bubbles: false,
+      cancelable: false,
+      detail: undefined
+    }
+    var evt = document.createEvent('Events')
+    var bubbles = true
+    for (var name in params) {
+      (name === 'bubbles') ? (bubbles = !!params[name]) : (evt[name] = params[name])
+    }
+    evt.initEvent(event, bubbles, true)
+    return evt
+  }
+  CustomEvent.prototype = window.Event.prototype
+  window.CustomEvent = CustomEvent
+}
+
+/**
+ * fixed String trim
+ */
+if (String.prototype.trim === undefined) { // fix for iOS 3.2
+  /* eslint-disable no-extend-native */
+  String.prototype.trim = function () {
+    return this.replace(/^\s+|\s+$/g, '')
+  }
+}
+Object.setPrototypeOf = Object.setPrototypeOf || function (obj, proto) {
+  /* eslint-disable no-proto */
+  obj['__proto__'] = proto
+  return obj
+}
+
 let class2type = {}
 
 let types = ['Boolean', 'Number', 'String', 'Function', 'Array', 'Date', 'RegExp', 'Object', 'Error']
@@ -5,12 +52,6 @@ let types = ['Boolean', 'Number', 'String', 'Function', 'Array', 'Date', 'RegExp
 types.forEach((name, i) => {
   class2type['[object ' + name + ']'] = name.toLowerCase()
 })
-
-if (!Array.isArray) {
-  Array.isArray = function (a) {
-    return Object.prototype.toString.call(a) === '[object Array]'
-  }
-}
 
 /**
  * 获取类型

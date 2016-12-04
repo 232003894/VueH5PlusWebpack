@@ -23,7 +23,13 @@ export var options = {
   keyEventBind: {
     backbutton: true,
     menubutton: true
-  }
+  },
+  /**
+   * 执行 beforeback 若返回false，则不再执行back()方法；
+   * 否则（返回true或无返回值），继续执行back()方法；
+   * @type {Function}
+   */
+  beforeback: null
 }
 
 /**
@@ -59,12 +65,12 @@ var inits = {}
 export function init(opts) {
   options = utils.mix(true, global, opts || {})
   ready.domready(function () {
-    act.doAction('inits', function (init, index) {
+    act.doAction('inits', function (_init, index) {
       // 是否未执行过
-      var isInit = !inits[init.name]
+      var isInit = !inits[_init.name]
       if (isInit) {
-        init.handle()
-        inits[init.name] = true
+        _init.handle()
+        inits[_init.name] = true
       }
     })
   })
@@ -128,7 +134,7 @@ ready.apiready(function () {
   currentWebview = plus.webview.currentWebview()
 })
 
-function receive(eventType, eventData) {
+var receive = function (eventType, eventData) {
   if (eventType) {
     try {
       if (eventData) {
@@ -158,7 +164,7 @@ export function fire(webviewOrWindow, eventType, eventData) {
         eventData = JSON.stringify(eventData || {}).replace(/'/g, '\\u0027').replace(/\\/g, '\\u005c')
       }
     }
-    var _js = receive.toString() + ';receive("' + eventType + '","' + eventData + '")'
+    var _js = '(' + receive.toString().replace('/function ?+(/', 'function') + ')("' + eventType + '","' + eventData + '")'
     if (utils.isWindow(webviewOrWindow)) {
       // Window
       webviewOrWindow.eval(_js)
@@ -378,6 +384,10 @@ export function openWindow(url, id, opts) {
   }
   return webview
 }
+
+ready.apiready(function () {
+  currentWebview = plus.webview.currentWebview()
+})
 
 // /**
 //  * 创建当前页面的子webview

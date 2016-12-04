@@ -67,7 +67,22 @@
       Divider,
       Button
     },
-    ready() {},
+    init() {
+      var self = this
+      console.log('vue components init ' + new Date().getMilliseconds())
+      document.addEventListener('test', function(e) {
+        console.log(JSON.stringify(self.$data, null, 2))
+      })
+    },
+    ready() {
+      var self = this
+      $api.domready(() => {
+        console.log('domready ' + new Date().getMilliseconds())
+      })
+      $api.apiready(() => {
+        console.log('apiready ' + new Date().getMilliseconds())
+      })
+    },
     data() {
       return {
         msg: '我的钱包(简单头部)',
@@ -89,17 +104,16 @@
     methods: {
       // 设置
       settingAction() {
-        $api.openWindow(this.settingUri)
+        $api.toast({
+          text: '百度'
+        })
+
+        $api.fire(window, 'test')
+
+        // $api.openWindow(this.settingUri)
       }
     }
   }
-
-  $api.domready(() => {
-    console.log('ready')
-  })
-  $api.apiready(() => {
-    alert('plusReady')
-  })
 </script>
 
 <style scoped lang="less">

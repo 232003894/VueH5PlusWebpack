@@ -45,7 +45,6 @@ let os = {};
       // document.body.classList.add( $.className( 'plus-stream' ) )
   }
 })(navigator.userAgent)
-
 export {
   os
 }

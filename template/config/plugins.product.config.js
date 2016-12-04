@@ -27,7 +27,7 @@ if (process.platform != 'win32') {
 pluginsConfig.push(new ExtractTextPlugin('css/[name].css'))
   // pluginsConfig.push(new ExtractTextPlugin('css/[name].[contenthash:3].css'))
 
-// 配合CLI的--bail，一出error就终止webpack的编译进程
+// 允许错误不打断程序
 //pluginsConfig.push( new webpack.NoErrorsPlugin( ) )
 
 pluginsConfig.push(new webpack.optimize.UglifyJsPlugin({
@@ -38,8 +38,14 @@ pluginsConfig.push(new webpack.optimize.UglifyJsPlugin({
     //在输出中保存版权注释
     comments: false
   },
+  // https://github.com/mishoo/UglifyJS2/blob/master/lib/compress.js
   compress: {
-    warnings: false
+    // 不输出警告
+    warnings: false,
+    // 去掉 console
+    // drop_console: false,
+    // 去掉 debugger
+    drop_debugger: true
   }
 }))
 

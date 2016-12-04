@@ -14,10 +14,10 @@ export function doAction(type, callback) {
   }
   if (utils.isFunction(callback)) {
     // 指定了callback
-    hooks[type].forEach(callback)
+    hooks[type] && hooks[type].forEach(callback)
   } else {
     // 未指定callback，直接执行
-    hooks[type].forEach(function (hook, index) {
+    hooks[type] && hooks[type].forEach(function (hook, index) {
       return !hook.handle()
     })
   }
