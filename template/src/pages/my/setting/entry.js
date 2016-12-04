@@ -11,6 +11,7 @@ import Msg from 'components/msg'
 new Vue({
   el: 'body',
   components: {
-    App
+    App,
+    Msg
   }
 })

@@ -10,11 +10,13 @@ Vue.use(VueValidator)
 
 require('configVue')
 import App from './app'
+import Msg from 'components/msg'
 
 /* eslint-disable no-new */
 new Vue({
   el: 'body',
   components: {
-    App
+    App,
+    Msg
   }
 })

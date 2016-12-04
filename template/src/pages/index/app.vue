@@ -110,7 +110,7 @@
 
         $api.fire(window, 'test')
 
-        // $api.openWindow(this.settingUri)
+        $api.openWindow(this.settingUri)
       }
     }
   }
