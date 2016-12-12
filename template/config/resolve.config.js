@@ -9,7 +9,6 @@ module.exports = {
     /* vux 组件引用路径  */
     // 'vux-components': 'vux/src/components',
     'vux-components': 'vux/dist/components',
-
     /* 项目代码根路径 */
     'src': dirVars.srcRootDir,
     /* 代码-静态资源路径 样式(less css) 图片 字体 等*/

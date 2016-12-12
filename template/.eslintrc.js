@@ -48,7 +48,7 @@ module.exports = {
     {{#if_eq lintConfig "airbnb"}}
     'import/no-unresolved': 0,
     {{/if_eq}}
-    // allow debugger during development
+    // allow debugger during development ? 2 : 0
     'no-debugger': process.env.NODE_ENV === 'production' ? 0 : 0
   }
 }
