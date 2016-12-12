@@ -4,7 +4,7 @@
       <masker style="border-radius: 2px;">
         <div class="m-img" :style="{backgroundImage: 'url(' + item.img + ')'}"></div>
         <div slot="content" class="m-title">
-          {{item.title}}
+          <span v-text="item.title"></span>
           <br/>
           <span class="m-time">2016-03-18</span>
         </div>

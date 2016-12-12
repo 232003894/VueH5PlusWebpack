@@ -4,7 +4,7 @@
       <div class="weui_loading">
         <div class="weui_loading_leaf" v-for="i in 12" :class="['weui_loading_leaf_' + i]"></div>
       </div>
-      <p class="weui_toast_content">{{text}}
+      <p class="weui_toast_content" v-text="text">
         <slot></slot>
       </p>
     </div>

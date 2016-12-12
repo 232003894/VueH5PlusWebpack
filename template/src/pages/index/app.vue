@@ -2,7 +2,7 @@
   <div>
     <c-box :padding-top="46" :padding-bottom="55" v-ref:box>
       <!--header slot-->
-      <c-header slot="header" :transition="headerTransition" :left-options="{showBack:showBack}">{{title}}</c-header>
+      <c-header slot="header" :transition="headerTransition" :left-options="{showBack:showBack}" :title="title"></c-header>
       <!--default slot-->
       <router-view :transition="'vux-pop-' + (direction === 'forward' ? 'in' : 'out')"></router-view>
       <!--bottom slot-->

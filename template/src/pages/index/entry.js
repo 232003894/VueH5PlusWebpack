@@ -48,6 +48,18 @@ router.beforeEach(({
   from,
   next
 }) => {
+  currentPage = to.path
+  if (to.path === '/') {
+    commit('Title', '主页')
+    commit('ShowBack', false)
+  } else if (to.path === '/demo') {
+    commit('Title', '演示')
+    commit('ShowBack', true)
+  } else if (to.path === '/setting') {
+    commit('Title', '设置')
+    commit('ShowBack', true)
+  }
+  commit('UPDATE_LOADING', true)
   const toIndex = history.getItem(to.path)
   const fromIndex = history.getItem(from.path)
   if (toIndex) {
@@ -62,19 +74,7 @@ router.beforeEach(({
     to.path !== '/' && history.setItem(to.path, historyCount)
     commit('UPDATE_DIRECTION', 'forward')
   }
-  currentPage = to.path
-  if (to.path === '/') {
-    commit('Title', '主页')
-    commit('ShowBack', false)
-  } else if (to.path === '/demo') {
-    commit('Title', '演示')
-    commit('ShowBack', true)
-  } else if (to.path === '/setting') {
-    commit('Title', '设置')
-    commit('ShowBack', true)
-  }
-  commit('UPDATE_LOADING', true)
-  setTimeout(next, 50)
+  setTimeout(next, 250)
 })
 
 router.afterEach((transition) => {

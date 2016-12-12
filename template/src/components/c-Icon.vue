@@ -1,6 +1,6 @@
 <template>
   <slot name='before'></slot>
-  <i class="{{className}}">
+  <i :class="[className]">
     <slot></slot>
   </i>
 </template>

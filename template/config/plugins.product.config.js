@@ -28,7 +28,7 @@ pluginsConfig.push(new ExtractTextPlugin('css/[name].css'))
   // pluginsConfig.push(new ExtractTextPlugin('css/[name].[contenthash:3].css'))
 
 // 允许错误不打断程序
-//pluginsConfig.push( new webpack.NoErrorsPlugin( ) )
+// pluginsConfig.push( new webpack.NoErrorsPlugin( ) )
 if (process.env.NODE_ENV === 'production') {
   pluginsConfig.push(new webpack.optimize.UglifyJsPlugin({
     mangle: true,

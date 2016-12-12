@@ -49,6 +49,6 @@ module.exports = {
     'import/no-unresolved': 0,
     {{/if_eq}}
     // allow debugger during development
-    'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0
+    'no-debugger': process.env.NODE_ENV === 'production' ? 0 : 0
   }
 }
