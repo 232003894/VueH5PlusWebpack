@@ -29,25 +29,27 @@ pluginsConfig.push(new ExtractTextPlugin('css/[name].css'))
 
 // 允许错误不打断程序
 //pluginsConfig.push( new webpack.NoErrorsPlugin( ) )
-
-pluginsConfig.push(new webpack.optimize.UglifyJsPlugin({
-  mangle: true,
-  output: {
-    //中文ascii化，非常有用！防止中文乱码的神配置
-    ascii_only: true,
-    //在输出中保存版权注释
-    comments: false
-  },
-  // https://github.com/mishoo/UglifyJS2/blob/master/lib/compress.js
-  compress: {
-    // 不输出警告
-    warnings: false,
-    // 去掉 console
-    // drop_console: false,
-    // 去掉 debugger
-    drop_debugger: true
-  }
-}))
+if (process.env.NODE_ENV === 'production') {
+  pluginsConfig.push(new webpack.optimize.UglifyJsPlugin({
+    mangle: true,
+    // https://github.com/mishoo/UglifyJS2/blob/master/lib/output.js
+    output: {
+      //中文ascii化，非常有用！防止中文乱码的神配置
+      ascii_only: true,
+      //在输出中保存版权注释
+      comments: false
+    },
+    // https://github.com/mishoo/UglifyJS2/blob/master/lib/compress.js
+    compress: {
+      // 不输出警告
+      warnings: false,
+      // 去掉 console
+      drop_console: false,
+      // 去掉 debugger
+      drop_debugger: true
+    }
+  }))
+}
 
 //为组件分配ID，通过这个插件webpack可以分析和优先考虑使用最多的模块，并为它们分配最小的ID
 pluginsConfig.push(new webpack.optimize.OccurenceOrderPlugin())

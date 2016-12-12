@@ -1,146 +1,176 @@
 <template>
   <div>
-    <divider>使用简单卡片头部和内容slot</divider>
-    <card :header="{title:msg}">
-      <div slot="content" class="card-demo-flex card-demo-content01">
-        <div class="vux-1px-l vux-1px-r">
-          <span>1130</span>
-          <br/> 豆豆
-        </div>
-        <div class="vux-1px-r">
-          <span>15</span>
-          <br/> 东券
-        </div>
-        <div class="vux-1px-r">
-          <span>0</span>
-          <br/> 东卡/E卡
-        </div>
-        <div>
-          <span>88</span>
-          <br/> 七天待还
-        </div>
-      </div>
-    </card>
-    <br>
-    <divider>简单头部,简单底部带链接</divider>
-    <card :header="{title:'商品详情(简单头部)'}" :footer="{title:'设置(简单底部带链接)',link:settingUri}">
-      <p slot="content" class="card-padding">
-        这里是内容
-        <Button v-touch:tap="settingAction" text="设&nbsp;&nbsp;置"></Button>
-      </p>
-    </card>
-    <divider>简单头部</divider>
-    <card :header="{title:'图标'}">
-      <p slot="content" class="card-padding">
-        <i class="iconfont icon-close iconfont--spin"></i>
-        <i class="iconfont iconfont--spin">&#xe613;</i>
-      </p>
-    </card>
-    <divider>使用头部slot和内容slot</divider>
-    <card>
-      <tip slot="header" style="padding:10px;">2个头部:tip,image</tip>
-      <img slot="header" src="http://placeholder.qiniudn.com/640x300" style="width:100%;display:block;">
-      <div slot="content" class="card-padding">
-        <p style="color:#999;font-size:12px;">2016-07-31 07:42:45</p>
-        <p style="font-size:14px;line-height:1.2;padding-top:10px;">
-          C语言终于超越了Java，登顶榜首．Python超过C++成为第三名，C#被R顶出前五．最近几年R一路飙升，主要是由于乘上了大数据分析的浪潮．</p>
-      </div>
-    </card>
+    <c-box :padding-top="46" :padding-bottom="55" v-ref:box>
+      <!--header slot-->
+      <c-header slot="header" :transition="headerTransition" :left-options="{showBack:showBack}">{{title}}</c-header>
+      <!--default slot-->
+      <router-view :transition="'vux-pop-' + (direction === 'forward' ? 'in' : 'out')"></router-view>
+      <!--bottom slot-->
+      <tabbar icon-class="vux-center iconSize" slot="bottom">
+        <c-tabbar-item v-link="{path:'/'}" :selected="route.path === '/'">
+          <c-icon type="homeon" slot="iconon"></c-icon>
+          <c-icon type="home" slot="icon"></c-icon>
+          <span slot="label">主页</span>
+        </c-tabbar-item>
+        <c-tabbar-item badge="9" v-link="{path:'/demo'}" :selected="route.path === '/demo'">
+          <c-icon type="demoon" slot="iconon"></c-icon>
+          <c-icon type="demo" slot="icon"></c-icon>
+          <span slot="label">演示</span>
+        </c-tabbar-item>
+        <c-tabbar-item show-dot v-link="{path:'/setting'}" :selected="route.path === '/setting'">
+          <c-icon type="settingon" slot="iconon"></c-icon>
+          <c-icon type="setting" slot="icon"></c-icon>
+          <span slot="label">设置</span>
+        </c-tabbar-item>
+      </tabbar>
+    </c-box>
   </div>
 </template>
 <script>
   /** vux components*/
-  import Tip from 'vux-components/tip'
-  import Divider from 'vux-components/Divider'
-  import Card from 'vux-components/card'
-  /** project components*/
-  import Button from 'components/Button'
+  import Tabbar from 'vux-components/tabbar'
+  import TabbarItem from 'vux-components/tabbar-item'
+  import Icon from 'vux-components/icon'
+  /** customer components*/
+  import cBox from 'components/c-box'
+  import CHeader from 'components/c-header'
+  import cIcon from 'components/c-Icon'
+  import cTabbarItem from 'components/c-tabbar-item'
   /** $api*/
   import * as $api from 'api'
   /** $app*/
   import * as $app from 'app'
+  import store from './store'
 
   export default {
     components: {
-      Tip,
-      Card,
-      Divider,
-      Button
+      cBox,
+      cIcon,
+      CHeader,
+      Tabbar,
+      cTabbarItem,
+      Icon
     },
-    init() {
-      var self = this
-      console.log('vue components init ' + new Date().getMilliseconds())
-      document.addEventListener('test', function(e) {
-        console.log(JSON.stringify(self.$data, null, 2))
-      })
+    store: store,
+    vuex: {
+      getters: {
+        route: (state) => state.route,
+        isLoading: (state) => state.isLoading,
+        direction: (state) => state.direction,
+        showBack: (state) => state.showBack,
+        title: (state) => state.title
+      }
     },
     ready() {
-      var self = this
-      $api.domready(() => {
-        console.log('domready ' + new Date().getMilliseconds())
-      })
-      $api.apiready(() => {
-        console.log('apiready ' + new Date().getMilliseconds())
+      var vm = this
+      document.addEventListener('test', function(e) {
+        if (vm.route.path === '/setting') {
+          $api.log('main-setting:' + JSON.stringify(e.detail, null, 4))
+        } else if (vm.route.path === '/demo') {
+          $api.log('main-demo:' + JSON.stringify(e.detail, null, 4))
+        }
       })
     },
     data() {
-      return {
-        msg: '我的钱包(简单头部)',
-        settingUri: 'my_setting'
+      return {}
+    },
+    computed: {
+      headerTransition() {
+        return this.direction === 'forward' ? 'vux-header-fade-in-right' : 'vux-header-fade-in-left'
       }
     },
-    asyncData: function(resolve, reject) {
-      this.$http.get('http://demo.dcloud.net.cn/test/xhr/json.php').then(function(response) {
-        var data = JSON.parse(response.data)
-        setTimeout(() => {
-          resolve({
-            msg: data.string
-          })
-        }, 3000)
-      }, function(response) {
-        // handle error
-      })
-    },
-    methods: {
-      // 设置
-      settingAction() {
-        $api.toast({
-          text: '百度'
-        })
-
-        $api.fire(window, 'test')
-
-        $api.openWindow(this.settingUri)
-      }
-    }
+    methods: {}
   }
+
+  $api.init({
+    beforeback() {
+      $api.log('main-后退前的业务处理')
+      return true
+    }
+  })
 </script>
 
-<style scoped lang="less">
-  .card-demo-flex {
-    display: flex;
+<style lang="less">
+  body {
+    overflow-x: hidden;
   }
   
-  .card-demo-content01 {
-    padding: 10px 0;
+  .iconSize {
+    .iconfont {
+      font-size: 28px;
+    }
+  }
+  /* vue-router transition 开始 */
+  
+  .vux-pop-out-transition,
+  .vux-pop-in-transition {
+    width: 100%;
+    animation-duration: 0.5s;
+    animation-fill-mode: both;
+    backface-visibility: hidden;
   }
   
-  .card-padding {
-    padding: 15px 20px;
+  .vux-pop-out-enter,
+  .vux-pop-out-leave,
+  .vux-pop-in-enter,
+  .vux-pop-in-leave {
+    will-change: transform;
+    height: 100%;
+    position: absolute;
+    left: 0;
   }
   
-  .card-demo-flex>div {
-    flex: 1;
-    text-align: center;
-    font-size: 12px;
+  .vux-pop-out-enter {
+    animation-name: popInLeft;
   }
   
-  .card-demo-flex span {
-    color: #f74c31;
+  .vux-pop-out-leave {
+    animation-name: popOutRight;
   }
   
-  .btnstyle {
-    border-radius: 100px;
-    margin-top: 30px;
+  .vux-pop-in-enter {
+    perspective: 1000;
+    animation-name: popInRight;
   }
+  
+  .vux-pop-in-leave {
+    animation-name: popOutLeft;
+  }
+  
+  @keyframes popInLeft {
+    from {
+      transform: translate3d(-100%, 0, 0);
+    }
+    to {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+  
+  @keyframes popOutLeft {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+    to {
+      transform: translate3d(-100%, 0, 0);
+    }
+  }
+  
+  @keyframes popInRight {
+    from {
+      transform: translate3d(100%, 0, 0);
+    }
+    to {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+  
+  @keyframes popOutRight {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+    to {
+      transform: translate3d(100%, 0, 0);
+    }
+  }
+  /* vue-router transition 结束 */
 </style>

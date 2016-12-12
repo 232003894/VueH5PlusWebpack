@@ -1,18 +1,28 @@
+import * as init from './init'
+var _refreshs = []
+
 /**
  * 设备的加载完成
- * @param {function} callback
+ * @export
+ * @param {any} callback
+ * @param {any} needRefresh 是否需要追加到刷新
  * @returns
  */
-let apiready = (callback) => {
+export function ready(callback, needRefresh) {
+  if (needRefresh === true) {
+    _refreshs.push(callback)
+  }
   if (window.plus) {
-    setInterval(() => {
-      // 解决callback与plusready事件的执行时机问题(典型案例:showWaiting,closeWaiting)
-      callback()
-    }, 0)
+    // 解决callback与plusready事件的执行时机问题(典型案例:showWaiting,closeWaiting)
+    // setInterval(callback, 0)
+    setTimeout(callback, 0)
   } else {
-    document.addEventListener('plusready', () => {
-      callback()
-    }, false)
+    document.addEventListener('plusready', callback, false)
+    setTimeout(() => {
+      if (!window.plus) {
+        callback()
+      }
+    }, 500)
   }
   return this
 }
@@ -22,28 +32,36 @@ let apiready = (callback) => {
  * @param {function} callback
  * @returns
  */
-let domready = (callback) => {
+export function onload(callback) {
   let readyRE = /complete|loaded|interactive/
   if (readyRE.test(document.readyState)) {
     callback()
   } else {
-    document.addEventListener('DOMContentLoaded', () => {
-      callback()
-    }, false)
+    document.addEventListener('DOMContentLoaded', callback, false)
   }
   return this
 }
 
-apiready(() => {
-  // H5+ 中的窗体设置
-  var webview = plus.webview.currentWebview()
-  webview.setStyle({
-    // 去掉页面滚动条
-    scrollIndicator: 'none'
+export function refresh(callback) {
+  // todo:去掉msg.error
+  _refreshs.forEach((cb, index) => {
+    cb()
+  })
+  return this
+}
+
+onload(() => {
+  document.addEventListener('manualshow', function (e) {
+    if (window.plus && init.currentWebview) {
+      var opts = init.showOptions()
+      if (init.currentWebview.isVisible()) {
+        init.currentWebview.hide('none')
+        setTimeout(() => {
+          init.currentWebview.show(opts.aniShow, opts.duration + 100)
+        }, 500)
+      } else {
+        init.currentWebview.show(opts.aniShow, opts.duration)
+      }
+    }
   })
 })
-
-export {
-  domready,
-  apiready
-}

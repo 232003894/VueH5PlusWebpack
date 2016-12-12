@@ -7,6 +7,12 @@ if (!Array.isArray) {
   }
 }
 
+/* eslint-disable no-extend-native */
+Array.prototype.removeAt = function (index) {
+  // 移除数组中指定位置的元素，返回布尔表示成功与否
+  return !!this.splice(index, 1).length
+}
+
 /**
  * fixed CustomEvent
  */
@@ -217,4 +223,110 @@ export function trigger(element, eventType, eventData) {
     cancelable: true
   }))
   return this
-};
+}
+
+/**
+ * 去html标签
+ * @export
+ * @param {String} html
+ * @returns
+ */
+export function htmlToTxt(html) {
+  var doc = ''
+  if (getType(html) === 'string') {
+    // doc = html.replace(/^[^\/]+\/\*!?\s?/, '').replace(/\*\/[^\/]+$/, '').trim().replace(/>\s*</g, '><')
+    doc = html.replace(/<\/?.+?>/g, '')
+  }
+  return doc
+}
+
+/**
+ * 比较对象是否相等
+ * @param {Object} x
+ * @param {Object} y
+ * @param {String} propertys 设置对比的属性,多属性用逗号分隔,非必填
+ */
+export function equals(x, y, propertys) {
+  // If both x and y are null or undefined and exactly the same
+  if (x === y) {
+    return true
+  }
+  // If they are not strictly equal, they both need to be Objects
+  if (!(x instanceof Object) || !(y instanceof Object)) {
+    return false
+  }
+  // They must have the exact same prototype chain, the closest we can do is
+  // test the constructor.
+  if (x.constructor !== y.constructor) {
+    return false
+  }
+
+  if (propertys) {
+    var arrs = propertys.split(',')
+    for (var arr in arrs) {
+      var _p = arrs[arr]
+      if (x.hasOwnProperty(_p) && y.hasOwnProperty(_p)) {
+        // If they have the same strict value or identity then they are equal
+        if (x[_p] === y[_p]) {
+          continue
+        }
+        // Numbers, Strings, Functions, Booleans must be strictly equal
+        if (typeof (x[p]) === 'function') {
+          return (x[p]).toString() === (y[p]).toString()
+        } else if (typeof (x[_p]) !== 'object') {
+          return false
+        }
+        // Objects and Arrays must be tested recursively
+        if (!equals(x[_p], y[_p])) {
+          return false
+        }
+      }
+    }
+  } else {
+    for (var p in x) {
+      // Inherited properties were tested using x.constructor === y.constructor
+      if (x.hasOwnProperty(p)) {
+        // Allows comparing x[ p ] and y[ p ] when set to undefined
+        if (!y.hasOwnProperty(p)) {
+          return false
+        }
+        // If they have the same strict value or identity then they are equal
+        if (x[p] === y[p]) {
+          continue
+        }
+        // Numbers, Strings, Functions, Booleans must be strictly equal
+        if (typeof (x[p]) === 'function') {
+          return (x[p]).toString() === (y[p]).toString()
+        } else if (typeof (x[p]) !== 'object') {
+          return false
+        }
+        // Objects and Arrays must be tested recursively
+        if (!equals(x[p], y[p])) {
+          return false
+        }
+      }
+    }
+
+    for (p in y) {
+      // allows x[ p ] to be set to undefined
+      if (y.hasOwnProperty(p) && !x.hasOwnProperty(p)) {
+        return false
+      }
+    }
+  }
+
+  return true
+}
+
+/**
+ * log
+ * @export
+ * @param {string} msg
+ */
+export function log(msg) {
+  var br = '\r\n'
+  var _d = new Date()
+  var str = '[' + _d.toLocaleTimeString() + ' ' + _d.getMilliseconds() + ']' + br + ' '
+  str += msg
+  console.log(str)
+}

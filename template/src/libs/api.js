@@ -9,7 +9,10 @@ export {
   isPlainObject,
   // isArrayLike,
   mix,
-  trigger
+  trigger,
+  htmlToTxt,
+  equals,
+  log
 }
 from './api/utils'
 
@@ -22,27 +25,31 @@ from './api/os'
 // 页面加载
 export {
   // 网页的加载完成
-  domready,
+  onload,
   // 设备的加载完成
-  apiready
+  ready,
+  // app页面局部刷新
+  refresh
 }
 from './api/ready'
 
 // action
 export {
   doAction,
-  addAction
+  addAction,
+  removeAction
 }
 from './api/action'
 
 // init
 export {
+  msgOpts,
+  boxOpts,
   global,
   options,
   initGlobal,
   init,
   showOptions,
-  waitingOptions,
   windowOptions,
   currentWebview,
   isHomePage,
@@ -50,13 +57,15 @@ export {
   fireTree,
   fireAll,
   preload,
-  openWindow
+  openWindow,
+  showWindow
 }
 from './api/init'
 
 // 后退
 export {
   addBack,
+  removeBack,
   back,
   menu
 }
@@ -68,6 +77,26 @@ export {
 from './api/pages'
 
 export {
-  toast
+  getState,
+  setState,
+  getSettings,
+  setSettings
+}
+from './api/localStorage'
+
+export {
+  toast,
+  alert,
+  confirm,
+  dialog,
+  loading,
+  webError
 }
 from './api/msg'
+
+export {
+  noNetwork
+}
+from './api/plus'
+
+import './resource.js'

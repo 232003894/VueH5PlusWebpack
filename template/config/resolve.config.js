@@ -7,8 +7,8 @@ module.exports = {
   // 模块别名的配置，为了使用方便，一般来说所有模块都是要配置一下别名的
   alias: {
     /* vux 组件引用路径  */
-    'vux-components': 'vux/src/components',
-    'vux-plugins': 'vux/src/plugins',
+    // 'vux-components': 'vux/src/components',
+    'vux-components': 'vux/dist/components',
 
     /* 项目代码根路径 */
     'src': dirVars.srcRootDir,

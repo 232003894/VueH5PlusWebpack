@@ -14,6 +14,9 @@ npm run dev
 # 生产环境 with minification
 npm run build
 
+# 生产环境 未压缩的版本
+npm run build5
+
 {{#lint}}
 # 代码检查
 npm run lint

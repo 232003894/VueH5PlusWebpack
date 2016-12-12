@@ -2,8 +2,12 @@
   tpl
 </template>
 <script>
-  import * as $api from '../../libs'
-  import * as $app from '../../logic'
+  /** vux components*/
+  /** customer components*/
+  /** $api*/
+  import * as $api from 'api'
+  /** $app*/
+  import * as $app from 'app'
   export default {
     data() {
       return {}

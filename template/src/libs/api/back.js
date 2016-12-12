@@ -11,10 +11,20 @@ import * as msg from './msg'
  * 增加back执行流程
  * @export
  * @param {type} back
- * @returns {$.gestures}
+ * @returns
  */
 export function addBack(back) {
   return act.addAction('backs', back)
+}
+
+/**
+ * 删除back执行流程
+ * @export
+ * @param {type} back
+ * @returns
+ */
+export function removeBack(back) {
+  return act.removeAction('backs', back)
 }
 
 /**
@@ -25,11 +35,11 @@ addBack({
   index: 100,
   handle: function () {
     if (window.history.length > 1) {
-      console.log('web的后退 window.history.back')
+      // utils.log('web的后退 window.history.back')
       window.history.back()
-      return true
+      return false
     }
-    return false
+    return true
   }
 })
 
@@ -58,7 +68,7 @@ addBack({
   index: 10,
   handle: function () {
     if (!window.plus) {
-      return false
+      return true
     }
     var wobj = plus.webview.currentWebview()
     var parent = wobj.parent()
@@ -69,7 +79,7 @@ addBack({
       wobj.canBack(function (e) {
         // by chb 暂时注释，在碰到类似popover之类的锚点的时候，需多次点击才能返回；
         if (e.canBack) { // webview history back
-          console.log('5+环境的后退 window.history.back')
+          // utils.log('5+环境的后退 window.history.back')
           window.history.back()
         } else { // webview close or hide
           // fixed by fxy 此处不应该用opener判断，因为用户有可能自己close掉当前窗口的opener。这样的话。opener就为空了，导致不能执行close
@@ -99,7 +109,7 @@ addBack({
         }
       })
     }
-    return true
+    return false
   }
 })
 
@@ -131,14 +141,14 @@ var __menu = function () {
 }
 
 // 默认监听back和menu按键
-ready.apiready(() => {
+ready.ready(() => {
   document.addEventListener('fromChildrenBack', function (e) {
     __back()
   })
   document.addEventListener('fromChildrenMenu', function (e) {
     __menu()
   })
-  if (os.android) {
+  if (window.plus && os.android) {
     if (init.options.keyEventBind.backbutton) {
       plus.key.addEventListener('backbutton', __back, false)
     }

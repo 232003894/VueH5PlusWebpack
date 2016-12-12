@@ -9,6 +9,10 @@ import {
   pages
 }
 from './pages'
+import * as msg from './msg'
+
+export var msgOpts = {}
+export var boxOpts = {}
 
 export var global = {
   swipeBack: false,
@@ -64,7 +68,7 @@ var inits = {}
  */
 export function init(opts) {
   options = utils.mix(true, global, opts || {})
-  ready.domready(function () {
+  ready.onload(function () {
     act.doAction('inits', function (_init, index) {
       // 是否未执行过
       var isInit = !inits[_init.name]
@@ -77,10 +81,9 @@ export function init(opts) {
   return this
 }
 
-// 默认页面动画
+// 默认页面加载的动画:移入
 var defaultShow = {
-  autoShow: true,
-  duration: os.ios ? 200 : 100,
+  duration: os.ios ? 300 : 200,
   aniShow: 'slide-in-right'
 }
 
@@ -91,20 +94,8 @@ var defaultShow = {
  * @returns {Object}
  */
 export function showOptions(opts) {
-  return utils.mix(true, {}, defaultShow, opts)
-}
-
-/**
- * 设置等待动画配置
- * @export
- * @param {Object} opts
- * @returns {Object}
- */
-export function waitingOptions(opts) {
-  return utils.mix(true, {}, {
-    autoShow: true,
-    title: '正在加载...'
-  }, opts)
+  // return utils.mix(true, {}, defaultShow, opts)
+  return utils.mix(true, defaultShow, opts)
 }
 
 /**
@@ -130,8 +121,15 @@ export var currentWebview = null
  */
 export var isHomePage = false
 
-ready.apiready(function () {
-  currentWebview = plus.webview.currentWebview()
+ready.ready(function () {
+  if (window.plus) {
+    currentWebview = plus.webview.currentWebview()
+    isHomePage = currentWebview === plus.webview.getWebviewById(plus.runtime.appid)
+    currentWebview.setStyle({
+      // 去掉页面滚动条
+      scrollIndicator: 'none'
+    })
+  }
 })
 
 var receive = function (eventType, eventData) {
@@ -160,11 +158,14 @@ export function fire(webviewOrWindow, eventType, eventData) {
   if (webviewOrWindow) {
     if (eventData !== '') {
       eventData = eventData || {}
+
+      // utils.log(JSON.stringify(eventData))
       if (utils.isPlainObject(eventData)) {
         eventData = JSON.stringify(eventData || {}).replace(/'/g, '\\u0027').replace(/\\/g, '\\u005c')
       }
+      // utils.log(eventData)
     }
-    var _js = '(' + receive.toString().replace('/function ?+(/', 'function') + ')("' + eventType + '","' + eventData + '")'
+    var _js = '(' + receive.toString().replace('/function ?+(/', 'function') + ')("' + eventType + '",\'' + eventData + '\')'
     if (utils.isWindow(webviewOrWindow)) {
       // Window
       webviewOrWindow.eval(_js)
@@ -289,8 +290,8 @@ export function preload(url, id, opts) {
  * web:直接打开新url
  * 5+:打开新窗口
  * 1个参数 openWindow(opts)  url和id在opts中
- * 1个参数 preload(id)  url在pages中获取,opts为默认
- * 2个参数 preload(id,opts)  id=url或url在pages中获取
+ * 1个参数 openWindow(id)  url在pages中获取,opts为默认
+ * 2个参数 openWindow(id,opts)  id=url或url在pages中获取
  * 3个参数 openWindow(url,id,opts)  url, id, opts
  * @export
  * @param {any} url
@@ -323,71 +324,43 @@ export function openWindow(url, id, opts) {
 
   var webview = null
   if (window.plus) {
-    var nShow = showOptions(opts.show)
-    var nWaiting
+    msg.loading(true)
 
     webview = plus.webview.getWebviewById(id)
     if (webview) { // 已存在
-      // 每次show都需要传递动画参数
-      // 预加载的动画参数优先级：openWindow配置>preloadPages配置>默认配置
-      webview.show(nShow.aniShow, nShow.duration, function () {
-        fireTree(webview, 'pagebeforeshow')
-      })
-
-      // todo:afterShowMethodName 显示后的处理程序
+      setTimeout(() => {
+        showWindow(webview, false)
+      }, 500)
       return webview
     }
-
-    // 显示waiting
-    var waitingConfig = waitingOptions(opts.waiting)
-    if (waitingConfig.autoShow) {
-      nWaiting = plus.nativeUI.showWaiting(waitingConfig.title, waitingConfig.options)
-    }
-
     // 创建新窗口
     opts = utils.mix(opts, {
       id: id,
       url: url
     })
     webview = createWindow(opts)
-    if (nShow.autoShow) {
-      var showWebview = function () {
-        // 关闭等待框
-        if (nWaiting) {
-          nWaiting.close()
-        }
-        // 显示页面
-        webview.show(nShow.aniShow, nShow.duration)
-
-        // 已加载
-        webview.showed = true
-
-        // todo:afterShowMethodName 显示后的处理程序
-        // options.afterShowMethodName && webview.evalJS(options.afterShowMethodName + '(\'' + JSON.stringify(params) + '\')')
-      }
-
-      // TODO:能走到这一步，应该不用判断url了吧？
-      if (!url) {
-        showWebview()
-      } else {
-        // titleUpdate 触发时机早于 loaded，更换为 titleUpdate 后，可以更早的显示 webview
-        webview.addEventListener('titleUpdate', showWebview, false)
-
-        // loaded 事件发生后，触发预加载和 pagebeforeshow 事件
-        webview.addEventListener('loaded', function () {
-          fireTree(webview, 'pagebeforeshow')
-        }, false)
-      }
-    }
+    showWindow(webview, false)
   } else {
     window.location.href = url
   }
   return webview
 }
 
-ready.apiready(function () {
-  currentWebview = plus.webview.currentWebview()
-})
+/**
+ * 显示指定窗口
+ * @export
+ * @param {any} webview
+ * @param {any} showLoading
+ */
+export function showWindow(webview, showLoading) {
+  if (showLoading !== false) {
+    msg.loading(true)
+  }
+  setTimeout(() => {
+    msg.loading()
+  }, 500)
+  fireTree(webview, 'manualshow')
+}
 
 // /**
 //  * 创建当前页面的子webview
