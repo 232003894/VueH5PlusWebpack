@@ -27,31 +27,31 @@
       <p slot="content" class="card-padding">
         这里是内容
         <br/>
-        <x-button :mini="true" type="warn" v-touch:tap="toast">提示</x-button>
-        <x-button :mini="true" type="warn" v-touch:tap="alert">警告框</x-button>
-        <x-button :mini="true" type="warn" v-touch:tap="confirm">确认框</x-button>
-        <x-button :mini="true" type="warn" v-touch:tap="dialog">弹出消息</x-button>
-        <x-button :mini="true" type="warn" v-touch:tap="error">网络错误</x-button>
-        <x-button v-touch:tap="settingAction" type="primary" text="新&nbsp;窗&nbsp;口&nbsp;设&nbsp;置"></x-button>
+        <x-button :mini="true" type="warn" @click="toast">提示</x-button>
+        <x-button :mini="true" type="warn" @click="alert">警告框</x-button>
+        <x-button :mini="true" type="warn" @click="confirm">确认框</x-button>
+        <x-button :mini="true" type="warn" @click="dialog">弹出消息</x-button>
+        <x-button :mini="true" type="warn" @click="error">网络错误</x-button>
+        <x-button @click="settingAction" type="primary" text="新&nbsp;窗&nbsp;口&nbsp;设&nbsp;置"></x-button>
+        <x-button @click="loginReload" type="primary">登录(登陆后刷新)</x-button>
+        <x-button @click="loginRetry" type="primary">登录(登陆后重试)</x-button>
       </p>
     </card>
     <divider>简单头部</divider>
-    <card :header="{title:'图标'}">
-      <p slot="content" class="card-padding">
-        <c-icon type="close">
-          <span slot="before">前</span>后
-        </c-icon>
+    <card :header="{title: '图标'} ">
+      <p slot="content " class="card-padding ">
+        <c-icon type="home ">后</c-icon>
         <br/>
-        <c-icon>&#xe613;</c-icon>
+        <c-icon>&#xe73e;</c-icon>
       </p>
     </card>
     <divider>使用头部slot和内容slot</divider>
     <card>
-      <tip slot="header" style="padding:10px;">2个头部:tip,image</tip>
-      <img slot="header" src="http://placeholder.qiniudn.com/640x300" style="width:100%;display:block;">
-      <div slot="content" class="card-padding">
-        <p style="color:#999;font-size:12px;">2016-07-31 07:42:45</p>
-        <p style="font-size:14px;line-height:1.2;padding-top:10px;">
+      <tip slot="header " style="padding:10px; ">2个头部:tip,image</tip>
+      <img slot="header " src="http://placeholder.qiniudn.com/640x300 " style="width:100%;display:block; ">
+      <div slot="content " class="card-padding ">
+        <p style="color:#999;font-size:12px; ">2016-07-31 07:42:45</p>
+        <p style="font-size:14px;line-height:1.2;padding-top:10px; ">
           C语言终于超越了Java，登顶榜首．Python超过C++成为第三名，C#被R顶出前五．最近几年R一路飙升，主要是由于乘上了大数据分析的浪潮．</p>
       </div>
     </card>
@@ -59,16 +59,18 @@
 </template>
 <script>
   /** vux components*/
-  import Tip from 'vux-components/tip'
-  import Divider from 'vux-components/Divider'
-  import Card from 'vux-components/card'
-  import XButton from 'vux-components/x-button'
+  import Tip from 'vuxs/tip'
+  import Divider from 'vuxs/Divider'
+  import Card from 'vuxs/card'
+  import XButton from 'vuxs/x-button'
   /** customer components*/
-  import cIcon from 'components/c-Icon'
+  import cIcon from 'generals/c-Icon'
   /** $api*/
   import * as $api from 'api'
   /** $app*/
   import * as $app from 'app'
+
+  import Vue from 'vue'
 
   export default {
     components: {
@@ -86,26 +88,21 @@
     ready() {
       var vm = this
       $api.ready(() => {
-        if (vm.route.path === '/demo') {
+        if (vm.route.name === 'Demo') {
           vm.loadData()
+          vm.CompanyRecommended()
         }
       })
     },
     data() {
       return {
-        msg: '我的钱包(简单头部)',
-        settingUri: 'my_setting'
-      }
-    },
-    computed: {
-      settingUrl: function() {
-        return $api.pages[this.settingUri]
+        msg: '我的钱包(简单头部)'
       }
     },
     methods: {
       toast() {
         $api.toast({
-          msg: '<i class="weui_icon weui_icon_info_circle"></i>网络不给力',
+          msg: '<i class="weui_icon weui_icon_info_circle "></i>网络不给力',
           time: 1000,
           type: 'text',
           width: '12.5rem',
@@ -157,32 +154,62 @@
       // 设置
       settingAction() {
         // $api.fire(window, 'test')
-        $api.openWindow(this.settingUri)
+        $api.openWindow('my_setting')
       },
       loadData() {
-        console.log('ajax')
         var vm = this
-        vm.$http.get('http://demo.dcloud.net.cn/test/xhr/json.php', {
-          params: {
-            id: 1
-          },
+        var temp = vm.$http.get('http://demo.dcloud.net.cn/test/xhr/json.php', {
           app: {
             get: false
-          }
+          },
+          timeout: 10000
         }).then(function(response) {
-          var data = JSON.parse(response.data)
+          response.data = JSON.parse(response.data)
+
+          // $api.log('正常\r\n' + JSON.stringify(response.data, null, 4))
           setTimeout(() => {
-            vm.$set('msg', data.string)
+            vm.$set('msg', response.data.string)
           }, 200)
+
+          // return vm.CompanyRecommended()
         }, function(response) {
           // handle error
+          $api.log('错误\r\n' + JSON.stringify(response, null, 4))
+        })
+      },
+      CompanyRecommended() {
+        return this.$http.get('Buyer/UserCompany/CompanyRecommended', {
+          params: {
+            pageSize: 1
+          },
+          app: {
+            reload: true,
+            retry: this.CompanyRecommended
+          }
+        }).then(function(response) {
+          $api.log('正常\r\n' + JSON.stringify(response, null, 4))
+        }, function(response) {
+          // handle error
+          $api.log('错误\r\n' + JSON.stringify(response, null, 4))
+        })
+      },
+      loginReload() {
+        $api.showLogin(true)
+      },
+      loginRetry() {
+        $api.showLogin(false, () => {
+          $api.alert({
+            msg: '成功后续操作',
+            title: '登录成功',
+            buttonText: '确定'
+          }, false)
         })
       }
     }
   }
 </script>
 
-<style scoped lang="less">
+<style scoped>
   .card-demo-flex {
     display: flex;
   }

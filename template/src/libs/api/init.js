@@ -13,6 +13,7 @@ import * as msg from './msg'
 
 export var msgOpts = {}
 export var boxOpts = {}
+export var loginOpts = {}
 
 export var global = {
   swipeBack: false,
@@ -130,7 +131,7 @@ ready.ready(function () {
       scrollIndicator: 'none'
     })
   }
-})
+}, false)
 
 var receive = function (eventType, eventData) {
   if (eventType) {
@@ -357,9 +358,35 @@ export function showWindow(webview, showLoading) {
     msg.loading(true)
   }
   setTimeout(() => {
-    msg.loading()
+    msg.loading(false)
   }, 500)
   fireTree(webview, 'manualshow')
+}
+
+/**
+ * 回到首页
+ * @export
+ */
+export function goHome() {
+  if (window.plus) {
+    msg.loading(true)
+    var webview = plus.webview.getLaunchWebview()
+    var top = plus.webview.getTopWebview()
+    var _all = plus.webview.all()
+    _all.forEach(function (el) {
+      if (el.id !== webview.id && top.id !== el.id) {
+        el.close('none')
+      }
+    }, this)
+    setTimeout(() => {
+      msg.loading(false)
+      setTimeout(() => {
+        top.close(defaultShow.aniShow.replace('in', 'out'), defaultShow.duration + 100)
+      }, 100)
+    }, 300)
+  } else if (pages['index']) {
+    window.location.href = pages['index']
+  }
 }
 
 // /**

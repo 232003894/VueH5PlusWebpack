@@ -1,4 +1,6 @@
 import * as init from './init'
+import * as msg from './msg'
+
 var _refreshs = []
 
 /**
@@ -9,7 +11,7 @@ var _refreshs = []
  * @returns
  */
 export function ready(callback, needRefresh) {
-  if (needRefresh === true) {
+  if (!(needRefresh === false)) {
     _refreshs.push(callback)
   }
   if (window.plus) {
@@ -42,11 +44,17 @@ export function onload(callback) {
   return this
 }
 
-export function refresh(callback) {
-  // todo:去掉msg.error
+/**
+ * 业务逻辑刷新
+ * @export
+ * @returns
+ */
+export function refresh() {
   _refreshs.forEach((cb, index) => {
     cb()
   })
+
+  // msg.webError(false)
   return this
 }
 
@@ -54,7 +62,10 @@ onload(() => {
   document.addEventListener('manualshow', function (e) {
     if (window.plus && init.currentWebview) {
       var opts = init.showOptions()
-      if (init.currentWebview.isVisible()) {
+
+      // fixed:排除已经是TopWebview的情况 2016年12月16日
+      var isTop = init.currentWebview === plus.webview.getTopWebview()
+      if (init.currentWebview.isVisible() && !isTop) { // 如果已经显示但不是TopWebview的情况
         init.currentWebview.hide('none')
         setTimeout(() => {
           init.currentWebview.show(opts.aniShow, opts.duration + 100)
@@ -63,5 +74,8 @@ onload(() => {
         init.currentWebview.show(opts.aniShow, opts.duration)
       }
     }
+  })
+  document.addEventListener('logined', function (e) {
+    msg.closeLogin()
   })
 })

@@ -32,10 +32,10 @@
 
 <script>
   /** vux components*/
-  import Group from 'vux-components/group'
-  import Tip from 'vux-components/tip'
-  import Cell from 'vux-components/cell'
-  import Switch from 'vux-components/Switch'
+  import Group from 'vuxs/group'
+  import Tip from 'vuxs/tip'
+  import Cell from 'vuxs/cell'
+  import Switch from 'vuxs/Switch'
   /** customer components*/
   /** $api*/
   import * as $api from 'api'
@@ -62,17 +62,17 @@
     },
     methods: {
       change(value) {
+        $api.showLogin(true)
         $api.fireAll('test', {
           a: 1,
           b: 3,
           c: [1, 2, 3]
         })
-        $api.log('change:', value)
       }
     }
   }
 </script>
 
-<style lang="less">
+<style scoped>
 
 </style>

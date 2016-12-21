@@ -1,0 +1,31 @@
+// 将设置放入此文件中以覆盖默认设置
+{
+  "editor.wrappingColumn": 0,
+  // End with a newline.
+  "html.format.endWithNewline": false,
+  // Enable/disable default JSON formatter (requires restart)
+  "json.format.enable": false,
+  "editor.formatOnSave": true,
+  // Link file types to the beautifier type
+  "beautify.language": {
+    "js": {
+      "type": [
+        "javascript"
+      ],
+      "filename": [
+        ".jshintrc",
+        ".jsbeautify"
+      ]
+    },
+    "css": [
+      "css",
+      "scss",
+      "less"
+    ],
+    "html": [
+      "htm",
+      "html",
+      "vue"
+    ]
+  }
+}

@@ -1,6 +1,6 @@
 import Vue from 'vue'
-import VueTouch from 'vue-touch'
-Vue.use(VueTouch)
+import FastClick from 'fastclick'
+FastClick.attach(document.body)
 
 import 'configVue'
 import App from './app'

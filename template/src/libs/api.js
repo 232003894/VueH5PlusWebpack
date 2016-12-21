@@ -45,6 +45,7 @@ from './api/action'
 export {
   msgOpts,
   boxOpts,
+  loginOpts,
   global,
   options,
   initGlobal,
@@ -58,7 +59,8 @@ export {
   fireAll,
   preload,
   openWindow,
-  showWindow
+  showWindow,
+  goHome
 }
 from './api/init'
 
@@ -66,6 +68,8 @@ from './api/init'
 export {
   addBack,
   removeBack,
+  __backFirst,
+  h5Back,
   back,
   menu
 }
@@ -90,7 +94,10 @@ export {
   confirm,
   dialog,
   loading,
-  webError
+  webError,
+  showLogin,
+  closeLogin,
+  cancleLogin
 }
 from './api/msg'
 

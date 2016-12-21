@@ -24,7 +24,7 @@
   }
 </script>
 
-<style lang="less">
+<style scoped>
   .loading-overlay {
     content: "";
     position: fixed;
@@ -37,15 +37,14 @@
     background: rgba(0, 0, 0, 0);
     transition: all .3s;
   }
+  /*loading toast*/
   
-  // loading toast
-  .loading-overlay {
-    .weui_toast_content {
-      margin-top: 64%;
-      font-size: 14px;
-    }
-    .weui_toast {
-      top: 40%;
-    }
+  .loading-overlay .weui_toast_content {
+    margin-top: 64%;
+    font-size: 14px;
+  }
+  
+  .loading-overlay .weui_toast {
+    top: 40%;
   }
 </style>

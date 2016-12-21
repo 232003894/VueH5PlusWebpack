@@ -24,11 +24,16 @@
 </template>
 
 <script>
-  import Masker from 'vux-components/masker'
+  import Masker from 'vuxs/masker'
+  /** $api*/
+  import * as $api from 'api'
 
   export default {
     components: {
       Masker
+    },
+    ready() {
+      // $api.showLogin(true)
     },
     data() {
       return {
@@ -47,7 +52,7 @@
   }
 </script>
 
-<style lang="less">
+<style scoped>
   .m-img {
     padding-bottom: 33%;
     display: block;

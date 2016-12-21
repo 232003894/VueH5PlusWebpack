@@ -10,7 +10,9 @@ const state = {
   title: '主页',
   showBack: false,
   isLoading: false,
-  direction: 'forward'
+  direction: 'forward',
+  headerHeight: 46,
+  bottomHeight: 55
 }
 export default new Vuex.Store({
   state,
@@ -20,6 +22,12 @@ export default new Vuex.Store({
     },
     ShowBack(state, showBack) {
       state.showBack = showBack
+    },
+    headerHeight(state, headerHeight) {
+      state.headerHeight = headerHeight
+    },
+    bottomHeight(state, bottomHeight) {
+      state.bottomHeight = bottomHeight
     },
     UPDATE_LOADING(state, status) {
       $api.loading(status)

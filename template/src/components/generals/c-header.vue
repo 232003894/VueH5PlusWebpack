@@ -20,7 +20,7 @@
   import {
     back
   }
-  from '../libs/api/back'
+  from '../../libs/api/back'
   export default {
     props: {
       leftOptions: {
@@ -51,7 +51,7 @@
   }
 </script>
 
-<style lang="less">
+<style scoped>
   .vux-header .vux-header-title,
   .vux-header h1 {
     /*为了居中 默认是100px 感觉不是居中的*/

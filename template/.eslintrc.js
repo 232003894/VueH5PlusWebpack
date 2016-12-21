@@ -39,7 +39,7 @@ module.exports = {
       //禁止在 switch 语句中填充
       "switches": "never"
     }],
-    "space-before-function-paren": [0, "never" ],
+    "space-before-function-paren": [0, "never"],
     // allow paren-less arrow functions
     'arrow-parens': 0,
     // allow async-await
@@ -48,7 +48,7 @@ module.exports = {
     {{#if_eq lintConfig "airbnb"}}
     'import/no-unresolved': 0,
     {{/if_eq}}
-    // allow debugger during development ? 2 : 0
-    'no-debugger': process.env.NODE_ENV === 'production' ? 0 : 0
+    // allow debugger during development
+    'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0
   }
 }

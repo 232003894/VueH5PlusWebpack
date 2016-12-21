@@ -1,41 +1,39 @@
 <template>
   <div>
-    <c-box :padding-top="46" :padding-bottom="55" v-ref:box>
+    <c-app :padding-top="headerHeight" :padding-bottom="bottomHeight" v-ref:app>
       <!--header slot-->
       <c-header slot="header" :transition="headerTransition" :left-options="{showBack:showBack}" :title="title"></c-header>
       <!--default slot-->
       <router-view :transition="'vux-pop-' + (direction === 'forward' ? 'in' : 'out')"></router-view>
       <!--bottom slot-->
-      <tabbar icon-class="vux-center iconSize" slot="bottom">
-        <c-tabbar-item v-link="{path:'/'}" :selected="route.path === '/'">
-          <c-icon type="homeon" slot="iconon"></c-icon>
-          <c-icon type="home" slot="icon"></c-icon>
+      <tabbar icon-class="vux-center" slot="bottom">
+        <c-tabbar-item v-link="{path:'/'}" :selected="route.name === 'Main'">
+          <c-icon type="homeon" slot="iconon" size="28px"></c-icon>
+          <c-icon type="home" slot="icon" size="24px"></c-icon>
           <span slot="label">主页</span>
         </c-tabbar-item>
-        <c-tabbar-item badge="9" v-link="{path:'/demo'}" :selected="route.path === '/demo'">
-          <c-icon type="demoon" slot="iconon"></c-icon>
-          <c-icon type="demo" slot="icon"></c-icon>
+        <c-tabbar-item badge="9" v-link="{path:'/demo'}" :selected="route.name === 'Demo'">
+          <c-icon type="demoon" slot="iconon" size="28px"></c-icon>
+          <c-icon type="demo" slot="icon" size="24px"></c-icon>
           <span slot="label">演示</span>
         </c-tabbar-item>
-        <c-tabbar-item show-dot v-link="{path:'/setting'}" :selected="route.path === '/setting'">
-          <c-icon type="settingon" slot="iconon"></c-icon>
-          <c-icon type="setting" slot="icon"></c-icon>
+        <c-tabbar-item show-dot v-link="{path:'/setting'}" :selected="route.name === 'Setting'">
+          <c-icon type="settingon" slot="iconon" size="28px"></c-icon>
+          <c-icon type="setting" slot="icon" size="24px"></c-icon>
           <span slot="label">设置</span>
         </c-tabbar-item>
       </tabbar>
-    </c-box>
+    </c-app>
   </div>
 </template>
 <script>
   /** vux components*/
-  import Tabbar from 'vux-components/tabbar'
-  import TabbarItem from 'vux-components/tabbar-item'
-  import Icon from 'vux-components/icon'
+  import Tabbar from 'vuxs/tabbar'
   /** customer components*/
-  import cBox from 'components/c-box'
-  import CHeader from 'components/c-header'
-  import cIcon from 'components/c-Icon'
-  import cTabbarItem from 'components/c-tabbar-item'
+  import cApp from 'generals/c-app'
+  import CHeader from 'generals/c-header'
+  import cIcon from 'generals/c-Icon'
+  import cTabbarItem from 'generals/c-tabbar-item'
   /** $api*/
   import * as $api from 'api'
   /** $app*/
@@ -44,12 +42,11 @@
 
   export default {
     components: {
-      cBox,
+      cApp,
       cIcon,
       CHeader,
       Tabbar,
-      cTabbarItem,
-      Icon
+      cTabbarItem
     },
     store: store,
     vuex: {
@@ -58,15 +55,17 @@
         isLoading: (state) => state.isLoading,
         direction: (state) => state.direction,
         showBack: (state) => state.showBack,
-        title: (state) => state.title
+        title: (state) => state.title,
+        headerHeight: (state) => state.headerHeight,
+        bottomHeight: (state) => state.bottomHeight
       }
     },
     ready() {
       var vm = this
       document.addEventListener('test', function(e) {
-        if (vm.route.path === '/setting') {
+        if (vm.route.name === 'Setting') {
           $api.log('main-setting:' + JSON.stringify(e.detail, null, 4))
-        } else if (vm.route.path === '/demo') {
+        } else if (vm.route.name === 'Demo') {
           $api.log('main-demo:' + JSON.stringify(e.detail, null, 4))
         }
       })
@@ -90,15 +89,9 @@
   })
 </script>
 
-<style lang="less">
+<style scoped>
   body {
     overflow-x: hidden;
-  }
-  
-  .iconSize {
-    .iconfont {
-      font-size: 28px;
-    }
   }
   /* vue-router transition 开始 */
   

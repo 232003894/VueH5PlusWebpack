@@ -19,7 +19,7 @@
     go
   } from 'vux/src/libs/router'
   /** vux components*/
-  import Badge from 'vux-components/badge'
+  import Badge from 'vuxs/badge'
 
   export default {
     components: {
@@ -42,27 +42,21 @@
     }
   }
 </script>
-<style lang="less">
-  .weui_tabbar_item {
-    .weui_tabbar_icon {
-      color: black;
-    }
-    .weui_tabbar_label {
-      span {
-        color: black;
-      }
-    }
+<style scoped>
+  .weui_tabbar_item .weui_tabbar_icon {
+    color: black;
   }
   
-  .weui_tabbar_item.weui_bar_item_on {
-    .weui_tabbar_icon {
-      color: #ef4f4f;
-    }
-    .weui_tabbar_label {
-      span {
-        font-weight: bolder;
-        color: #ef4f4f;
-      }
-    }
+  .weui_tabbar_item .weui_tabbar_label span {
+    color: black;
+  }
+  
+  .weui_tabbar_item.weui_bar_item_on .weui_tabbar_icon {
+    color: #ef4f4f;
+  }
+  
+  .weui_tabbar_item.weui_bar_item_on .weui_tabbar_label span {
+    font-weight: bolder;
+    color: #ef4f4f;
   }
 </style>

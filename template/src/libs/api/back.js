@@ -70,48 +70,64 @@ addBack({
     if (!window.plus) {
       return true
     }
-    var wobj = plus.webview.currentWebview()
-    var parent = wobj.parent()
-    if (parent) {
-      // 激活父窗体的back事件
-      init.fire(parent, 'fromChildrenBack')
-    } else {
-      wobj.canBack(function (e) {
-        // by chb 暂时注释，在碰到类似popover之类的锚点的时候，需多次点击才能返回；
-        if (e.canBack) { // webview history back
-          // utils.log('5+环境的后退 window.history.back')
-          window.history.back()
-        } else { // webview close or hide
-          // fixed by fxy 此处不应该用opener判断，因为用户有可能自己close掉当前窗口的opener。这样的话。opener就为空了，导致不能执行close
-          if (wobj.id === plus.runtime.appid) { // 首页
-            // 首页不存在opener的情况下，后退实际上应该是退出应用；
-            // 首次按键，提示‘再按一次退出应用’
-            if (!__backFirst) {
-              __backFirst = new Date().getTime()
-              msg.toast('再按一次退出应用', 'bottom')
-              setTimeout(function () {
-                __backFirst = null
-              }, 2000)
-            } else {
-              if (new Date().getTime() - __backFirst < 2000) {
-                plus.runtime.quit()
-              }
-            }
-          } else { // 其他页面
-            if (wobj.preload) {
-              wobj.hide('auto')
-            } else {
-              // 只关闭当前页面自身
-              // 其打开的所有子页面 暂不处理
-              wobj.close()
-            }
-          }
-        }
-      })
-    }
+    h5Back()
     return false
   }
 })
+
+/**
+ * h5Back
+ */
+export function h5Back() {
+  // var wobj = plus.webview.currentWebview()
+  var wobj = init.currentWebview
+  var parent = wobj.parent()
+  if (parent) {
+    // 激活父窗体的back事件
+    init.fire(parent, 'fromChildrenBack')
+  } else {
+    wobj.canBack(function (e) {
+      // by chb 暂时注释，在碰到类似popover之类的锚点的时候，需多次点击才能返回；
+      if (e.canBack) {
+        // utils.log('5+环境的后退 window.history.back')
+        // webview history back
+        window.history.back()
+
+        // 关闭登录层
+        setTimeout(() => {
+          msg.closeLogin()
+        }, 300)
+      } else { // webview close or hide
+        // fixed by fxy 此处不应该用opener判断，因为用户有可能自己close掉当前窗口的opener。这样的话。opener就为空了，导致不能执行close
+        // if (wobj.id === plus.runtime.appid) {
+        if (init.isHomePage) {
+          // 首页
+          // 首页不存在opener的情况下，后退实际上应该是退出应用；
+          // 首次按键，提示‘再按一次退出应用’
+          if (!__backFirst) {
+            __backFirst = new Date().getTime()
+            msg.toast('再按一次退出应用', 'bottom')
+            setTimeout(function () {
+              __backFirst = null
+            }, 2000)
+          } else {
+            if (new Date().getTime() - __backFirst < 2000) {
+              plus.runtime.quit()
+            }
+          }
+        } else { // 其他页面
+          if (wobj.preload) {
+            wobj.hide('auto')
+          } else {
+            // 只关闭当前页面自身
+            // 其打开的所有子页面 暂不处理
+            wobj.close()
+          }
+        }
+      }
+    })
+  }
+}
 
 /**
  * 菜单
@@ -156,4 +172,4 @@ ready.ready(() => {
       plus.key.addEventListener('menubutton', __menu, false)
     }
   }
-})
+}, false)

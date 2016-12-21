@@ -1,7 +1,7 @@
 /**
  * msg api 的前提 2选1
  * 1.调用了 c-msg 组件
- * 2.调用了 c-box 组件
+ * 2.调用了 c-app 组件
  * 这2个组件2选一
  */
 
@@ -10,6 +10,7 @@ import {
 } from './os'
 import * as init from './init'
 import * as utils from './utils'
+import * as back from './back'
 
 /**
  * toast
@@ -177,7 +178,8 @@ export function dialog(opts) {
  * @param {Bollon} value 显示或隐藏
  */
 export function loading(value) {
-  init.msgOpts.isLoading = value === true
+  init.msgOpts.isLoading = value !== false
+  return this
 }
 
 /**
@@ -186,5 +188,89 @@ export function loading(value) {
  * @param {Bollon} value 显示或隐藏
  */
 export function webError(value) {
-  init.boxOpts.isError = value === true
+  init.boxOpts.isError = value !== false
+  return this
+}
+
+/**
+ * showLogin
+ * @export
+ * @param {any} needReload 登录后是否需要刷新
+ * @param {any} loginCallBack 登录后回调,可以用于重试
+ * @returns
+ */
+export function showLogin(needReload, loginCallBack) {
+  if (init.msgOpts.isLogin !== true) {
+    init.msgOpts.isLogin = true
+    init.loginOpts.needReload = (needReload === true)
+    if (loginCallBack && utils.isFunction(loginCallBack)) {
+      init.loginOpts.loginCallBack = loginCallBack
+    } else {
+      init.loginOpts.loginCallBack = undefined
+    }
+  }
+  return this
+}
+
+/**
+ * closeLogin
+ * @export
+ */
+export function closeLogin() {
+  if (init.msgOpts.isLogin === true) {
+    // console.log('closeLogin')
+    init.msgOpts.isLogin = false
+    init.loginOpts.needReload = false
+    init.loginOpts.loginCallBack = undefined
+  }
+  return this
+}
+
+/**
+ * cancleLogin
+ * @export
+ */
+export function cancleLogin() {
+  if (init.msgOpts.isLogin === true) {
+    setTimeout(() => {
+      // reload 后退/关闭来源
+      if (init.loginOpts.needReload) {
+        // console.log('cancleLogin')
+        if (window.plus) {
+          back.h5Back()
+        } else {
+          if (window.history.length > 1) {
+            window.history.back()
+
+            // 关闭登录层
+            setTimeout(() => {
+              closeLogin()
+            }, 300)
+          } else {
+            // confirm
+            confirm({
+              title: '退出登录',
+              msg: '退出登录会关闭本页面,是否退出登录？',
+              confirmText: '不了，继续登录',
+              cancelText: '是的，我要退出',
+              onConfirmHide: () => {
+                // utils.log('confirm 关闭')
+              },
+              onConfirm: () => {
+                // utils.log('不了，继续登录')
+              },
+              onCancel: () => {
+                // utils.log('是的，我要退出')
+                window.close()
+              }
+            }, false)
+          }
+        }
+      } else {
+        // 关闭登录层
+        closeLogin()
+      }
+    }, 0)
+  }
+  return this
 }

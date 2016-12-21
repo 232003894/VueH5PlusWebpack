@@ -1,5 +1,5 @@
 <template>
-  <c-box :padding-top="46" :padding-bottom="55" v-ref:box>
+  <c-app :padding-top="46" :padding-bottom="55" v-ref:app>
     <!--header slot-->
     <x-header slot="header" :left-options="{backText:'后退',showBack:true}">设置</x-header>
     <!--default slot-->
@@ -32,19 +32,19 @@
 
       <img class="logo" src="../../../img/logo.png">
     </div>
-  </c-box>
+  </c-app>
 </template>
 
 <script>
   /** vux components*/
-  import Group from 'vux-components/group'
-  import Tip from 'vux-components/tip'
-  import Cell from 'vux-components/cell'
-  import Switch from 'vux-components/Switch'
-  import Icon from 'vux-components/icon'
-  import XHeader from 'vux-components/x-header'
+  import Group from 'vuxs/group'
+  import Tip from 'vuxs/tip'
+  import Cell from 'vuxs/cell'
+  import Switch from 'vuxs/Switch'
+  import Icon from 'vuxs/icon'
+  import XHeader from 'vuxs/x-header'
   /** customer components*/
-  import cBox from 'components/c-box'
+  import cApp from 'generals/c-app'
   /** $api*/
   import * as $api from 'api'
   /** $app*/
@@ -52,7 +52,7 @@
 
   export default {
     components: {
-      cBox,
+      cApp,
       Group,
       Tip,
       Switch,
@@ -60,15 +60,10 @@
       XHeader,
       Icon
     },
-    init() {
-      // $api.loading(true)
-    },
     ready() {
       // $api.log('app ready')
       var vm = this
-
       $api.onload(() => {})
-
       $api.ready(() => {
         // $api.log('plus ready plus=' + !!window.plus)
       })
@@ -81,14 +76,11 @@
     },
     methods: {
       change(value) {
+        // $api.openWindow('index')
+        $api.goHome()
         if (window.plus) {
-          $api.showWindow(plus.webview.getWebviewById(plus.runtime.appid))
+          // $api.showWindow(plus.webview.getWebviewById(plus.runtime.appid))
         }
-        // $api.fireAll('test', {
-        //   a: 1,
-        //   b: 3,
-        //   c: [1, 2, 3]
-        // })
       }
     }
   }
@@ -101,6 +93,6 @@
   })
 </script>
 
-<style lang="less">
+<style scoped>
 
 </style>

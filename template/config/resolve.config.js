@@ -7,14 +7,16 @@ module.exports = {
   // 模块别名的配置，为了使用方便，一般来说所有模块都是要配置一下别名的
   alias: {
     /* vux 组件引用路径  */
-    // 'vux-components': 'vux/src/components',
-    'vux-components': 'vux/dist/components',
+    // 'vux/dist/components-commonjs'  'vux/src/components'
+    'vuxs': 'vux/dist/components-commonjs',
     /* 项目代码根路径 */
     'src': dirVars.srcRootDir,
     /* 代码-静态资源路径 样式(less css) 图片 字体 等*/
     'assets': dirVars.assetsDir,
-    /* 项目自身组件路径 */
-    'components': dirVars.componentsDir,
+    /* 项目通用组件组件路径 */
+    'generals': dirVars.generalsComponentsDir,
+    /* 项目业务组件组件路径 */
+    'business': dirVars.businessComponentsDir,
     /* config */
     /* configModule */
     'configVue': path.resolve(dirVars.configDir, 'vue.config'),

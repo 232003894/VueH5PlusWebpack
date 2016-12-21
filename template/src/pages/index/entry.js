@@ -1,10 +1,11 @@
 import Vue from 'vue'
-import VueTouch from 'vue-touch'
-Vue.use(VueTouch)
+import FastClick from 'fastclick'
+FastClick.attach(document.body)
+
 import Router from 'vue-router'
 Vue.use(Router)
-
 import 'configVue'
+
 import App from './app'
 import Demo from './demo'
 import Main from './main'
@@ -48,16 +49,22 @@ router.beforeEach(({
   from,
   next
 }) => {
-  currentPage = to.path
-  if (to.path === '/') {
+  currentPage = to.name
+  if (to.name === 'Main') {
     commit('Title', '主页')
     commit('ShowBack', false)
-  } else if (to.path === '/demo') {
+    commit('headerHeight', 46)
+    commit('bottomHeight', 55)
+  } else if (to.name === 'Demo') {
     commit('Title', '演示')
     commit('ShowBack', true)
-  } else if (to.path === '/setting') {
+    commit('headerHeight', 46)
+    commit('bottomHeight', 55)
+  } else if (to.name === 'Setting') {
     commit('Title', '设置')
     commit('ShowBack', true)
+    commit('headerHeight', 46)
+    commit('bottomHeight', 55)
   }
   commit('UPDATE_LOADING', true)
   const toIndex = history.getItem(to.path)
@@ -97,12 +104,15 @@ router.afterEach((transition) => {
 sync(store, router)
 router.map({
   '/': {
+    name: 'Main',
     component: Main
   },
   '/setting': {
+    name: 'Setting',
     component: Setting
   },
   '/demo': {
+    name: 'Demo',
     component: Demo
   }
 })

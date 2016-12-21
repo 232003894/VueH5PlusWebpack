@@ -1,5 +1,5 @@
 <template>
-  <c-box :padding-top="46" :padding-bottom="55" v-ref:box>
+  <c-app :padding-top="46" :padding-bottom="55" v-ref:app>
     <!--header slot-->
     <x-header slot="header" :left-options="{showBack:false}">主页</x-header>
     <!--default slot-->
@@ -31,23 +31,21 @@
         <p slot="content" class="card-padding">
           这里是内容
           <br/>
-          <x-button :mini="true" type="warn" v-touch:tap="toast">toast</x-button>
-          <x-button :mini="true" type="warn" v-touch:tap="alert">alert</x-button>
-          <x-button :mini="true" type="warn" v-touch:tap="confirm">confirm</x-button>
-          <x-button :mini="true" type="warn" v-touch:tap="dialog">
+          <x-button :mini="true" type="warn" @click="toast">toast</x-button>
+          <x-button :mini="true" type="warn" @click="alert">alert</x-button>
+          <x-button :mini="true" type="warn" @click="confirm">confirm</x-button>
+          <x-button :mini="true" type="warn" @click="dialog">
             dialog
           </x-button>
-          <x-button v-touch:tap="settingAction" type="primary" text="设&nbsp;&nbsp;置"></x-button>
+          <x-button @click="settingAction" type="primary" text="设&nbsp;&nbsp;置"></x-button>
         </p>
       </card>
       <divider>简单头部</divider>
       <card :header="{title:'图标'}">
         <p slot="content" class="card-padding">
-          <c-icon type="close">
-            <span slot="before">前</span>后
-          </c-icon>
+          <c-icon type="home">后</c-icon>
           <br/>
-          <c-icon>&#xe613;</c-icon>
+          <c-icon>&#xe73e;</c-icon>
         </p>
       </card>
       <divider>使用头部slot和内容slot</divider>
@@ -76,21 +74,21 @@
         <span slot="label">设置</span>
       </tabbar-item>
     </tabbar>
-  </c-box>
+  </c-app>
 </template>
 <script>
   /** vux components*/
-  import Tip from 'vux-components/tip'
-  import Divider from 'vux-components/Divider'
-  import Card from 'vux-components/card'
-  import XButton from 'vux-components/x-button'
-  import Tabbar from 'vux-components/tabbar'
-  import TabbarItem from 'vux-components/tabbar-item'
-  import Icon from 'vux-components/icon'
-  import XHeader from 'vux-components/x-header'
+  import Tip from 'vuxs/tip'
+  import Divider from 'vuxs/Divider'
+  import Card from 'vuxs/card'
+  import XButton from 'vuxs/x-button'
+  import Tabbar from 'vuxs/tabbar'
+  import TabbarItem from 'vuxs/tabbar-item'
+  import Icon from 'vuxs/icon'
+  import XHeader from 'vuxs/x-header'
   /** customer components*/
-  import cBox from 'components/c-box'
-  import cIcon from 'components/c-Icon'
+  import cApp from 'generals/c-app'
+  import cIcon from 'generals/c-Icon'
   /** $api*/
   import * as $api from 'api'
   /** $app*/
@@ -98,7 +96,7 @@
 
   export default {
     components: {
-      cBox,
+      cApp,
       cIcon,
       Tip,
       Card,
@@ -205,7 +203,7 @@
   }
 </script>
 
-<style scoped lang="less">
+<style scoped>
   .card-demo-flex {
     display: flex;
   }

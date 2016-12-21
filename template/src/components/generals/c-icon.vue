@@ -1,6 +1,5 @@
 <template>
-  <slot name='before'></slot>
-  <i :class="[className]">
+  <i :class="[className]" :style="{ color: color, fontSize: size  }">
     <slot></slot>
   </i>
 </template>
@@ -9,6 +8,14 @@
   export default {
     props: {
       type: {
+        type: String,
+        default: ''
+      },
+      size: {
+        type: String,
+        default: ''
+      },
+      color: {
         type: String,
         default: ''
       }
