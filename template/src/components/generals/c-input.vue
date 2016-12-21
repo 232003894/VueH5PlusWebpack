@@ -13,7 +13,7 @@
     <div class="weui_cell_ft">
       <icon type="clear" v-show="showClear && value && !readonly" @click="clear"></icon>
       <c-icon type="eyeon" v-show="showPassword && !readonly" @click="pwd" :color="pwdIconColor"></c-icon>
-      <icon class="vux-input-icon-warn" type="warn" title="{{!valid ? firstError : ''}}" v-show="!equalWith && ((touched && !valid && firstError) || (forceShowError && !valid && firstError))"></icon>
+      <icon class="vux-input-icon-warn" type="warn" :title="!valid?firstError:''" v-show="!equalWith && ((touched && !valid && firstError) || (forceShowError && !valid && firstError))"></icon>
       <icon class="vux-input-icon-warn" type="warn" v-show="hasLengthEqual && dirty && equalWith && !valid"></icon>
       <icon type="success" v-show="equalWith && equalWith===value && valid"></icon>
       <slot name="right"></slot>

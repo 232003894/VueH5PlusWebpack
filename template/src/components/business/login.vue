@@ -51,8 +51,10 @@
         $api.back()
       },
       login() {
-        // todo:登录的方法
-        // 登录成功
+        // 登录的方法
+        $app.useLogin()
+
+        // 登录成功的全局处理
         this.success()
       },
       success() {
