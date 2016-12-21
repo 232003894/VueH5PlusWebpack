@@ -5,7 +5,7 @@
     <!--default slot-->
     <div>
       <group>
-        <c-input title="账户" name="username" placeholder="请输入用户名或手机号"></c-input>
+        <c-input title="账户" name="username" inline-desc="123" placeholder="请输入用户名或手机号"></c-input>
         <c-input title="密码" name="username" type="password" placeholder="请输入密码"></c-input>
       </group>
       <group>

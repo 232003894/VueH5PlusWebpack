@@ -13,7 +13,7 @@ module.exports = {
   {{/if_eq}}
   // required to lint *.vue files
   plugins: [
-    'html' 
+    'html'
   ],
   "globals": {
     "plus": true,
@@ -23,10 +23,10 @@ module.exports = {
     "screen": true
   },
   // add your custom rules here
-  'rules': { 
+  'rules': {
     {{#if_eq lintConfig "standard"}}
     "comma-spacing": 0,
-     "no-unused-vars": ["off", {
+      "no-unused-vars": ["off", {
       "vars": "local",
       "args": "none"
     }],

@@ -1,8 +1,10 @@
 <template>
   <div class="weui_cell" :class="{'weui_cell_warn': !valid}">
     <div class="weui_cell_hd">
-      <label class="weui_label" :style="{width: $parent.labelWidth || (labelWidth + 'em'), textAlign: $parent.labelAlign, marginRight: $parent.labelMarginRight}" v-if="title">{{title}}</label>
-      <inline-desc v-if="inlineDesc">{{inlineDesc}}</inline-desc>
+      <label class="weui_label" :style="{width: $parent.labelWidth || (labelWidth + 'em'), textAlign: $parent.labelAlign, marginRight: $parent.labelMarginRight}" v-if="title" v-text="title"></label>
+      <inline-desc v-if="inlineDesc">
+        <span v-text="inlineDesc"></span>
+      </inline-desc>
     </div>
     <div class="weui_cell_bd weui_cell_primary">
       <input class="weui_input" :autocomplete="autocomplete" :autocapitalize="autocapitalize" :autocorrect="autocorrect" :spellcheck="spellcheck" :style="inputStyle" :type="type" :name="name" :pattern="pattern" :placeholder="placeholder" :readonly="readonly"
