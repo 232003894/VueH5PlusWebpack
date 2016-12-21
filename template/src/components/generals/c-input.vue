@@ -189,7 +189,7 @@
 
         if (this.min) {
           if (this.value.length < this.min) {
-            // this.errors.min = this.$interpolate('最少应该输入{{min}}个字符哦')
+            // this.errors.min = this.$interpolate('最少应该输入{\{min}}个字符哦')
             this.errors.min = '最少应该输入' + this.min + '个字符哦'
             this.valid = false
             this.getError()
@@ -201,7 +201,7 @@
 
         if (this.max) {
           if (this.value.length > this.max) {
-            // this.errors.max = this.$interpolate('最多可以输入{{max}}个字符哦')
+            // this.errors.max = this.$interpolate('最多可以输入{\{max}}个字符哦')
             this.errors.max = '最多可以输入' + this.max + '个字符哦'
             this.valid = false
             this.forceShowError = true
