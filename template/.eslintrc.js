@@ -26,7 +26,7 @@ module.exports = {
   'rules': {
     {{#if_eq lintConfig "standard"}}
     "comma-spacing": 0,
-      "no-unused-vars": ["off", {
+    "no-unused-vars": ["off", {
       "vars": "local",
       "args": "none"
     }],
