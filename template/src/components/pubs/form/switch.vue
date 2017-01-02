@@ -17,7 +17,7 @@
 
 <script>
   /** customer components*/
-  import cIcon from 'generals/c-Icon'
+  import cIcon from 'pubs/c-Icon'
   import InlineDesc from 'vuxs/inline-desc'
 
   export default {

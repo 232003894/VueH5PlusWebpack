@@ -40,7 +40,7 @@
   import value2name from 'vux/src/filters/value2name'
   import uuidMixin from 'vux/src/libs/mixin_uuid'
   /** customer components*/
-  import cIcon from 'generals/c-Icon'
+  import cIcon from 'pubs/c-Icon'
 
   const getObject = function(obj) {
     return JSON.parse(JSON.stringify(obj))

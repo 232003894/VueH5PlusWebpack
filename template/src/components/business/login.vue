@@ -26,11 +26,11 @@
   /** vux components*/
   import XButton from 'vuxs/x-button'
   /** customer components*/
-  import cBox from 'generals/c-box'
-  import CHeader from 'generals/c-header'
-  import cIcon from 'generals/c-Icon'
-  import cGroup from 'generals/c-group'
-  import Field from 'generals/form/field'
+  import cBox from 'pubs/c-box'
+  import CHeader from 'pubs/c-header'
+  import cIcon from 'pubs/c-Icon'
+  import cGroup from 'pubs/c-group'
+  import Field from 'pubs/form/field'
 
   export default {
     components: {

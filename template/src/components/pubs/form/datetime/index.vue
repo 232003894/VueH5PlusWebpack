@@ -23,7 +23,7 @@
   import Group from 'vuxs/group'
   import InlineDesc from 'vuxs/inline-desc'
   /** customer components*/
-  import cIcon from 'generals/c-Icon'
+  import cIcon from 'pubs/c-Icon'
 
   export default {
     components: {

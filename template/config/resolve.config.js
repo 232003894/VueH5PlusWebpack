@@ -14,16 +14,17 @@ module.exports = {
     /* 代码-静态资源路径 样式(less css) 图片 字体 等*/
     'assets': dirVars.assetsDir,
     /* 项目通用组件组件路径 */
-    'generals': dirVars.generalsComponentsDir,
+    'pubs': dirVars.pubsComponentsDir,
     /* 项目业务组件组件路径 */
     'business': dirVars.businessComponentsDir,
     /* config */
-    'config': path.resolve(dirVars.configDir, ''),
+    'config': path.resolve(dirVars.configDir, '')
+    
     /* configModule */
-    'configVue': path.resolve(dirVars.configDir, 'vue.config'),
-    'configModule': path.resolve(dirVars.configDir, 'common.config'),
-    'api': path.resolve(dirVars.libsDir, 'api'),
-    'app': path.resolve(dirVars.logicDir, 'app')
+    // 'configVue': path.resolve(dirVars.configDir, 'vue.config'),
+    // 'configModule': path.resolve(dirVars.configDir, 'common.config'),
+    // 'api': path.resolve(dirVars.libsDir, 'api'),
+    // 'app': path.resolve(dirVars.logicDir, 'app')
 
     /* logic */
     // cm: path.resolve( dirVars.logicDir, 'common.module' ),

@@ -66,7 +66,7 @@
   import Card from 'vuxs/card'
   import XButton from 'vuxs/x-button'
   /** customer components*/
-  import cIcon from 'generals/c-Icon'
+  import cIcon from 'pubs/c-Icon'
 
   export default {
     components: {

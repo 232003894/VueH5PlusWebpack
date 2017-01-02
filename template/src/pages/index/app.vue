@@ -30,10 +30,10 @@
   /** vux components*/
   import Tabbar from 'vuxs/tabbar'
   /** customer components*/
-  import cBox from 'generals/c-box'
-  import CHeader from 'generals/c-header'
-  import cIcon from 'generals/c-Icon'
-  import cTabbarItem from 'generals/c-tabbar-item'
+  import cBox from 'pubs/c-box'
+  import CHeader from 'pubs/c-header'
+  import cIcon from 'pubs/c-Icon'
+  import cTabbarItem from 'pubs/c-tabbar-item'
 
   import store from './store'
 

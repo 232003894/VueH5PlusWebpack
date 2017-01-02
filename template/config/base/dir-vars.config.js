@@ -21,7 +21,7 @@ moduleExports.srcRootDir = path.resolve(moduleExports.staticRootDir, './src')
 moduleExports.pagesDir = path.resolve(moduleExports.srcRootDir, './pages')
 
 // 存放自定义的通用VUE组件
-moduleExports.generalsComponentsDir = path.resolve(moduleExports.srcRootDir, './components/generals')
+moduleExports.pubsComponentsDir = path.resolve(moduleExports.srcRootDir, './components/pubs')
 
 // 存放自定义的业务VUE组件
 moduleExports.businessComponentsDir = path.resolve(moduleExports.srcRootDir, './components/business')

@@ -25,7 +25,7 @@
 
 <script>
   /** customer components*/
-  import cIcon from 'generals/c-Icon'
+  import cIcon from 'pubs/c-Icon'
   export default {
     props: {
       showCounter: {

@@ -5,7 +5,7 @@ import Vuerify from '../libs/va'
 // http请求统一拦截
 import httpInit from './vue.http.config'
 // 全局弹出消息
-import * as msg from 'generals/msg'
+import * as msg from 'pubs/msg'
 
 export default function (vue) {
   vue.use(VueResource)

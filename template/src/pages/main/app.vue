@@ -14,9 +14,9 @@
   /** vux components*/
   import XButton from 'vuxs/x-button'
   /** customer components*/
-  import cBox from 'generals/c-box'
-  import CHeader from 'generals/c-header'
-  import cGroup from 'generals/c-group'
+  import cBox from 'pubs/c-box'
+  import CHeader from 'pubs/c-header'
+  import cGroup from 'pubs/c-group'
 
   export default {
     components: {

@@ -29,7 +29,7 @@
   import Cell from 'vuxs/cell'
   import props from 'vux/src/components/inline-calendar/props'
   /** customer components*/
-  import cIcon from 'generals/c-Icon'
+  import cIcon from 'pubs/c-Icon'
 
   const Props = props()
   Props.title = {
