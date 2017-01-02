@@ -17,10 +17,6 @@
 </template>
 
 <script>
-  import {
-    back
-  }
-  from '../../libs/api/back'
   export default {
     props: {
       leftOptions: {
@@ -45,7 +41,7 @@
     },
     methods: {
       onClickBack() {
-        back()
+        api.back()
       }
     }
   }

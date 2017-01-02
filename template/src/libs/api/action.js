@@ -78,3 +78,28 @@ export function removeAction(type, hook) {
 
   return hooks[type]
 }
+
+/**
+ * 执行指定类型的action
+ * @export
+ * @param {String} type action类型
+ * @param {Function} callback 回调
+ */
+
+/**
+ * 是否与小于指定index 的action
+ * @export
+ * @param {any} type action类型
+ * @param {any} index 指定index
+ */
+export function hasIndex(type, index) {
+  if (type.trim() === '') {
+    return false
+  }
+  if (!hooks[type]) {
+    return false
+  }
+  return hooks[type].some(function (hook) {
+    return hook.index < index
+  })
+}

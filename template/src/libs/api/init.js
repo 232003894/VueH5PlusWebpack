@@ -1,4 +1,5 @@
 import * as utils from './utils'
+import * as events from './event'
 import * as act from './action'
 import * as ready from './ready'
 import {
@@ -9,11 +10,23 @@ import {
   pages
 }
 from './pages'
-import * as msg from './msg'
 
-export var msgOpts = {}
-export var boxOpts = {}
-export var loginOpts = {}
+var boxOpts = {}
+
+export function initBoxOpts(obj) {
+  boxOpts = obj
+  return this
+}
+
+/**
+ * show error
+ * @export
+ * @param {Bollon} value 显示或隐藏
+ */
+export function webError(value) {
+  boxOpts.isError = value !== false
+  return this
+}
 
 export var global = {
   swipeBack: false,
@@ -121,95 +134,6 @@ export var currentWebview = null
  * 是否主页
  */
 export var isHomePage = false
-
-ready.ready(function () {
-  if (window.plus) {
-    currentWebview = plus.webview.currentWebview()
-    isHomePage = currentWebview === plus.webview.getWebviewById(plus.runtime.appid)
-    currentWebview.setStyle({
-      // 去掉页面滚动条
-      scrollIndicator: 'none'
-    })
-  }
-}, false)
-
-var receive = function (eventType, eventData) {
-  if (eventType) {
-    try {
-      if (eventData) {
-        eventData = JSON.parse(eventData)
-      }
-    } catch (e) {}
-    document.dispatchEvent(new CustomEvent(eventType, {
-      detail: eventData,
-      bubbles: true,
-      cancelable: true
-    }))
-  }
-}
-
-/**
- * 单页面事件通知 html和5+ 都可以用
- * @export
- * @param {Object} webviewOrWindow webview 或者 window
- * @param {any} eventType
- * @param {Object} eventData
- */
-export function fire(webviewOrWindow, eventType, eventData) {
-  if (webviewOrWindow) {
-    if (eventData !== '') {
-      eventData = eventData || {}
-
-      // utils.log(JSON.stringify(eventData))
-      if (utils.isPlainObject(eventData)) {
-        eventData = JSON.stringify(eventData || {}).replace(/'/g, '\\u0027').replace(/\\/g, '\\u005c')
-      }
-      // utils.log(eventData)
-    }
-    var _js = '(' + receive.toString().replace('/function ?+(/', 'function') + ')("' + eventType + '",\'' + eventData + '\')'
-    if (utils.isWindow(webviewOrWindow)) {
-      // Window
-      webviewOrWindow.eval(_js)
-    } else {
-      // webview
-      webviewOrWindow.evalJS(_js)
-    }
-  }
-}
-
-/**
- * 事件通知 本窗体和所有子窗体  html(不通知子窗体)和5+都可用
- * @export
- * @param {any} webview
- * @param {any} eventType
- * @param {Object} eventData
- */
-export function fireTree(webview, eventType, eventData) {
-  fire(webview, eventType, eventData)
-  if (webview.children) {
-    var list = webview.children()
-    for (var i = 0; i < list.length; i++) {
-      fire(list[i], eventType, eventData)
-    }
-  }
-}
-
-/**
- * 事件通知 所有窗体  html(只通知本窗体)和5+都可用
- * @export
- * @param {any} eventType
- * @param {Object} eventData
- */
-export function fireAll(eventType, eventData) {
-  if (window.plus) {
-    var list = plus.webview.all()
-    for (var i = list.length - 1; i >= 0; i--) {
-      fire(list[i], eventType, eventData)
-    }
-  } else {
-    fire(window, eventType, eventData)
-  }
-}
 
 /**
  * 创建Webview窗口，用于加载新的HTML页面，可通过styles设置Webview窗口的样式，创建完成后需要调用show方法才能将Webview窗口显示出来。
@@ -325,7 +249,7 @@ export function openWindow(url, id, opts) {
 
   var webview = null
   if (window.plus) {
-    msg.loading(true)
+    window.$loading && window.$loading(true)
 
     webview = plus.webview.getWebviewById(id)
     if (webview) { // 已存在
@@ -355,12 +279,12 @@ export function openWindow(url, id, opts) {
  */
 export function showWindow(webview, showLoading) {
   if (showLoading !== false) {
-    msg.loading(true)
+    window.$loading && window.$loading(true)
   }
+  events.fireTree(webview, 'manualshow')
   setTimeout(() => {
-    msg.loading(false)
+    window.$loading && window.$loading(false)
   }, 500)
-  fireTree(webview, 'manualshow')
 }
 
 /**
@@ -369,7 +293,7 @@ export function showWindow(webview, showLoading) {
  */
 export function goHome() {
   if (window.plus) {
-    msg.loading(true)
+    window.$loading && window.$loading(true)
     var webview = plus.webview.getLaunchWebview()
     var top = plus.webview.getTopWebview()
     var _all = plus.webview.all()
@@ -379,7 +303,7 @@ export function goHome() {
       }
     }, this)
     setTimeout(() => {
-      msg.loading(false)
+      window.$loading && window.$loading(false)
       setTimeout(() => {
         top.close(defaultShow.aniShow.replace('in', 'out'), defaultShow.duration + 100)
       }, 100)

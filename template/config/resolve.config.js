@@ -18,6 +18,7 @@ module.exports = {
     /* 项目业务组件组件路径 */
     'business': dirVars.businessComponentsDir,
     /* config */
+    'config': path.resolve(dirVars.configDir, ''),
     /* configModule */
     'configVue': path.resolve(dirVars.configDir, 'vue.config'),
     'configModule': path.resolve(dirVars.configDir, 'common.config'),

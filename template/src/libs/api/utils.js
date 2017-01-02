@@ -81,6 +81,26 @@ export function getType(obj) {
 }
 
 /**
+ * 判定是否为字符串
+ * @export
+ * @param {any} value
+ * @returns {boolean} 是否为字符串
+ */
+export function isString(value) {
+  return getType(value) === 'string'
+}
+
+/**
+ * 判定是否为正则
+ * @export
+ * @param {any} value
+ * @returns {boolean} 是否为正则
+ */
+export function isRegExp(value) {
+  return getType(value) === 'regexp'
+}
+
+/**
  * 判定是否为一个函数
  * @export
  * @param {any} value
@@ -88,6 +108,26 @@ export function getType(obj) {
  */
 export function isFunction(value) {
   return getType(value) === 'function'
+}
+
+/**
+ * 判定是否为日期
+ * @export
+ * @param {any} value
+ * @returns {boolean} 是否为日期
+ */
+export function isDate(value) {
+  return getType(value) === 'date'
+}
+
+/**
+ * 判定是否为数组
+ * @export
+ * @param {any} value
+ * @returns {boolean} 是否为数组
+ */
+export function isArray(value) {
+  return getType(value) === 'array'
 }
 
 /**
@@ -329,4 +369,21 @@ export function log(msg) {
   var str = '[' + _d.toLocaleTimeString() + ' ' + _d.getMilliseconds() + ']' + br + ' '
   str += msg
   console.log(str)
+}
+
+var rformat = /\\?##([^{}]+)##/gm
+
+/**
+ * 模板替换输出
+ * @export
+ * @param {any} tpl 示例:'最少输入##minlength##个字'
+ * @param {any} data  示例:{'minlength': 12}
+ * @returns
+ */
+export function tplRelpace(tpl, data) {
+  data = data || {}
+  tpl = tpl || ''
+  return tpl.replace(rformat, function (_, name) {
+    return data[name] == null ? '' : data[name]
+  })
 }

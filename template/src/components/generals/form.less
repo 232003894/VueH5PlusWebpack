@@ -1,0 +1,104 @@
+@import './var';
+.weui_cell {
+  padding-bottom: 5px;
+}
+
+.weui_cell:before {
+  border-top: none;
+}
+
+.text-field-line {
+  margin: -1px @marginLR 0;
+  height: 1px;
+  border: none;
+  opacity: 0.3;
+  left: 0;
+  right: 0;
+  position: absolute;
+  background-color: @color;
+}
+
+.focus {
+  margin: -2px @marginLR 0;
+  height: 2px;
+  border: none;
+  opacity: 0.9;
+  left: 0;
+  right: 0;
+  position: absolute;
+  transform: scaleX(0);
+  transition: transform .45s @easeOutFunction , background-color 1s @easeOutFunction;
+}
+
+.active .focus {
+  transform: scaleX(1);
+  background-color: @activeColor;
+}
+
+.warn .focus {
+  transform: scaleX(1);
+  background-color: @warnColor;
+}
+
+.error {
+  opacity: 0.8;
+  font-size: 14px;
+  line-height: 14px;
+  height: 0;
+  max-height: 14px;
+  margin: 3px @marginLR 1px;
+  text-align: right;
+  overflow: hidden;
+  left: 0;
+  right: 0;
+  transition: color 1s @easeOutFunction, height .25s @easeOutFunction;
+}
+
+.active .error {
+  height: 14px;
+  color: @activeColor;
+}
+
+.warn .error {
+  height: 14px;
+  color: @warnColor;
+}
+
+.weui_label {
+  font-weight: 400;
+  color: @color;
+  transition: color 1s @easeOutFunction;
+}
+
+.active .weui_label {
+  color: @activeColor;
+}
+
+.warn .weui_label {
+  color: @warnColor;
+}
+
+.vux-popup-picker-value {
+  color: @placeholderColor;
+  transition: color 1s @easeOutFunction;
+}
+
+.active .vux-popup-picker-value {
+  color: @activeColor;
+}
+
+.warn .vux-popup-picker-value {
+  color: @warnColor;
+}
+
+.weui_cell_ft {
+  color: #888
+}
+
+.weui_textarea {
+  background-color: transparent;
+}
+
+.weui_cell_ft.with_arrow:after {
+  right: 3px;
+}

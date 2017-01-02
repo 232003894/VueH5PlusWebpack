@@ -1,10 +1,8 @@
 import Vue from 'vue'
-import FastClick from 'fastclick'
-FastClick.attach(document.body)
+import config from 'configVue'
+config(Vue)
 
-import 'configVue'
 import App from './app'
-
 /* eslint-disable no-new */
 new Vue({
   el: 'body',

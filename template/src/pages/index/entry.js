@@ -1,10 +1,9 @@
 import Vue from 'vue'
-import FastClick from 'fastclick'
-FastClick.attach(document.body)
-
 import Router from 'vue-router'
 Vue.use(Router)
-import 'configVue'
+import store from './store'
+import config from 'config'
+config(Vue)
 
 import App from './app'
 import Demo from './demo'
@@ -14,8 +13,9 @@ import Setting from './setting'
 import * as init from '../../libs/api/init'
 
 const router = new Router({
-  transitionOnLoad: true
-    // saveScrollPosition: true
+  // history: true,
+  // saveScrollPosition: true,
+  // transitionOnLoad: false
 })
 
 /**
@@ -24,8 +24,6 @@ const router = new Router({
 import {
   sync
 } from 'vuex-router-sync'
-
-import store from './store'
 
 let history = window.sessionStorage
 history.clear()
@@ -97,8 +95,7 @@ router.afterEach((transition) => {
   setTimeout(function () {
     window.addEventListener('scroll', saveDemoScrollTop, false)
   }, 200)
-
-  init.boxOpts.isError = false
+  api.webError(false)
 })
 
 sync(store, router)

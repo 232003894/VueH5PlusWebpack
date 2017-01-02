@@ -1,7 +1,5 @@
 <template>
-  <i :class="[className]" :style="{ color: color, fontSize: size  }">
-    <slot></slot>
-  </i>
+  <i :class="[className]" :style="{ color: color, fontSize: size  }"><slot></slot></i>
 </template>
 
 <script>
@@ -24,7 +22,7 @@
       className() {
         if (this.type !== '') {
           return `iconfont icon-${this.type}`
-        } else if (this.type === '' && this.code !== '') {
+        } else {
           return 'iconfont'
         }
       }

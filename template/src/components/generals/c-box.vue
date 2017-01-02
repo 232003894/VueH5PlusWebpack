@@ -21,8 +21,6 @@
   </div>
 </template>
 <script>
-  import * as init from '../../libs/api/init'
-  import * as re from '../../libs/api/ready'
   /** vux components*/
   import XButton from 'vuxs/x-button'
   /** customer components*/
@@ -44,7 +42,8 @@
     },
     ready() {
       var self = this
-      init.boxOpts = self.$data
+      api.initBoxOpts(self.$data)
+        // api.webError(self.$data.isError)
     },
     computed: {
       errorPaddingTop: function() {
@@ -74,7 +73,7 @@
     },
     methods: {
       refresh() {
-        re.refresh()
+        api.refresh()
       }
     }
   }
@@ -99,6 +98,7 @@
   .ui-error {
     text-align: center;
     padding-top: 35%;
+    padding-top: calc((100vh - 250px) * 0.5);
   }
   
   .ui-error h4 {

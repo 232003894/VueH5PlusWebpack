@@ -8,4 +8,6 @@ if (IS_PRODUCTION) {
 } else {
   moduleExports.API_ROOT = 'http://localhost/mock/'
 }
-module.exports = moduleExports
+// module.exports = moduleExports
+
+export default moduleExports

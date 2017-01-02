@@ -1,9 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-/** $api*/
-import * as $api from 'api'
-
 Vue.use(Vuex)
 
 const state = {
@@ -30,7 +27,7 @@ export default new Vuex.Store({
       state.bottomHeight = bottomHeight
     },
     UPDATE_LOADING(state, status) {
-      $api.loading(status)
+      window.$loading && window.$loading(status)
       state.isLoading = status
     },
     UPDATE_DIRECTION(state, direction) {

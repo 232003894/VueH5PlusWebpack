@@ -1,8 +1,6 @@
 import Vue from 'vue'
-import FastClick from 'fastclick'
-FastClick.attach(document.body)
-import 'configVue'
-
+import config from 'config'
+config(Vue)
 import App from './app'
 /* eslint-disable no-new */
 new Vue({

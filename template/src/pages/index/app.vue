@@ -1,6 +1,6 @@
 <template>
   <div>
-    <c-app :padding-top="headerHeight" :padding-bottom="bottomHeight" v-ref:app>
+    <c-box :padding-top="headerHeight" :padding-bottom="bottomHeight" v-ref:app>
       <!--header slot-->
       <c-header slot="header" :transition="headerTransition" :left-options="{showBack:showBack}" :title="title"></c-header>
       <!--default slot-->
@@ -13,8 +13,8 @@
           <span slot="label">主页</span>
         </c-tabbar-item>
         <c-tabbar-item badge="9" v-link="{path:'/demo'}" :selected="route.name === 'Demo'">
-          <c-icon type="demoon" slot="iconon" size="28px"></c-icon>
-          <c-icon type="demo" slot="icon" size="24px"></c-icon>
+          <c-icon type="dianpufill" slot="iconon" size="28px"></c-icon>
+          <c-icon type="dianpu" slot="icon" size="24px"></c-icon>
           <span slot="label">演示</span>
         </c-tabbar-item>
         <c-tabbar-item show-dot v-link="{path:'/setting'}" :selected="route.name === 'Setting'">
@@ -23,26 +23,23 @@
           <span slot="label">设置</span>
         </c-tabbar-item>
       </tabbar>
-    </c-app>
+    </c-box>
   </div>
 </template>
 <script>
   /** vux components*/
   import Tabbar from 'vuxs/tabbar'
   /** customer components*/
-  import cApp from 'generals/c-app'
+  import cBox from 'generals/c-box'
   import CHeader from 'generals/c-header'
   import cIcon from 'generals/c-Icon'
   import cTabbarItem from 'generals/c-tabbar-item'
-  /** $api*/
-  import * as $api from 'api'
-  /** $app*/
-  import * as $app from 'app'
+
   import store from './store'
 
   export default {
     components: {
-      cApp,
+      cBox,
       cIcon,
       CHeader,
       Tabbar,
@@ -62,11 +59,16 @@
     },
     ready() {
       var vm = this
+      api.ready(() => {
+        setTimeout(() => {
+          api.androidKeys()
+        }, 3000)
+      }, false)
       document.addEventListener('test', function(e) {
         if (vm.route.name === 'Setting') {
-          $api.log('main-setting:' + JSON.stringify(e.detail, null, 4))
+          api.log('main-setting:' + JSON.stringify(e.detail, null, 4))
         } else if (vm.route.name === 'Demo') {
-          $api.log('main-demo:' + JSON.stringify(e.detail, null, 4))
+          api.log('main-demo:' + JSON.stringify(e.detail, null, 4))
         }
       })
     },
@@ -81,9 +83,9 @@
     methods: {}
   }
 
-  $api.init({
+  api.init({
     beforeback() {
-      $api.log('main-后退前的业务处理')
+      api.log('main-后退前的业务处理')
       return true
     }
   })

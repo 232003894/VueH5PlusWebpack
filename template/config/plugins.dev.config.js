@@ -40,7 +40,7 @@ pageArr.forEach((page) => {
       inject: true // js插入位置
     }
     if (_page in entries) {
-      conf.chunks = ['vendors', _page]
+      conf.chunks = ['base', _page]
         //是否加hash参数: 例如 *.js?fdlfjdlfjdl245
       conf.hash = true;
     }

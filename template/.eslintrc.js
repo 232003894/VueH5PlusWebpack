@@ -20,7 +20,9 @@ module.exports = {
     "alert": true,
     "CustomEvent": true,
     "localStorage": true,
-    "screen": true
+    "screen": true,
+    "api": true,
+    "app": true
   },
   // add your custom rules here
   'rules': {

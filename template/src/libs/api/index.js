@@ -3,7 +3,11 @@ import Style from 'assets/css.vue' // eslint-disable-line
 // 工具
 export {
   getType,
+  isString,
+  isRegExp,
   isFunction,
+  isDate,
+  isArray,
   isWindow,
   isObject,
   isPlainObject,
@@ -12,40 +16,44 @@ export {
   trigger,
   htmlToTxt,
   equals,
-  log
+  log,
+  tplRelpace
 }
-from './api/utils'
+from './utils'
+
+// 日期
+export {
+  dateFormat
+}
+from './date'
 
 // 系统
 export {
   os
 }
-from './api/os'
-
-// 页面加载
-export {
-  // 网页的加载完成
-  onload,
-  // 设备的加载完成
-  ready,
-  // app页面局部刷新
-  refresh
-}
-from './api/ready'
+from './os'
 
 // action
 export {
   doAction,
   addAction,
-  removeAction
+  removeAction,
+  hasIndex
 }
-from './api/action'
+from './action'
+
+// event
+export {
+  fire,
+  fireTree,
+  fireAll
+}
+from './event'
 
 // init
 export {
-  msgOpts,
-  boxOpts,
-  loginOpts,
+  initBoxOpts,
+  webError,
   global,
   options,
   initGlobal,
@@ -54,15 +62,12 @@ export {
   windowOptions,
   currentWebview,
   isHomePage,
-  fire,
-  fireTree,
-  fireAll,
   preload,
   openWindow,
   showWindow,
   goHome
 }
-from './api/init'
+from './init'
 
 // 后退
 export {
@@ -73,12 +78,25 @@ export {
   back,
   menu
 }
-from './api/back'
+from './back'
+
+// 页面加载
+export {
+  // 网页的加载完成
+  onload,
+  // 设备的加载完成
+  ready,
+  // app页面局部刷新
+  refresh,
+  // 安卓的后退和菜单键事件绑定
+  androidKeys
+}
+from './ready'
 
 export {
   pages
 }
-from './api/pages'
+from './pages'
 
 export {
   getState,
@@ -86,24 +104,11 @@ export {
   getSettings,
   setSettings
 }
-from './api/localStorage'
-
-export {
-  toast,
-  alert,
-  confirm,
-  dialog,
-  loading,
-  webError,
-  showLogin,
-  closeLogin,
-  cancleLogin
-}
-from './api/msg'
+from './localStorage'
 
 export {
   noNetwork
 }
-from './api/plus'
+from './plus'
 
-import './resource.js'
+// import './resource.js'

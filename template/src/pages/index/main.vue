@@ -10,7 +10,7 @@
         </div>
       </masker>
     </div>
-    <div style="margin: 10px;overflow: hidden;">
+    <div style="margin: 10px;overflow: hidden;" @click="back">
       <masker style="border-radius: 2px;" color="F9C90C" :opacity="0.8">
         <div class="m-img" style="background-image:url(https://cdn.xiaotaojiang.com/uploads/56/4b3601364b86fdfd234ef11d8712ad/_.jpg)"></div>
         <div slot="content" class="m-title">
@@ -25,15 +25,20 @@
 
 <script>
   import Masker from 'vuxs/masker'
-  /** $api*/
-  import * as $api from 'api'
 
   export default {
     components: {
       Masker
     },
     ready() {
-      // $api.showLogin(true)
+      api.ready(() => {
+        api.androidKeys()
+      }, false)
+    },
+    methods: {
+      back() {
+        api.back()
+      }
     },
     data() {
       return {

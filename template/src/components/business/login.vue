@@ -1,75 +1,131 @@
 <template>
-  <c-box :padding-top="46" :padding-bottom="55" v-ref:box>
-    <!--header slot-->
-    <c-header slot="header" :left-options="{showBack:true}">用户登录</c-header>
-    <!--default slot-->
-    <div>
-      <group>
-        <c-input title="账户" name="username" :min=6 :max=10 inline-desc="123" placeholder="请输入用户名或手机号"></c-input>
-        <c-input title="密码" name="username" type="password" placeholder="请输入密码"></c-input>
-      </group>
-      <group>
-        <x-button type="primary" @click="login">登录</x-button>
-        <!--<x-button type="primary" @click="close">取消登录</x-button>-->
-      </group>
-    </div>
-    <!--bottom slot-->
-  </c-box>
+  <div>
+    <c-box :padding-top="46" :padding-bottom="0" v-ref:box>
+      <!--header slot-->
+      <c-header slot="header" :left-options="{showBack:true}">用户登录</c-header>
+      <!--default slot-->
+      <!--<div class="center">
+        <p>
+          XXX登录
+        </p>
+        <img class="logo" src="../../img/logo.png">
+      </div>-->
+      <c-group style="margin-top:20px;background-color: transparent" label-width="4em" label-align="left" label-margin-right="5px">
+        <field title="账号" name="username" placeholder="请输账号" icon="wode" :value.sync="username" :errors="getError('username')"></field>
+        <field title="密码" name="password" type="password" placeholder="请输入密码" icon="gengduo" :value.sync="password" :errors="getError('password')"></field>
+      </c-group>
+      <c-group style="margin-top:30px;padding: 10px 15px;">
+        <x-button type="primary" style="padding: 5px 0;" @click="handleSubmit" :disabled="invalid">登&nbsp;&nbsp;&nbsp;&nbsp;录</x-button>
+      </c-group>
+      <!--bottom slot-->
+    </c-box>
+  </div>
 </template>
 
 <script>
   /** vux components*/
-  import Group from 'vuxs/group'
   import XButton from 'vuxs/x-button'
   /** customer components*/
   import cBox from 'generals/c-box'
   import CHeader from 'generals/c-header'
   import cIcon from 'generals/c-Icon'
-  import cInput from 'generals/c-input'
-
-  /** $api*/
-  import * as $api from 'api'
-  /** $app*/
-  import * as $app from 'app'
+  import cGroup from 'generals/c-group'
+  import Field from 'generals/form/field'
 
   export default {
     components: {
+      XButton,
       cBox,
       cIcon,
       CHeader,
-      cInput,
-      XButton,
-      Group
+      Field,
+      cGroup
     },
     props: {},
-    ready() {},
+    ready() {
+      var vm = this
+      var temp = vm.$http.get('http://demo.dcloud.net.cn/test/xhr/json.php', {
+        app: {
+          get: false
+        },
+        timeout: 10000
+      })
+    },
+    vaRules: {
+      username: {
+        'required': {
+          limit: true,
+          message: '请输入账号'
+        },
+        'minlength': {
+          limit: 4,
+          message: '账号最少##limit##个字'
+        }
+      },
+      password: {
+        'required': {
+          limit: true,
+          message: '请输入密码'
+        },
+        'minlength': {
+          limit: 6,
+          message: '密码最少##limit##个字'
+        }
+      }
+    },
+    computed: {
+      invalid() {
+        return this.$va.invalid
+      }
+    },
     data: function() {
-      return {}
+      return {
+        username: '',
+        password: ''
+      }
     },
     methods: {
       close() {
-        $api.back()
+        api.back()
       },
       login() {
         // 登录的方法
-        $app.useLogin()
+        app.useLogin()
 
         // 登录成功的全局处理
         this.success()
       },
       success() {
-        if ($api.loginOpts.loginCallBack) {
-          $api.loginOpts.loginCallBack()
+        this.username = ''
+        this.password = ''
+        setTimeout(() => {
+          this.$va.clear()
+        }, 150)
+
+        if (window.$login) {
+          window.$login.callBack()
+          if (window.$login.needReload()) {
+            api.refresh()
+          }
         }
-        if ($api.loginOpts.needReload) {
-          $api.refresh()
+
+        api.fireAll('logined')
+      },
+      getError(field) {
+        return this.$va.$errors[field] || []
+      },
+      handleSubmit() {
+        if (this.$va.check()) {
+          this.login()
         }
-        $api.fireAll('logined')
       }
     }
   }
 </script>
 
 <style>
-
+  .center {
+    margin-top: 60px;
+    text-align: center;
+  }
 </style>

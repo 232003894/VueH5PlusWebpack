@@ -23,7 +23,7 @@
     </card>
     <br>
     <divider>简单头部,简单底部带链接</divider>
-    <card :header="{title:'商品详情(简单头部)'}" :footer="{title:'设置(简单底部带链接)'}" @on-click-footer="settingAction">
+    <card :header="{title:'商品详情(简单头部)'}" :footer="{title:'表单验证(简单底部带链接)'}" @on-click-footer="testAction">
       <p slot="content" class="card-padding">
         这里是内容
         <br/>
@@ -32,24 +32,26 @@
         <x-button :mini="true" type="warn" @click="confirm">确认框</x-button>
         <x-button :mini="true" type="warn" @click="dialog">弹出消息</x-button>
         <x-button :mini="true" type="warn" @click="error">网络错误</x-button>
-        <x-button @click="settingAction" type="primary" text="新&nbsp;窗&nbsp;口&nbsp;设&nbsp;置"></x-button>
+        <x-button @click="settingAction" type="primary" text="表单验证"></x-button>
         <x-button @click="loginReload" type="primary">登录(登陆后刷新)</x-button>
         <x-button @click="loginRetry" type="primary">登录(登陆后重试)</x-button>
       </p>
     </card>
-    <divider>简单头部</divider>
-    <card :header="{title: '图标'} ">
-      <p slot="content " class="card-padding ">
-        <c-icon type="home ">后</c-icon>
+    <divider>简单头部
+      <span v-text="date|date 'yyyy/MM/dd HH:mm:ss sss'"></span>
+    </divider>
+    <card :header="{title: '图标'}">
+      <p slot="content" class="card-padding ">
+        <c-icon type="question">后</c-icon>
         <br/>
-        <c-icon>&#xe73e;</c-icon>
+        <c-icon>&#xe738;</c-icon>后
       </p>
     </card>
     <divider>使用头部slot和内容slot</divider>
     <card>
-      <tip slot="header " style="padding:10px; ">2个头部:tip,image</tip>
-      <img slot="header " src="http://placeholder.qiniudn.com/640x300 " style="width:100%;display:block; ">
-      <div slot="content " class="card-padding ">
+      <tip slot="header" style="padding:10px; ">2个头部:tip,image</tip>
+      <img slot="header" src="http://placeholder.qiniudn.com/640x300 " style="width:100%;display:block; ">
+      <div slot="content" class="card-padding ">
         <p style="color:#999;font-size:12px; ">2016-07-31 07:42:45</p>
         <p style="font-size:14px;line-height:1.2;padding-top:10px; ">
           C语言终于超越了Java，登顶榜首．Python超过C++成为第三名，C#被R顶出前五．最近几年R一路飙升，主要是由于乘上了大数据分析的浪潮．</p>
@@ -65,12 +67,6 @@
   import XButton from 'vuxs/x-button'
   /** customer components*/
   import cIcon from 'generals/c-Icon'
-  /** $api*/
-  import * as $api from 'api'
-  /** $app*/
-  import * as $app from 'app'
-
-  import Vue from 'vue'
 
   export default {
     components: {
@@ -87,7 +83,10 @@
     },
     ready() {
       var vm = this
-      $api.ready(() => {
+      api.ready(() => {
+        api.androidKeys()
+      }, false)
+      api.ready(() => {
         if (vm.route.name === 'Demo') {
           vm.loadData()
           vm.CompanyRecommended()
@@ -96,65 +95,71 @@
     },
     data() {
       return {
-        msg: '我的钱包(简单头部)'
+        msg: '我的钱包(简单头部)',
+        date: '/Date(1373021259229)/'
       }
     },
     methods: {
       toast() {
-        $api.toast({
+        window.$toast && window.$toast({
           msg: '<i class="weui_icon weui_icon_info_circle "></i>网络不给力',
           time: 1000,
           type: 'text',
           width: '12.5rem',
           onHide: () => {
-            $api.log('toast 关闭回调')
+            api.log('toast 关闭回调')
           }
         })
       },
       alert() {
-        $api.alert({
+        window.$alert && window.$alert({
           msg: '百度<br/>1234',
           title: 'Alert',
-          buttonText: '好的,我知道了',
-          alertCB: () => {
-            $api.log('alert 关闭回调')
+          button: '好的,我知道了',
+          onHide: () => {
+            api.log('alert 关闭回调')
           }
-        }, false)
+        })
       },
       confirm() {
-        $api.confirm({
-          title: '提示',
+        window.$confirm && window.$confirm({
+          title: '确认框',
           msg: '百度<br/>1234',
-          confirmText: '好的,我知道了',
-          cancelText: '取消',
-          onConfirmHide: () => {
-            $api.log('confirm 关闭回调')
+          confirm: '好的,我知道了',
+          cancel: '取消',
+          onHide: () => {
+            api.log('confirm 关闭回调')
           },
           onConfirm: () => {
-            $api.log('confirm 确认回调')
+            api.log('confirm 确认回调')
           },
           onCancel: () => {
-            $api.log('confirm 取消回调')
+            api.log('confirm 取消回调')
           }
         }, false)
       },
       dialog() {
-        $api.dialog({
+        window.$dialog && window.$dialog({
           msg: '百度<br/>1234',
           scroll: false,
           hideOnBlur: true,
-          onDialogHide: () => {
-            $api.log('dialog 关闭回调')
+          onHide: () => {
+            api.log('dialog 关闭回调')
           }
         })
       },
       error() {
-        $api.webError(true)
+        api.webError(true)
       },
       // 设置
       settingAction() {
-        // $api.fire(window, 'test')
-        $api.openWindow('my_setting')
+        // api.fire(window, 'test')
+        api.openWindow('my_setting')
+      },
+      // 设置
+      testAction() {
+        // api.fire(window, 'test')
+        api.openWindow('main')
       },
       loadData() {
         var vm = this
@@ -165,8 +170,9 @@
           timeout: 10000
         }).then(function(response) {
           response.data = JSON.parse(response.data)
+          api.log('loadData')
 
-          // $api.log('正常\r\n' + JSON.stringify(response.data, null, 4))
+          // api.log('正常\r\n' + JSON.stringify(response.data, null, 4))
           setTimeout(() => {
             vm.$set('msg', response.data.string)
           }, 200)
@@ -174,7 +180,7 @@
           // return vm.CompanyRecommended()
         }, function(response) {
           // handle error
-          $api.log('错误\r\n' + JSON.stringify(response, null, 4))
+          api.log('错误\r\n' + JSON.stringify(response, null, 4))
         })
       },
       CompanyRecommended() {
@@ -187,22 +193,27 @@
             retry: this.CompanyRecommended
           }
         }).then(function(response) {
-          $api.log('正常\r\n' + JSON.stringify(response, null, 4))
+          api.log('CompanyRecommended')
+
+          // api.log('正常\r\n' + JSON.stringify(response, null, 4))
         }, function(response) {
           // handle error
-          $api.log('错误\r\n' + JSON.stringify(response, null, 4))
+          api.log('错误\r\n' + JSON.stringify(response, null, 4))
         })
       },
       loginReload() {
-        $api.showLogin(true)
+        window.$login.show(true)
       },
       loginRetry() {
-        $api.showLogin(false, () => {
-          $api.alert({
-            msg: '成功后续操作',
-            title: '登录成功',
-            buttonText: '确定'
-          }, false)
+        window.$login.show({
+          reload: false,
+          success: () => {
+            window.$alert && window.$alert({
+              msg: '成功后续操作',
+              title: '登录成功',
+              button: '确定'
+            })
+          }
         })
       }
     }

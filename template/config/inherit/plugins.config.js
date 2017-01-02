@@ -9,7 +9,7 @@ var _chunks = Object.keys(entries);
 var configPlugins = [
   // 提取公共模块
   new webpack.optimize.CommonsChunkPlugin({
-    name: 'vendors', // 公共模块的名称
+    name: 'base', // 公共模块的名称
     chunks: _chunks, // chunks是需要提取的模块
     minChunks: _chunks.length
   })

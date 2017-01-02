@@ -1,11 +1,7 @@
 import * as utils from './utils'
 import * as act from './action'
 import * as init from './init'
-import * as ready from './ready'
-import {
-  os
-} from './os'
-import * as msg from './msg'
+import * as events from './event'
 
 /**
  * 增加back执行流程
@@ -47,7 +43,9 @@ addBack({
  * 执行后退
  */
 export function back() {
-  if (utils.isFunction(init.options.beforeback)) {
+  // console.log('backs')
+  let hasIndex = act.hasIndex('backs', 10)
+  if (utils.isFunction(init.options.beforeback) && !hasIndex) {
     if (init.options.beforeback() === false) {
       return
     }
@@ -79,12 +77,11 @@ addBack({
  * h5Back
  */
 export function h5Back() {
-  // var wobj = plus.webview.currentWebview()
-  var wobj = init.currentWebview
+  var wobj = plus.webview.currentWebview()
   var parent = wobj.parent()
   if (parent) {
     // 激活父窗体的back事件
-    init.fire(parent, 'fromChildrenBack')
+    events.fire(parent, 'fromChildrenBack')
   } else {
     wobj.canBack(function (e) {
       // by chb 暂时注释，在碰到类似popover之类的锚点的时候，需多次点击才能返回；
@@ -95,18 +92,20 @@ export function h5Back() {
 
         // 关闭登录层
         setTimeout(() => {
-          msg.closeLogin()
+          window.$login && window.$login.close && window.$login.close()
         }, 300)
       } else { // webview close or hide
         // fixed by fxy 此处不应该用opener判断，因为用户有可能自己close掉当前窗口的opener。这样的话。opener就为空了，导致不能执行close
-        // if (wobj.id === plus.runtime.appid) {
-        if (init.isHomePage) {
+        if (wobj.id === plus.runtime.appid) {
+          // if (init.isHomePage) {
           // 首页
           // 首页不存在opener的情况下，后退实际上应该是退出应用；
           // 首次按键，提示‘再按一次退出应用’
           if (!__backFirst) {
             __backFirst = new Date().getTime()
-            msg.toast('再按一次退出应用', 'bottom')
+            plus.nativeUI.toast('再按一次退出应用', {
+              verticalAlign: 'bottom'
+            })
             setTimeout(function () {
               __backFirst = null
             }, 2000)
@@ -140,36 +139,11 @@ export function menu() {
   } else {
     // 执行父窗口的menu
     if (window.plus) {
-      var wobj = init.currentWebview
+      var wobj = plus.webview.currentWebview()
       var parent = wobj.parent()
       if (parent) {
-        init.fire(parent, 'fromChildrenMenu')
+        events.fire(parent, 'fromChildrenMenu')
       }
     }
   }
 }
-
-var __back = function () {
-  back()
-}
-var __menu = function () {
-  menu()
-}
-
-// 默认监听back和menu按键
-ready.ready(() => {
-  document.addEventListener('fromChildrenBack', function (e) {
-    __back()
-  })
-  document.addEventListener('fromChildrenMenu', function (e) {
-    __menu()
-  })
-  if (window.plus && os.android) {
-    if (init.options.keyEventBind.backbutton) {
-      plus.key.addEventListener('backbutton', __back, false)
-    }
-    if (init.options.keyEventBind.menubutton) {
-      plus.key.addEventListener('menubutton', __menu, false)
-    }
-  }
-}, false)
