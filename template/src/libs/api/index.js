@@ -73,7 +73,6 @@ from './init'
 export {
   addBack,
   removeBack,
-  __backFirst,
   h5Back,
   back,
   menu

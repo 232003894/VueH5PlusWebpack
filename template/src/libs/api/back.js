@@ -56,7 +56,7 @@ export function back() {
 /**
  * 首次按下back按键的时间
  */
-export var __backFirst = null
+var __backFirst = null
 
 /**
  * 5+ back
