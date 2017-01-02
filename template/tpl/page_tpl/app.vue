@@ -3,9 +3,9 @@
 </template>
 <script>
   /** vux components*/
+  import XButton from 'vuxs/x-button'
   /** customer components*/
-  /** $app*/
-  import * as $app from 'app'
+  import cBox from 'pubs/c-box'
   export default {
     data() {
       return {}
