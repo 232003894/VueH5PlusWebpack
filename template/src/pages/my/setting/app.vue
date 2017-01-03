@@ -1,9 +1,9 @@
 <template>
-  <c-box :padding-top="46">
+  <box :padding-top="46">
     <!--header slot-->
     <c-header slot="header" :left-options="{showBack:true}">表单</c-header>
     <!--default slot-->
-    <c-group style="background-color: transparent" label-width="5.5em" label-align="left" label-margin-right="5px">
+    <group style="background-color: transparent" label-width="5.5em" label-align="left" label-margin-right="5px">
       <field title="账户" name="username" placeholder="请输入用户名或手机号" icon="wode" :value.sync="username" :errors="getError('username')"></field>
       <field title="密码" name="password" type="password" placeholder="请输入密码" icon="gengduo" :value.sync="password" :errors="getError('password')"></field>
       <text title="详情" :max="200" name="description" placeholder="描述" icon="fankui" :value.sync="info" :errors="getError('info')"></text>
@@ -15,23 +15,23 @@
       <radio title="单选" icon="wode" placeholder="请选择" :value.sync="radio" :fill-mode="false" fill-label="其他" fill-placeholder="填写其他的哦" :options="radiolist" :errors="getError('radio')"></radio>
       <switch icon="wode" title="开关" :value.sync="checked"></switch>
       <rater icon="wode" title="好评" :value.sync="fenzhi" :max="6" star="☻" active-color="#FF9900" :margin="4"></rater>
-    </c-group>
-    <c-group style="margin-top: 15px;">
+    </group>
+    <group style="margin-top: 15px;">
       <x-button type="primary" @click="handleSubmit">提交</x-button>
-    </c-group>
+    </group>
     <br>
     <br>
-  </c-box>
+  </box>
 </template>
 
 <script>
   /** vux components*/
   import XButton from 'vuxs/x-button'
   /** customer components*/
-  import cBox from 'pubs/c-box'
+  import Box from 'pubs/box'
   import CHeader from 'pubs/c-header'
-  import cIcon from 'pubs/c-Icon'
-  import cGroup from 'pubs/c-group'
+  import Icon from 'pubs/Icon'
+  import Group from 'pubs/group'
   import Field from 'pubs/form/field'
   import Text from 'pubs/form/text'
   import PopupPicker from 'pubs/form/popup-picker'
@@ -46,13 +46,13 @@
   export default {
     components: {
       XButton,
-      cBox,
-      cIcon,
+      Box,
+      Icon,
       CHeader,
       Field,
       Text,
       PopupPicker,
-      cGroup,
+      Group,
       Num,
       Checklist,
       Calendar,

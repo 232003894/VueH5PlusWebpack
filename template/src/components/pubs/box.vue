@@ -8,7 +8,7 @@
     </div>
     <div class="weui_tab_bd vux-fix-safari-overflow-scrolling" :style="{'padding-top':top,'padding-bottom':bottom}" v-show="isError" v-el:error>
       <div class="ui-error" :style="{'padding-top':errorPaddingTop}">
-        <c-icon type="wifi"></c-icon>
+        <icon type="wifi"></icon>
         <h4>网络不给力</h4>
         <div class="ui-button">
           <x-button @click="refresh">重新加载</x-button>
@@ -24,10 +24,10 @@
   /** vux components*/
   import XButton from 'vuxs/x-button'
   /** customer components*/
-  import CIcon from './c-Icon'
+  import Icon from './Icon'
   export default {
     components: {
-      CIcon,
+      Icon,
       XButton
     },
     props: {
@@ -43,7 +43,6 @@
     ready() {
       var self = this
       api.initBoxOpts(self.$data)
-        // api.webError(self.$data.isError)
     },
     computed: {
       errorPaddingTop: function() {

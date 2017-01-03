@@ -3,7 +3,7 @@
     <div class="weui_cell">
       <div class="weui_cell_hd">
         <label class="weui_label" v-if="icon||title" :style="{width: $parent.labelWidth || (labelWidth + 'em'), textAlign: $parent.labelAlign, marginRight: $parent.labelMarginRight}">
-          <c-icon :type="icon" v-if="icon" size="18px"></c-icon>
+          <icon :type="icon" v-if="icon" size="18px"></icon>
           <span v-text="title" v-if="title"></span>
         </label>
         <hr class="focus" />
@@ -42,14 +42,14 @@
   import shuffle from 'array-shuffle'
 
   /** customer components*/
-  import cIcon from 'pubs/c-Icon'
+  import Icon from 'pubs/Icon'
 
   export default {
     created() {
       this.uuid = Math.random().toString(36).substring(3, 8)
     },
     components: {
-      cIcon
+      Icon
     },
     filters: {
       getValue,

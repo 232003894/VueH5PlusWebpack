@@ -1,29 +1,29 @@
 <template>
-  <c-box :padding-top="46" :padding-bottom="55" v-ref:box>
+  <box :padding-top="46" :padding-bottom="55" v-ref:box>
     <!--header slot-->
     <c-header slot="header" :left-options="{showBack:true}">测试</c-header>
     <!--default slot-->
-    <c-group style="margin-top: 50px;">
+    <group style="margin-top: 50px;">
       <x-button type="primary" @click="handleSubmit" :disabled="invalid">测试</x-button>
-    </c-group>
+    </group>
     <!--bottom slot-->
-  </c-box>
+  </box>
 </template>
 
 <script>
   /** vux components*/
   import XButton from 'vuxs/x-button'
   /** customer components*/
-  import cBox from 'pubs/c-box'
+  import Box from 'pubs/box'
   import CHeader from 'pubs/c-header'
-  import cGroup from 'pubs/c-group'
+  import Group from 'pubs/group'
 
   export default {
     components: {
       XButton,
-      cBox,
+      Box,
       CHeader,
-      cGroup
+      Group
     },
     props: {},
     ready() {},

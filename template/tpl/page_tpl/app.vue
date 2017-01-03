@@ -5,7 +5,7 @@
   /** vux components*/
   import XButton from 'vuxs/x-button'
   /** customer components*/
-  import cBox from 'pubs/c-box'
+  import Box from 'pubs/box'
   export default {
     data() {
       return {}

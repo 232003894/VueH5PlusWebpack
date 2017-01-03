@@ -42,9 +42,9 @@
     </divider>
     <card :header="{title: '图标'}">
       <p slot="content" class="card-padding ">
-        <c-icon type="question">后</c-icon>
+        <icon type="question">后</icon>
         <br/>
-        <c-icon>&#xe738;</c-icon>后
+        <icon>&#xe738;</icon>后
       </p>
     </card>
     <divider>使用头部slot和内容slot</divider>
@@ -66,11 +66,11 @@
   import Card from 'vuxs/card'
   import XButton from 'vuxs/x-button'
   /** customer components*/
-  import cIcon from 'pubs/c-Icon'
+  import Icon from 'pubs/Icon'
 
   export default {
     components: {
-      cIcon,
+      Icon,
       Tip,
       Card,
       Divider,
@@ -89,7 +89,7 @@
       api.ready(() => {
         if (vm.route.name === 'Demo') {
           vm.loadData()
-          vm.CompanyRecommended()
+          vm.customers()
         }
       })
     },
@@ -165,36 +165,33 @@
         var vm = this
         var temp = vm.$http.get('http://demo.dcloud.net.cn/test/xhr/json.php', {
           app: {
-            get: false
+            load: false
           },
           timeout: 10000
         }).then(function(response) {
-          response.data = JSON.parse(response.data)
-          api.log('loadData')
-
+          // api.log('loadData')
           // api.log('正常\r\n' + JSON.stringify(response.data, null, 4))
+
           setTimeout(() => {
             vm.$set('msg', response.data.string)
           }, 200)
 
-          // return vm.CompanyRecommended()
+          // return vm.customers()
         }, function(response) {
           // handle error
           api.log('错误\r\n' + JSON.stringify(response, null, 4))
         })
       },
-      CompanyRecommended() {
-        return this.$http.get('Buyer/UserCompany/CompanyRecommended', {
+      customers() {
+        return this.$http.get('http://211.149.193.19:8080/api/customers', {
           params: {
-            pageSize: 1
+            test: 1
           },
           app: {
-            reload: true,
-            retry: this.CompanyRecommended
+            load: false
           }
         }).then(function(response) {
-          api.log('CompanyRecommended')
-
+          // api.log('customers')
           // api.log('正常\r\n' + JSON.stringify(response, null, 4))
         }, function(response) {
           // handle error

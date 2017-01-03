@@ -1,6 +1,44 @@
+/*
+response
+{
+    "version": "1.0.0",
+    "sys": {
+        "code": 0,
+        "msg": null,
+        "data": null,
+        "acts": []
+    },
+    "biz": {
+        "code": 0,
+        "msg": null,
+        "data": null,
+        "acts": [
+            {
+                "code": "00",
+                "name": "登录"
+            }
+        ]
+    }
+}
+修改后输出的
+{
+    'version': '1.0.0',
+    'type': 'biz',
+    'ok': true，
+    'code': 0,
+    'msg': null,
+    'data': null,
+    'acts': []
+}
+*/
+
 export default function (vue, _api) {
-  var state = _api.getState()
-  vue.http.headers.common['v'] = '1.00'
+  const error404 = '服务无法访问'
+  const error503 = '操作失败'
+  const apiVersion = '1.00'
+
+  let state = _api.getState()
+  vue.http.headers.common['v'] = apiVersion
   vue.http.headers.common['d'] = 'web'
   vue.http.headers.common['t'] = state.t + ''
   vue.http.headers.common['s'] = state.s + ''
@@ -14,6 +52,25 @@ export default function (vue, _api) {
   }, false)
 
   vue.http.interceptors.push((request, next) => {
+    request.app = request.app || {}
+
+    /**
+     * 是否加载用途的请求
+     * true:加载请求,用于页面加载或列表加载的类型( 默认值 )
+     * false:操作请求
+     * 影响范围
+     * 1.请求失败的提示(在goError方法中实现)
+     *   true:加载失败层,显示刷新按钮( 默认值 )
+     *   false:操作失败的提示,toast
+     * 2.登录完成的处理:是否需要重新加载页面(在login.vue的success方法中实现)
+     *   true:加载请求需要重新加载页面( 默认值 )
+     *   false:操作请求不需要重新加载页面
+     * 3.取消登录的处理(后退关闭来源页面)(在msg-login-index.js的cancle方法中实现)
+     *   true:后退或关闭来源(plus并且无history),关闭登录层( 默认值 )
+     *   false:关闭登录层
+     */
+    request.app.load = (request.app.load !== false)
+
     // 超时处理
     var timeout
     request.onTimeout = (request) => {
@@ -39,9 +96,7 @@ export default function (vue, _api) {
      * 继续
      */
     var goNext = () => {
-      // 关闭网络错误层
       // 显示loading
-      // _api.webError(false)
       window.$loading && window.$loading(true)
 
       // 处理response
@@ -55,66 +110,89 @@ export default function (vue, _api) {
 
         // 返回的数据对象
         var json = {
-          ok: false
+          version: apiVersion,
+          type: 'biz',
+          ok: false,
+          code: 0,
+          msg: null,
+          data: null,
+          acts: []
         }
-        if (response && response.data && response.data.message) { // 给项目中的response的规定的json数据格式用的
-          var copy = _api.mix(true, {}, response.data)
-
-          // 后续action
-          if (copy.act) {
-            json.act = copy.act
-          }
-          // 错误代码
-          if (copy.message.err_code) {
-            json.code = copy.message.err_code
-          }
-          // 错误消息
-          if (copy.message.err_msg) {
-            json.msg = copy.message.err_msg
-          }
-          // 增加的业务按钮
-          if (copy.btns && copy.btns.length > 0) {
-            json.btns = copy.btns
-          }
-          // 主体数据
-          json.data = copy.data
-          if (request.app.retry && _api.isFunction(request.app.retry)) {
-            json.retry = request.app.retry
+        if (response.version && (response.sys || response.biz) && response.ok) {
+          // 服务端格式化过的标准json格式(自行约定的)
+          if (response.sys && response.sys.code > 0) {
+            // 服务错误(比如服务不存在404 或 服务端错误-黄页类型的并错误统一捕获过的)
+            json.type = 'sys'
+            _api.mix(true, json, response.sys)
+            if (json.code === 404) {
+              // 服务找不到
+              goError(error404)
+            } else if (json.code === 503) {
+              // 服务端错误(黄页等)
+              goError(error503)
+            }
           } else {
-            json.retry = undefined
+            // 无服务错误,处理业务response
+            json.type = 'biz'
+            _api.mix(true, json, response.biz)
+            if (json.code === 401) {
+              // 权限不足
+              // 根据data来判断是登录权限不足还是其他的权限不足(如:卖家权限,是否开店)
+              if (json.data && json.data !== 0) {
+                // todo:其他权限
+              } else {
+                // 需要登录
+                window.$login && window.$login.show && window.$login.show({
+                  reload: request.app.load
+                })
+              }
+            } else if (json.code === 200) {
+              // 业务完全成功
+              json.ok = true
+
+              // 关闭网络错误层
+              _api.webError(false)
+            } else if (json.code >= 201 && json.code <= 299) {
+              // 业务成功,但是有部分业务问题
+              json.ok = true
+
+              // 关闭网络错误层
+              _api.webError(false)
+            } else if (json.code === 500) {
+              // 业务失败
+              // load时:加载失败层,显示刷新按钮( 默认值 )
+              // 非load时:关闭加载失败层,没有提示,请求失败回调自行处理错误业务
+              goError()
+            }
           }
-          // 代码处理
-          if (copy.message.err_code === 0) {
-            // 正常
-            _api.webError(false)
-            json.ok = true
-          } else if (copy.message.err_code === 401) {
-            // 未登陆
-            // todo:需要 登陆 暂时用消息提示
-            window.$toast && window.$toast({
-              msg: '请登陆',
-              time: 1000
-            })
-          } else if (copy.message.err_code === 500) {
-            // 业务错误
-            // 错误的提示
-            goError()
-          } else if (copy.message.err_code === 503 || copy.message.err_code === 404) {
-            // 503 服务端错误(黄页等)
-            // 404 服务找不到等等
-            // 错误的提示
-            goError('操作失败')
-          }
-        } else { // 给非项目中规定的response json数据格式用的
+        } else {
+          // 第三方的 或 response.ok == false 的情况
           json.ok = response.ok
-          json.data = response.data
+          if (json.ok) {
+            // 第三方的请求成功
+            json.data = response.data
+            if (_api.isString(json.data)) {
+              // 字符串尝试转换为 json对象
+              try {
+                json.data = JSON.parse(json.data)
+              } catch (error) {}
+            }
+            // 关闭网络错误层
+            _api.webError(false)
+          } else {
+            // 请求失败或第三方的请求失败
+            json.type = 'sys'
+            if (response.status === 404) {
+              // 服务找不到
+              json.code = 404
+              goError(error404)
+            } else {
+              // 其他的都归为服务器错误
+              json.code = 503
+              goError(error503)
+            }
+          }
         }
-        // return Promise.resolve().then(() => {
-        //   return json.data
-        // })
-        // return Promise.reject()['catch'](undefined, () => {
-        //   return json.data
-        // })
         return json
       })
     }
@@ -125,7 +203,7 @@ export default function (vue, _api) {
      */
     var goError = (_msg) => {
       // 提示网络错误
-      if (request.app.reload) {
+      if (request.app.load) {
         // 加载
         _api.webError(true)
       } else {
@@ -135,7 +213,7 @@ export default function (vue, _api) {
           setTimeout(() => {
             window.$toast && window.$toast({
               msg: _msg,
-              time: 1000,
+              time: 2000,
               type: 'text'
             })
           }, 150)
@@ -153,23 +231,11 @@ export default function (vue, _api) {
         setTimeout(() => {
           window.$loading && window.$loading(false)
         }, 100)
-        goError('操作失败')
+        goError(error503)
       } else {
         goNext()
       }
     }
-    request.app = request.app || {}
-
-    /**
-     * 登录后是否需要重新加载页面
-     * false:不需要,操作请求,用于操作/提交等( 默认值 )
-     * true:需要,加载请求,用于页面加载或列表加载的类型
-     * 影响范围
-     * 1.请求失败的提示(加载失败效果/操作失败的提示)
-     * 2.取消登录的处理(后退关闭来源页面)
-     * 3.登录完成的处理
-     */
-    request.app.reload = (request.app.reload === true)
 
     handle()
   })

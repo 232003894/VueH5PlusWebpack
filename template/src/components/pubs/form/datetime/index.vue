@@ -3,7 +3,7 @@
     <div class="weui_cell vux-tap-active">
       <div class="weui_cell_hd">
         <label class="weui_label" v-if="icon||title" :style="{width: $parent.labelWidth || (labelWidth + 'em'), textAlign: $parent.labelAlign, marginRight: $parent.labelMarginRight}">
-          <c-icon :type="icon" v-if="icon" size="18px"></c-icon>
+          <icon :type="icon" v-if="icon" size="18px"></icon>
           <span v-text="title" v-if="title"></span>
         </label>
         <inline-desc v-if="inlineDesc">
@@ -23,13 +23,13 @@
   import Group from 'vuxs/group'
   import InlineDesc from 'vuxs/inline-desc'
   /** customer components*/
-  import cIcon from 'pubs/c-Icon'
+  import Icon from 'pubs/Icon'
 
   export default {
     components: {
       Group,
       InlineDesc,
-      cIcon
+      Icon
     },
     props: {
       format: {

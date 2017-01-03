@@ -1,49 +1,49 @@
 <template>
   <div>
-    <c-box :padding-top="headerHeight" :padding-bottom="bottomHeight" v-ref:app>
+    <box :padding-top="headerHeight" :padding-bottom="bottomHeight" v-ref:app>
       <!--header slot-->
       <c-header slot="header" :transition="headerTransition" :left-options="{showBack:showBack}" :title="title"></c-header>
       <!--default slot-->
       <router-view :transition="'vux-pop-' + (direction === 'forward' ? 'in' : 'out')"></router-view>
       <!--bottom slot-->
       <tabbar icon-class="vux-center" slot="bottom">
-        <c-tabbar-item v-link="{path:'/'}" :selected="route.name === 'Main'">
-          <c-icon type="homeon" slot="iconon" size="28px"></c-icon>
-          <c-icon type="home" slot="icon" size="24px"></c-icon>
+        <tabbar-item v-link="{path:'/'}" :selected="route.name === 'Main'">
+          <icon type="homeon" slot="iconon" size="28px"></icon>
+          <icon type="home" slot="icon" size="24px"></icon>
           <span slot="label">主页</span>
-        </c-tabbar-item>
-        <c-tabbar-item badge="9" v-link="{path:'/demo'}" :selected="route.name === 'Demo'">
-          <c-icon type="dianpufill" slot="iconon" size="28px"></c-icon>
-          <c-icon type="dianpu" slot="icon" size="24px"></c-icon>
+        </tabbar-item>
+        <tabbar-item badge="9" v-link="{path:'/demo'}" :selected="route.name === 'Demo'">
+          <icon type="dianpufill" slot="iconon" size="28px"></icon>
+          <icon type="dianpu" slot="icon" size="24px"></icon>
           <span slot="label">演示</span>
-        </c-tabbar-item>
-        <c-tabbar-item show-dot v-link="{path:'/setting'}" :selected="route.name === 'Setting'">
-          <c-icon type="settingon" slot="iconon" size="28px"></c-icon>
-          <c-icon type="setting" slot="icon" size="24px"></c-icon>
+        </tabbar-item>
+        <tabbar-item show-dot v-link="{path:'/setting'}" :selected="route.name === 'Setting'">
+          <icon type="settingon" slot="iconon" size="28px"></icon>
+          <icon type="setting" slot="icon" size="24px"></icon>
           <span slot="label">设置</span>
-        </c-tabbar-item>
+        </tabbar-item>
       </tabbar>
-    </c-box>
+    </box>
   </div>
 </template>
 <script>
   /** vux components*/
   import Tabbar from 'vuxs/tabbar'
   /** customer components*/
-  import cBox from 'pubs/c-box'
+  import Box from 'pubs/box'
   import CHeader from 'pubs/c-header'
-  import cIcon from 'pubs/c-Icon'
-  import cTabbarItem from 'pubs/c-tabbar-item'
+  import Icon from 'pubs/Icon'
+  import TabbarItem from 'pubs/tabbar-item'
 
   import store from './store'
 
   export default {
     components: {
-      cBox,
-      cIcon,
+      Box,
+      Icon,
       CHeader,
       Tabbar,
-      cTabbarItem
+      TabbarItem
     },
     store: store,
     vuex: {

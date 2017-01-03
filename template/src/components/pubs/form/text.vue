@@ -1,7 +1,7 @@
 <template>
   <div :class="[bodyStyle]" @click="bodyClick">
     <label class="weui_label" v-if="icon||title" :style="{width: $parent.labelWidth || (labelWidth + 'em'), textAlign: $parent.labelAlign, marginRight: $parent.labelMarginRight}">
-      <c-icon :type="icon" v-if="icon" size="18px"></c-icon>
+      <icon :type="icon" v-if="icon" size="18px"></icon>
       <span v-text="title" v-if="title"></span>
     </label>
     <div class="weui_cell">
@@ -25,7 +25,7 @@
 
 <script>
   /** customer components*/
-  import cIcon from 'pubs/c-Icon'
+  import Icon from 'pubs/Icon'
   export default {
     props: {
       showCounter: {
@@ -65,7 +65,7 @@
       }
     },
     components: {
-      cIcon
+      Icon
     },
     watch: {
       value(newVal) {}

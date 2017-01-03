@@ -3,7 +3,7 @@
     <div class="weui_cell">
       <div class="weui_cell_hd">
         <label class="weui_label" v-if="icon||title" :style="{width: $parent.labelWidth || (labelWidth + 'em'), textAlign: $parent.labelAlign, marginRight: $parent.labelMarginRight}">
-          <c-icon :type="icon" v-if="icon" size="18px"></c-icon>
+          <icon :type="icon" v-if="icon" size="18px"></icon>
           <span v-text="title" v-if="title"></span>
         </label>
         <inline-desc v-if="inlineDesc">
@@ -15,8 +15,8 @@
           v-el:input />
       </div>
       <div class="weui_cell_ft">
-        <c-icon type="close" v-show="showClear && value && !readonly" @click="clear" size="16px"></c-icon>
-        <c-icon type="eyeon" v-show="showPassword && !readonly" @click="pwd" :color="pwdIconColor" size="16px"></c-icon>
+        <icon type="close" v-show="showClear && value && !readonly" @click="clear" size="16px"></icon>
+        <icon type="eyeon" v-show="showPassword && !readonly" @click="pwd" :color="pwdIconColor" size="16px"></icon>
         <slot name="right"></slot>
       </div>
       <hr class="text-field-line" />
@@ -32,7 +32,7 @@
   /** vux components*/
   import InlineDesc from 'vuxs/inline-desc'
   /** customer components*/
-  import cIcon from 'pubs/c-Icon'
+  import Icon from 'pubs/Icon'
 
   export default {
     ready() {
@@ -48,7 +48,7 @@
     },
     components: {
       InlineDesc,
-      cIcon
+      Icon
     },
     props: {
       type: {
