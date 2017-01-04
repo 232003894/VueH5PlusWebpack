@@ -16,10 +16,10 @@ export default function (vue) {
   if (IS_PRODUCTION) {
     // 由于本脚手架并没有牵涉到HTTP请求，因此此处仅作为演示分离开发/生产环境之用。
     vue.config.devtools = false
-    vue.http.options.root = 'http://api.yipifa.com/'
+    vue.http.options.root = 'http://192.168.2.241:8003/'
   } else {
     vue.config.devtools = true
-    vue.http.options.root = 'http://api.yipifa.com/'
+    vue.http.options.root = 'http://192.168.2.241:8003/'
   }
   vue.filter('date', function (value, formats) {
     // 返回处理后的值

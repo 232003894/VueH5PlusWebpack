@@ -17,7 +17,7 @@
       <rater icon="wode" title="好评" :value.sync="fenzhi" :max="6" star="☻" active-color="#FF9900" :margin="4"></rater>
     </group>
     <group style="margin-top: 15px;">
-      <x-button type="primary" @click="handleSubmit">提交</x-button>
+      <x-button type="primary" @click="handleSubmit" :disabled="$va.invalid">提交</x-button>
     </group>
     <br>
     <br>
@@ -139,11 +139,6 @@
       checked: {},
       fenzhi: {}
     },
-    computed: {
-      invalid() {
-        return this.$va.invalid
-      }
-    },
     data: function() {
       return {
         username: '',
@@ -250,9 +245,8 @@
         return this.$va.$errors[field] || []
       },
       handleSubmit() {
-        // if (this.$va.check()) {}
-        this.$va.check()
-        this.$va.reset()
+        if (this.$va.check()) {}
+        // this.$va.reset()
       }
     }
   }
