@@ -119,7 +119,7 @@
 </script>
 
 <style lang="less" scoped>
-  @import '../form';
+  @import './form';
   .weui_cell {
     padding-bottom: 10px;
   }

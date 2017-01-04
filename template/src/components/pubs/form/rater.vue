@@ -111,5 +111,5 @@
 </script>
 
 <style lang="less" scoped>
-  @import '../form';
+  @import './form';
 </style>

@@ -166,7 +166,7 @@
   }
 </style>
 <style lang="less" scoped>
-  @import '../form';
+  @import './form';
   .weui_cells_radio {
     margin-top: -5px;
   }

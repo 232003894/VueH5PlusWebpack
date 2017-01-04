@@ -71,7 +71,9 @@ export default function (vue, _api) {
      */
     request.app.load = (request.app.load !== false)
 
-    /**超时处理 */
+    /**
+     * 超时处理
+     */
     var timeout
     request.onTimeout = (request) => {
       setTimeout(() => {

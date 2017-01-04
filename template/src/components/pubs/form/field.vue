@@ -148,7 +148,7 @@
 </script>
 
 <style lang="less" scoped>
-  @import '../form';
+  @import './form';
   .text-field-line {
     bottom: 0;
   }

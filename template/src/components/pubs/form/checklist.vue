@@ -108,7 +108,7 @@
 </script>
 
 <style lang="less" scoped>
-  @import '../form';
+  @import './form';
   .weui_cells {
     margin-top: -5px;
     background-color: transparent;

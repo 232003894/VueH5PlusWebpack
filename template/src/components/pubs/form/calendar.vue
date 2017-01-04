@@ -121,7 +121,7 @@
 
 </style>
 <style lang="less" scoped>
-  @import '../form';
+  @import './form';
   .active .error {
     height: 0;
   }
