@@ -17,7 +17,8 @@ response
                 "code": "00",
                 "name": "登录"
             }
-        ]
+        ],
+        pager:{}
     }
 }
 修改后输出的
@@ -136,6 +137,7 @@ export default function (vue, _api) {
           } else {
             // 无服务错误,处理业务response
             json.type = 'biz'
+            json.pager = {}
             _api.mix(true, json, response.biz)
             if (json.code === 401) {
               // 权限不足
